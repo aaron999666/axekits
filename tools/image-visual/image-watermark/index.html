@@ -1,0 +1,139 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>图片水印</title><style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:sans-serif;background:#0f0f23;color:#e0e0e0;padding-top:48px}.c{max-width:900px;margin:0 auto;padding:20px}.drop{border:2px dashed #333;border-radius:12px;padding:40px;text-align:center;cursor:pointer;margin-bottom:20px}.drop:hover{border-color:#e94560}.controls{background:#1a1a2e;border:1px solid #333;border-radius:8px;padding:16px;margin-bottom:16px}.row{display:flex;gap:12px;align-items:center;margin-bottom:12px}.row label{color:#e94560;font-size:12px;text-transform:uppercase;letter-spacing:1px;min-width:80px}.row input[type=text],.row input[type=number],.row select{flex:1;background:#0f0f23;color:#e0e0e0;border:1px solid #333;border-radius:8px;padding:8px;font-size:14px;outline:none}.row input[type=range]{flex:1;accent-color:#e94560}.row input[type=color]{width:50px;height:36px;border:1px solid #333;border-radius:4px;cursor:pointer}button{background:linear-gradient(135deg,#e94560,#c23152);color:#fff;border:none;padding:10px 24px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:600;width:100%;margin-bottom:16px}.preview{text-align:center}.preview canvas{max-width:100%;border-radius:8px}</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- toolbox:seo-geo:start -->
+<title>图片水印 | ToolBox</title>
+<meta name="description" content="为图片添加文字水印，可自定义位置、大小和透明度 关键词: image, watermark, text, canvas, web">
+<meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1">
+<link rel="canonical" href="https://toolsbox.ai/tools/image-watermark">
+<link rel="alternate" hreflang="zh-CN" href="https://toolsbox.ai/tools/image-watermark?lang=zh-CN">
+<link rel="alternate" hreflang="en" href="https://toolsbox.ai/tools/image-watermark?lang=en">
+<link rel="alternate" hreflang="x-default" href="https://toolsbox.ai/tools/image-watermark">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolBox">
+<meta property="og:title" content="图片水印 | ToolBox">
+<meta property="og:description" content="为图片添加文字水印，可自定义位置、大小和透明度 关键词: image, watermark, text, canvas, web">
+<meta property="og:url" content="https://toolsbox.ai/tools/image-watermark">
+<meta property="og:locale" content="zh_CN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="图片水印 | ToolBox">
+<meta name="twitter:description" content="为图片添加文字水印，可自定义位置、大小和透明度 关键词: image, watermark, text, canvas, web">
+<meta name="geo.region" content="CN-31">
+<meta name="geo.placename" content="Shanghai">
+<meta name="ICBM" content="31.2304,121.4737">
+<script type="application/ld+json" id="toolbox-jsonld">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Image Watermark","applicationCategory":"image-visual","operatingSystem":"Web","url":"https://toolsbox.ai/tools/image-watermark","description":"Add text watermarks to images with customizable position, size, and opacity","inLanguage":["zh-CN","en"],"offers":{"@type":"Offer","price":"0","priceCurrency":"CNY"},"publisher":{"@type":"Organization","name":"ToolBox"}}<\/script>
+<!-- toolbox:seo-geo:end -->
+
+<style id="toolbox-shell-styles">
+:root{
+  --tb-bg:#070d18;--tb-surface:#0f1b31;--tb-surface-soft:#162744;--tb-text:#ebf2ff;
+  --tb-text-muted:#99abd1;--tb-accent:#ff7a45;--tb-accent-2:#ffb066;--tb-border:#253a63;
+  --tb-radius:14px;--tb-shadow:0 12px 30px rgba(7,13,24,.45);
+}
+html,body{background:radial-gradient(1200px 500px at 50% -20%,#1a2f57 0%,#070d18 58%) fixed !important;color:var(--tb-text) !important;}
+#toolbox-shell{
+  position:fixed;top:0;left:0;right:0;height:56px;
+  background:linear-gradient(120deg,var(--tb-surface) 0%,var(--tb-surface-soft) 100%);
+  color:var(--tb-text);display:flex;align-items:center;padding:0 16px;z-index:99999;
+  font-family:'IBM Plex Sans','Segoe UI',sans-serif;font-size:14px;gap:12px;
+  box-shadow:var(--tb-shadow);border-bottom:1px solid var(--tb-border);backdrop-filter:blur(10px);
+}
+#toolbox-shell button{
+  background:transparent;border:1px solid transparent;color:var(--tb-text);cursor:pointer;font-size:16px;
+  padding:7px 10px;border-radius:10px;transition:all .2s ease;
+}
+#toolbox-shell button:hover{background:rgba(255,255,255,.08);border-color:var(--tb-border);}
+#toolbox-tool-name{font-weight:700;font-size:14px;letter-spacing:.2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:42vw;}
+#toolbox-shell-right{margin-left:auto;display:flex;align-items:center;gap:10px;}
+#toolbox-points{
+  background:linear-gradient(120deg,var(--tb-accent) 0%,var(--tb-accent-2) 100%);
+  padding:5px 12px;border-radius:999px;font-size:12px;font-weight:800;color:#2a180b;
+}
+#toolbox-free-remaining{font-size:11px;color:var(--tb-text-muted);}
+
+/* Unified tool canvas primitives */
+body{padding-top:56px !important;font-family:'IBM Plex Sans','Segoe UI',sans-serif !important;}
+.container,.c{max-width:1120px !important;margin:0 auto !important;padding:20px !important;}
+.actions{bottom:18px !important;}
+button:not(#toolbox-shell button){
+  border:none !important;border-radius:12px !important;padding:10px 16px !important;
+  background:linear-gradient(120deg,var(--tb-accent),var(--tb-accent-2)) !important;color:#1b120a !important;
+  font-weight:700 !important;box-shadow:0 4px 14px rgba(255,122,69,.25) !important;
+}
+button.secondary{
+  background:linear-gradient(120deg,#1a2846,#21355a) !important;color:var(--tb-text) !important;
+  border:1px solid var(--tb-border) !important;box-shadow:none !important;
+}
+input,textarea,select{
+  background:#0f1b31 !important;border:1px solid var(--tb-border) !important;color:var(--tb-text) !important;
+  border-radius:12px !important;
+}
+h1,h2,h3,h4,label{font-family:'IBM Plex Sans','Segoe UI',sans-serif !important;}
+h3,label{color:#ff9a6b !important;}
+</style>
+</head><body>
+
+<!-- toolbox:shell:start -->
+<div id="toolbox-shell">
+  <button onclick="history.back()" title="Back">&#8592;</button>
+  <button onclick="window.location.href='/'" title="Home">&#8962;</button>
+  <span id="toolbox-tool-name">ToolBox Tool</span>
+  <div id="toolbox-shell-right">
+    <span id="toolbox-free-remaining"></span>
+    <span id="toolbox-points">0 pts</span>
+  </div>
+</div>
+<!-- toolbox:shell:end -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="c"><div class="drop" onclick="document.getElementById('file').click()"><div style="font-size:48px">💧</div><p style="color:#aaa;margin-top:8px">Click or drag image</p><input type="file" id="file" accept="image/*" style="display:none" onchange="loadFile(this)"></div><div class="controls"><div class="row"><label>Text</label><input type="text" id="text" value="ToolBox" oninput="apply()"></div><div class="row"><label>Size</label><input type="range" id="size" min="10" max="120" value="36" oninput="document.getElementById('sizeVal').textContent=this.value+'px';apply()"><span id="sizeVal" style="min-width:50px">36px</span></div><div class="row"><label>Color</label><input type="color" id="color" value="#ffffff" oninput="apply()"><label>Opacity</label><input type="range" id="opacity" min="10" max="100" value="50" oninput="document.getElementById('opVal').textContent=this.value+'%';apply()"><span id="opVal" style="min-width:40px">50%</span></div><div class="row"><label>Position</label><select id="pos" onchange="apply()"><option value="br">Bottom Right</option><option value="bl">Bottom Left</option><option value="tr">Top Right</option><option value="tl">Top Left</option><option value="center">Center</option><option value="tile">Tile</option></select></div></div><button onclick="download()">Download</button><div class="preview"><canvas id="canvas"></canvas></div></div><script>function loadFile(input){var file=input.files[0];if(!file)return;var reader=new FileReader();reader.onload=function(e){var img=new Image();img.onload=function(){window._img=img;apply()};img.src=e.target.result};reader.readAsDataURL(file)}function apply(){if(!window._img)return;var img=window._img;var canvas=document.getElementById('canvas');canvas.width=img.naturalWidth;canvas.height=img.naturalHeight;var ctx=canvas.getContext('2d');ctx.drawImage(img,0,0);var text=document.getElementById('text').value;var size=parseInt(document.getElementById('size').value);var color=document.getElementById('color').value;var opacity=parseInt(document.getElementById('opacity').value)/100;var pos=document.getElementById('pos').value;ctx.font='bold '+size+'px sans-serif';ctx.fillStyle=color;ctx.globalAlpha=opacity;var m=20;var tw=ctx.measureText(text).width;var x,y;if(pos==='br'){x=canvas.width-tw-m;y=canvas.height-m}else if(pos==='bl'){x=m;y=canvas.height-m}else if(pos==='tr'){x=canvas.width-tw-m;y=size+m}else if(pos==='tl'){x=m;y=size+m}else if(pos==='center'){x=(canvas.width-tw)/2;y=canvas.height/2}else{for(var ty=size;ty<canvas.height;ty+=size*2){for(var tx=0;tx<canvas.width;tx+=tw+size){ctx.fillText(text,tx,ty)}}return}ctx.fillText(text,x,y);ctx.globalAlpha=1;window.toolbox&&window.toolbox.complete({text:text,position:pos})}function download(){var canvas=document.getElementById('canvas');var link=document.createElement('a');link.download='watermarked.png';link.href=canvas.toDataURL('image/png');link.click()}</script>
+
+
+
+
+
+
+
+
+
+<script src="/bridge.js" data-tool-id="image-watermark"><\/script>
+</body></html>

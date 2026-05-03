@@ -1,0 +1,139 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>JWT 解码</title><style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:sans-serif;background:#0f0f23;color:#e0e0e0;padding-top:48px}.c{max-width:900px;margin:0 auto;padding:20px}textarea{width:100%;height:120px;background:#1a1a2e;color:#e0e0e0;border:1px solid #333;border-radius:8px;padding:16px;font-family:monospace;font-size:14px;resize:vertical;outline:none;margin-bottom:16px}textarea:focus{border-color:#e94560}button{background:linear-gradient(135deg,#e94560,#c23152);color:#fff;border:none;padding:10px 24px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:600;margin-bottom:16px}.result{background:#1a1a2e;border:1px solid #333;border-radius:8px;padding:16px;margin-bottom:12px}.result h4{color:#e94560;font-size:13px;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}.result pre{color:#4ade80;font-family:monospace;font-size:13px;white-space:pre-wrap;word-break:break-all}.error{color:#e94560;font-size:13px}</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- toolbox:seo-geo:start -->
+<title>JWT 解码 | ToolBox</title>
+<meta name="description" content="解码和检查 JWT 令牌，查看头部和载荷 关键词: jwt, token, decode, security, utility">
+<meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1">
+<link rel="canonical" href="https://toolsbox.ai/tools/jwt-decode">
+<link rel="alternate" hreflang="zh-CN" href="https://toolsbox.ai/tools/jwt-decode?lang=zh-CN">
+<link rel="alternate" hreflang="en" href="https://toolsbox.ai/tools/jwt-decode?lang=en">
+<link rel="alternate" hreflang="x-default" href="https://toolsbox.ai/tools/jwt-decode">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolBox">
+<meta property="og:title" content="JWT 解码 | ToolBox">
+<meta property="og:description" content="解码和检查 JWT 令牌，查看头部和载荷 关键词: jwt, token, decode, security, utility">
+<meta property="og:url" content="https://toolsbox.ai/tools/jwt-decode">
+<meta property="og:locale" content="zh_CN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="JWT 解码 | ToolBox">
+<meta name="twitter:description" content="解码和检查 JWT 令牌，查看头部和载荷 关键词: jwt, token, decode, security, utility">
+<meta name="geo.region" content="CN-31">
+<meta name="geo.placename" content="Shanghai">
+<meta name="ICBM" content="31.2304,121.4737">
+<script type="application/ld+json" id="toolbox-jsonld">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"JWT Decoder","applicationCategory":"dev-assistant","operatingSystem":"Web","url":"https://toolsbox.ai/tools/jwt-decode","description":"Decode and inspect JWT tokens, view header and payload","inLanguage":["zh-CN","en"],"offers":{"@type":"Offer","price":"0","priceCurrency":"CNY"},"publisher":{"@type":"Organization","name":"ToolBox"}}<\/script>
+<!-- toolbox:seo-geo:end -->
+
+<style id="toolbox-shell-styles">
+:root{
+  --tb-bg:#070d18;--tb-surface:#0f1b31;--tb-surface-soft:#162744;--tb-text:#ebf2ff;
+  --tb-text-muted:#99abd1;--tb-accent:#ff7a45;--tb-accent-2:#ffb066;--tb-border:#253a63;
+  --tb-radius:14px;--tb-shadow:0 12px 30px rgba(7,13,24,.45);
+}
+html,body{background:radial-gradient(1200px 500px at 50% -20%,#1a2f57 0%,#070d18 58%) fixed !important;color:var(--tb-text) !important;}
+#toolbox-shell{
+  position:fixed;top:0;left:0;right:0;height:56px;
+  background:linear-gradient(120deg,var(--tb-surface) 0%,var(--tb-surface-soft) 100%);
+  color:var(--tb-text);display:flex;align-items:center;padding:0 16px;z-index:99999;
+  font-family:'IBM Plex Sans','Segoe UI',sans-serif;font-size:14px;gap:12px;
+  box-shadow:var(--tb-shadow);border-bottom:1px solid var(--tb-border);backdrop-filter:blur(10px);
+}
+#toolbox-shell button{
+  background:transparent;border:1px solid transparent;color:var(--tb-text);cursor:pointer;font-size:16px;
+  padding:7px 10px;border-radius:10px;transition:all .2s ease;
+}
+#toolbox-shell button:hover{background:rgba(255,255,255,.08);border-color:var(--tb-border);}
+#toolbox-tool-name{font-weight:700;font-size:14px;letter-spacing:.2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:42vw;}
+#toolbox-shell-right{margin-left:auto;display:flex;align-items:center;gap:10px;}
+#toolbox-points{
+  background:linear-gradient(120deg,var(--tb-accent) 0%,var(--tb-accent-2) 100%);
+  padding:5px 12px;border-radius:999px;font-size:12px;font-weight:800;color:#2a180b;
+}
+#toolbox-free-remaining{font-size:11px;color:var(--tb-text-muted);}
+
+/* Unified tool canvas primitives */
+body{padding-top:56px !important;font-family:'IBM Plex Sans','Segoe UI',sans-serif !important;}
+.container,.c{max-width:1120px !important;margin:0 auto !important;padding:20px !important;}
+.actions{bottom:18px !important;}
+button:not(#toolbox-shell button){
+  border:none !important;border-radius:12px !important;padding:10px 16px !important;
+  background:linear-gradient(120deg,var(--tb-accent),var(--tb-accent-2)) !important;color:#1b120a !important;
+  font-weight:700 !important;box-shadow:0 4px 14px rgba(255,122,69,.25) !important;
+}
+button.secondary{
+  background:linear-gradient(120deg,#1a2846,#21355a) !important;color:var(--tb-text) !important;
+  border:1px solid var(--tb-border) !important;box-shadow:none !important;
+}
+input,textarea,select{
+  background:#0f1b31 !important;border:1px solid var(--tb-border) !important;color:var(--tb-text) !important;
+  border-radius:12px !important;
+}
+h1,h2,h3,h4,label{font-family:'IBM Plex Sans','Segoe UI',sans-serif !important;}
+h3,label{color:#ff9a6b !important;}
+</style>
+</head><body>
+
+<!-- toolbox:shell:start -->
+<div id="toolbox-shell">
+  <button onclick="history.back()" title="Back">&#8592;</button>
+  <button onclick="window.location.href='/'" title="Home">&#8962;</button>
+  <span id="toolbox-tool-name">ToolBox Tool</span>
+  <div id="toolbox-shell-right">
+    <span id="toolbox-free-remaining"></span>
+    <span id="toolbox-points">0 pts</span>
+  </div>
+</div>
+<!-- toolbox:shell:end -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="c"><textarea id="i" placeholder="Paste JWT token here (e.g. eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...)"></textarea><button onclick="decode()">Decode</button><div id="results"></div></div><script>function decode(){var v=document.getElementById('i').value.trim();var container=document.getElementById('results');container.innerHTML='';if(!v){container.innerHTML='<div class="error">Please enter a JWT token</div>';return}var parts=v.split('.');if(parts.length!==3){container.innerHTML='<div class="error">Invalid JWT: must have 3 parts separated by dots</div>';window.toolbox&&window.toolbox.error('Invalid JWT format');return}try{var header=JSON.parse(b64decode(parts[0]));var payload=JSON.parse(b64decode(parts[1]));container.innerHTML='<div class="result"><h4>Header</h4><pre>'+JSON.stringify(header,null,2)+'</pre></div>'+'<div class="result"><h4>Payload</h4><pre>'+JSON.stringify(payload,null,2)+'</pre></div>'+'<div class="result"><h4>Signature</h4><pre>'+parts[2]+'</pre></div>';if(payload.exp){var now=Math.floor(Date.now()/1000);var exp=new Date(payload.exp*1000);container.innerHTML+='<div class="result"><h4>Expiration</h4><pre>'+exp.toISOString()+(payload.exp<now?' (EXPIRED)':' (Valid)')+'</pre></div>'}window.toolbox&&window.toolbox.complete({header:header,payload:payload})}catch(e){container.innerHTML='<div class="error">Decode error: '+e.message+'</div>';window.toolbox&&window.toolbox.error(e.message)}}function b64decode(s){s=s.replace(/-/g,'+').replace(/_/g,'/');while(s.length%4)s+='=';return decodeURIComponent(atob(s).split('').map(function(c){return '%'+('00'+c.charCodeAt(0).toString(16)).slice(-2)}).join(''))}</script>
+
+
+
+
+
+
+
+
+
+<script src="/bridge.js" data-tool-id="jwt-decode"><\/script>
+</body></html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Markdown 预览</title><style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:sans-serif;background:#0f0f23;color:#e0e0e0;padding-top:48px}.c{max-width:1200px;margin:0 auto;padding:20px;display:grid;grid-template-columns:1fr 1fr;gap:20px;height:calc(100vh - 68px)}textarea{width:100%;height:100%;background:#1a1a2e;color:#e0e0e0;border:1px solid #333;border-radius:8px;padding:16px;font-family:monospace;font-size:14px;resize:none;outline:none}textarea:focus{border-color:#e94560}.preview{width:100%;height:100%;background:#1a1a2e;border:1px solid #333;border-radius:8px;padding:16px;overflow-y:auto;color:#e0e0e0;line-height:1.6}.preview h1{color:#e94560;font-size:28px;margin:16px 0 8px;border-bottom:1px solid #333;padding-bottom:8px}.preview h2{color:#e94560;font-size:22px;margin:14px 0 6px}.preview h3{color:#e94560;font-size:18px;margin:12px 0 4px}.preview p{margin:8px 0}.preview code{background:#16213e;padding:2px 6px;border-radius:4px;font-family:monospace;font-size:13px;color:#4ade80}.preview pre{background:#16213e;padding:12px;border-radius:8px;overflow-x:auto;margin:8px 0}.preview pre code{background:none;padding:0}.preview blockquote{border-left:3px solid #e94560;padding-left:12px;margin:8px 0;color:#aaa}.preview ul,.preview ol{padding-left:24px;margin:8px 0}.preview a{color:#4ade80}.preview hr{border:none;border-top:1px solid #333;margin:16px 0}.preview strong{color:#fff}.preview em{color:#ccc}.preview img{max-width:100%;border-radius:8px}h3{margin-bottom:8px;color:#e94560;font-size:13px;text-transform:uppercase;letter-spacing:1px}</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- toolbox:seo-geo:start -->
+<title>Markdown 预览 | ToolBox</title>
+<meta name="description" content="实时预览 Markdown 转 HTML 关键词: markdown, preview, html, writing, utility">
+<meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1">
+<link rel="canonical" href="https://toolsbox.ai/tools/markdown-preview">
+<link rel="alternate" hreflang="zh-CN" href="https://toolsbox.ai/tools/markdown-preview?lang=zh-CN">
+<link rel="alternate" hreflang="en" href="https://toolsbox.ai/tools/markdown-preview?lang=en">
+<link rel="alternate" hreflang="x-default" href="https://toolsbox.ai/tools/markdown-preview">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolBox">
+<meta property="og:title" content="Markdown 预览 | ToolBox">
+<meta property="og:description" content="实时预览 Markdown 转 HTML 关键词: markdown, preview, html, writing, utility">
+<meta property="og:url" content="https://toolsbox.ai/tools/markdown-preview">
+<meta property="og:locale" content="zh_CN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Markdown 预览 | ToolBox">
+<meta name="twitter:description" content="实时预览 Markdown 转 HTML 关键词: markdown, preview, html, writing, utility">
+<meta name="geo.region" content="CN-31">
+<meta name="geo.placename" content="Shanghai">
+<meta name="ICBM" content="31.2304,121.4737">
+<script type="application/ld+json" id="toolbox-jsonld">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Markdown Preview","applicationCategory":"dev-assistant","operatingSystem":"Web","url":"https://toolsbox.ai/tools/markdown-preview","description":"Live preview Markdown to HTML conversion","inLanguage":["zh-CN","en"],"offers":{"@type":"Offer","price":"0","priceCurrency":"CNY"},"publisher":{"@type":"Organization","name":"ToolBox"}}<\/script>
+<!-- toolbox:seo-geo:end -->
+
+<style id="toolbox-shell-styles">
+:root{
+  --tb-bg:#070d18;--tb-surface:#0f1b31;--tb-surface-soft:#162744;--tb-text:#ebf2ff;
+  --tb-text-muted:#99abd1;--tb-accent:#ff7a45;--tb-accent-2:#ffb066;--tb-border:#253a63;
+  --tb-radius:14px;--tb-shadow:0 12px 30px rgba(7,13,24,.45);
+}
+html,body{background:radial-gradient(1200px 500px at 50% -20%,#1a2f57 0%,#070d18 58%) fixed !important;color:var(--tb-text) !important;}
+#toolbox-shell{
+  position:fixed;top:0;left:0;right:0;height:56px;
+  background:linear-gradient(120deg,var(--tb-surface) 0%,var(--tb-surface-soft) 100%);
+  color:var(--tb-text);display:flex;align-items:center;padding:0 16px;z-index:99999;
+  font-family:'IBM Plex Sans','Segoe UI',sans-serif;font-size:14px;gap:12px;
+  box-shadow:var(--tb-shadow);border-bottom:1px solid var(--tb-border);backdrop-filter:blur(10px);
+}
+#toolbox-shell button{
+  background:transparent;border:1px solid transparent;color:var(--tb-text);cursor:pointer;font-size:16px;
+  padding:7px 10px;border-radius:10px;transition:all .2s ease;
+}
+#toolbox-shell button:hover{background:rgba(255,255,255,.08);border-color:var(--tb-border);}
+#toolbox-tool-name{font-weight:700;font-size:14px;letter-spacing:.2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:42vw;}
+#toolbox-shell-right{margin-left:auto;display:flex;align-items:center;gap:10px;}
+#toolbox-points{
+  background:linear-gradient(120deg,var(--tb-accent) 0%,var(--tb-accent-2) 100%);
+  padding:5px 12px;border-radius:999px;font-size:12px;font-weight:800;color:#2a180b;
+}
+#toolbox-free-remaining{font-size:11px;color:var(--tb-text-muted);}
+
+/* Unified tool canvas primitives */
+body{padding-top:56px !important;font-family:'IBM Plex Sans','Segoe UI',sans-serif !important;}
+.container,.c{max-width:1120px !important;margin:0 auto !important;padding:20px !important;}
+.actions{bottom:18px !important;}
+button:not(#toolbox-shell button){
+  border:none !important;border-radius:12px !important;padding:10px 16px !important;
+  background:linear-gradient(120deg,var(--tb-accent),var(--tb-accent-2)) !important;color:#1b120a !important;
+  font-weight:700 !important;box-shadow:0 4px 14px rgba(255,122,69,.25) !important;
+}
+button.secondary{
+  background:linear-gradient(120deg,#1a2846,#21355a) !important;color:var(--tb-text) !important;
+  border:1px solid var(--tb-border) !important;box-shadow:none !important;
+}
+input,textarea,select{
+  background:#0f1b31 !important;border:1px solid var(--tb-border) !important;color:var(--tb-text) !important;
+  border-radius:12px !important;
+}
+h1,h2,h3,h4,label{font-family:'IBM Plex Sans','Segoe UI',sans-serif !important;}
+h3,label{color:#ff9a6b !important;}
+</style>
+</head><body>
+
+<!-- toolbox:shell:start -->
+<div id="toolbox-shell">
+  <button onclick="history.back()" title="Back">&#8592;</button>
+  <button onclick="window.location.href='/'" title="Home">&#8962;</button>
+  <span id="toolbox-tool-name">ToolBox Tool</span>
+  <div id="toolbox-shell-right">
+    <span id="toolbox-free-remaining"></span>
+    <span id="toolbox-points">0 pts</span>
+  </div>
+</div>
+<!-- toolbox:shell:end -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="c"><div><h3>Markdown Input</h3><textarea id="i" placeholder="# Hello World&#10;&#10;Write **markdown** here..." oninput="render()"></textarea></div><div><h3>Preview</h3><div class="preview" id="o"></div></div></div><script>function render(){var v=document.getElementById('i').value;var h=v.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');h=h.replace(/^### (.+)$/gm,'<h3>$1</h3>');h=h.replace(/^## (.+)$/gm,'<h2>$1</h2>');h=h.replace(/^# (.+)$/gm,'<h1>$1</h1>');h=h.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>');h=h.replace(/\*(.+?)\*/g,'<em>$1</em>');h=h.replace(/`([^`]+)`/g,'<code>$1</code>');h=h.replace(/```[\s\S]*?```/g,function(m){return'<pre><code>'+m.slice(3,-3).trim()+'</code></pre>'});h=h.replace(/^> (.+)$/gm,'<blockquote>$1</blockquote>');h=h.replace(/^---$/gm,'<hr>');h=h.replace(/\[([^\]]+)\]\(([^)]+)\)/g,'<a href="$2" target="_blank">$1</a>');h=h.replace(/!\[([^\]]*)\]\(([^)]+)\)/g,'<img src="$2" alt="$1">');h=h.replace(/^\* (.+)$/gm,'<li>$1</li>');h=h.replace(/(<li>.*<\/li>\n?)+/g,'<ul>$&</ul>');h=h.replace(/^\d+\. (.+)$/gm,'<li>$1</li>');h=h.replace(/\n\n/g,'</p><p>');h=h='<p>'+h+'</p>';h=h.replace(/<p>\s*<(h[1-3]|hr|pre|blockquote|ul|ol)/g,'<$1');h=h.replace(/<\/(h[1-3]|pre|blockquote|ul|ol)>\s*<\/p>/g,'</$1>');document.getElementById('o').innerHTML=h;window.toolbox&&window.toolbox.complete({action:'preview'})}</script>
+
+
+
+
+
+
+
+
+
+<script src="/bridge.js" data-tool-id="markdown-preview"><\/script>
+</body></html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>科学计算器</title><style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:sans-serif;background:#0f0f23;color:#e0e0e0;padding-top:48px}.c{max-width:400px;margin:0 auto;padding:20px}.display{background:#1a1a2e;border:1px solid #333;border-radius:12px;padding:20px;margin-bottom:16px;text-align:right}.display .expr{color:#aaa;font-size:14px;min-height:20px;word-break:break-all}.display .val{color:#4ade80;font-size:36px;font-family:monospace;word-break:break-all}.keys{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.keys button{background:#1a1a2e;color:#e0e0e0;border:1px solid #333;border-radius:8px;padding:16px;font-size:18px;cursor:pointer;transition:background 0.2s}.keys button:hover{background:#16213e}.keys button.op{color:#e94560}.keys button.fn{color:#4ade80;font-size:14px}.keys button.eq{background:linear-gradient(135deg,#e94560,#c23152);color:#fff;font-weight:700}.keys button.clr{color:#e94560}.history{background:#1a1a2e;border:1px solid #333;border-radius:8px;padding:12px;margin-top:16px;max-height:200px;overflow-y:auto}.history h4{color:#e94560;font-size:12px;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}.history div{color:#aaa;font-size:13px;padding:4px 0;border-bottom:1px solid #222;font-family:monospace}.history div span{color:#4ade80}</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- toolbox:seo-geo:start -->
+<title>科学计算器 | ToolBox</title>
+<meta name="description" content="科学计算器，支持历史记录、三角函数和对数 关键词: calculator, math, scientific, utility">
+<meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1">
+<link rel="canonical" href="https://toolsbox.ai/tools/calculator">
+<link rel="alternate" hreflang="zh-CN" href="https://toolsbox.ai/tools/calculator?lang=zh-CN">
+<link rel="alternate" hreflang="en" href="https://toolsbox.ai/tools/calculator?lang=en">
+<link rel="alternate" hreflang="x-default" href="https://toolsbox.ai/tools/calculator">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolBox">
+<meta property="og:title" content="科学计算器 | ToolBox">
+<meta property="og:description" content="科学计算器，支持历史记录、三角函数和对数 关键词: calculator, math, scientific, utility">
+<meta property="og:url" content="https://toolsbox.ai/tools/calculator">
+<meta property="og:locale" content="zh_CN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="科学计算器 | ToolBox">
+<meta name="twitter:description" content="科学计算器，支持历史记录、三角函数和对数 关键词: calculator, math, scientific, utility">
+<meta name="geo.region" content="CN-31">
+<meta name="geo.placename" content="Shanghai">
+<meta name="ICBM" content="31.2304,121.4737">
+<script type="application/ld+json" id="toolbox-jsonld">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Scientific Calculator","applicationCategory":"daily-calc","operatingSystem":"Web","url":"https://toolsbox.ai/tools/calculator","description":"Scientific calculator with history, trigonometry, and logarithms","inLanguage":["zh-CN","en"],"offers":{"@type":"Offer","price":"0","priceCurrency":"CNY"},"publisher":{"@type":"Organization","name":"ToolBox"}}<\/script>
+<!-- toolbox:seo-geo:end -->
+
+<style id="toolbox-shell-styles">
+:root{
+  --tb-bg:#070d18;--tb-surface:#0f1b31;--tb-surface-soft:#162744;--tb-text:#ebf2ff;
+  --tb-text-muted:#99abd1;--tb-accent:#ff7a45;--tb-accent-2:#ffb066;--tb-border:#253a63;
+  --tb-radius:14px;--tb-shadow:0 12px 30px rgba(7,13,24,.45);
+}
+html,body{background:radial-gradient(1200px 500px at 50% -20%,#1a2f57 0%,#070d18 58%) fixed !important;color:var(--tb-text) !important;}
+#toolbox-shell{
+  position:fixed;top:0;left:0;right:0;height:56px;
+  background:linear-gradient(120deg,var(--tb-surface) 0%,var(--tb-surface-soft) 100%);
+  color:var(--tb-text);display:flex;align-items:center;padding:0 16px;z-index:99999;
+  font-family:'IBM Plex Sans','Segoe UI',sans-serif;font-size:14px;gap:12px;
+  box-shadow:var(--tb-shadow);border-bottom:1px solid var(--tb-border);backdrop-filter:blur(10px);
+}
+#toolbox-shell button{
+  background:transparent;border:1px solid transparent;color:var(--tb-text);cursor:pointer;font-size:16px;
+  padding:7px 10px;border-radius:10px;transition:all .2s ease;
+}
+#toolbox-shell button:hover{background:rgba(255,255,255,.08);border-color:var(--tb-border);}
+#toolbox-tool-name{font-weight:700;font-size:14px;letter-spacing:.2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:42vw;}
+#toolbox-shell-right{margin-left:auto;display:flex;align-items:center;gap:10px;}
+#toolbox-points{
+  background:linear-gradient(120deg,var(--tb-accent) 0%,var(--tb-accent-2) 100%);
+  padding:5px 12px;border-radius:999px;font-size:12px;font-weight:800;color:#2a180b;
+}
+#toolbox-free-remaining{font-size:11px;color:var(--tb-text-muted);}
+
+/* Unified tool canvas primitives */
+body{padding-top:56px !important;font-family:'IBM Plex Sans','Segoe UI',sans-serif !important;}
+.container,.c{max-width:1120px !important;margin:0 auto !important;padding:20px !important;}
+.actions{bottom:18px !important;}
+button:not(#toolbox-shell button){
+  border:none !important;border-radius:12px !important;padding:10px 16px !important;
+  background:linear-gradient(120deg,var(--tb-accent),var(--tb-accent-2)) !important;color:#1b120a !important;
+  font-weight:700 !important;box-shadow:0 4px 14px rgba(255,122,69,.25) !important;
+}
+button.secondary{
+  background:linear-gradient(120deg,#1a2846,#21355a) !important;color:var(--tb-text) !important;
+  border:1px solid var(--tb-border) !important;box-shadow:none !important;
+}
+input,textarea,select{
+  background:#0f1b31 !important;border:1px solid var(--tb-border) !important;color:var(--tb-text) !important;
+  border-radius:12px !important;
+}
+h1,h2,h3,h4,label{font-family:'IBM Plex Sans','Segoe UI',sans-serif !important;}
+h3,label{color:#ff9a6b !important;}
+</style>
+</head><body>
+
+<!-- toolbox:shell:start -->
+<div id="toolbox-shell">
+  <button onclick="history.back()" title="Back">&#8592;</button>
+  <button onclick="window.location.href='/'" title="Home">&#8962;</button>
+  <span id="toolbox-tool-name">ToolBox Tool</span>
+  <div id="toolbox-shell-right">
+    <span id="toolbox-free-remaining"></span>
+    <span id="toolbox-points">0 pts</span>
+  </div>
+</div>
+<!-- toolbox:shell:end -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="c"><div class="display"><div class="expr" id="expr"></div><div class="val" id="val">0</div></div><div class="keys"><button class="clr" onclick="clr()">C</button><button class="fn" onclick="fn('Math.sqrt(')">√</button><button class="fn" onclick="fn('Math.pow(',2)">x²</button><button class="op" onclick="op('/')">÷</button><button onclick="num(7)">7</button><button onclick="num(8)">8</button><button onclick="num(9)">9</button><button class="op" onclick="op('*')">×</button><button onclick="num(4)">4</button><button onclick="num(5)">5</button><button onclick="num(6)">6</button><button class="op" onclick="op('-')">−</button><button onclick="num(1)">1</button><button onclick="num(2)">2</button><button onclick="num(3)">3</button><button class="op" onclick="op('+')">+</button><button class="fn" onclick="fn('(')">(</button><button onclick="num(0)">0</button><button class="fn" onclick="fn(')')">)</button><button class="eq" onclick="calc()">=</button><button class="fn" onclick="fn('Math.sin(')">sin</button><button class="fn" onclick="fn('Math.cos(')">cos</button><button class="fn" onclick="fn('Math.tan(')">tan</button><button class="fn" onclick="fn('Math.log(')">ln</button><button class="fn" onclick="fn('Math.PI')">π</button><button class="fn" onclick="fn('Math.E')">e</button><button class="fn" onclick="pct()">%</button><button class="fn" onclick="bs()">⌫</button></div><div class="history" id="hist"><h4>History</h4></div></div><script>var expr='';var display='0';function num(n){if(display==='0'||display==='Error')display='';display+=n;expr+=n;upd()}function op(o){expr+=o;display=o;upd()}function fn(f){if(f==='Math.pow(',2){expr+='**2';display='²';upd();return}expr+=f;display=f.replace('Math.','');upd()}function clr(){expr='';display='0';upd()}function bs(){expr=expr.slice(0,-1);display=expr||'0';upd()}function pct(){expr+='/100';display='%';upd()}function calc(){try{var r=Function('"use strict";return ('+expr+')')();if(typeof r==='number'){r=parseFloat(r.toPrecision(12))}addHist(expr,r);display=String(r);expr=String(r);upd();window.toolbox&&window.toolbox.complete({expression:expr,result:r})}catch(e){display='Error';expr='';upd();window.toolbox&&window.toolbox.error(e.message)}}function upd(){document.getElementById('val').textContent=display;document.getElementById('expr').textContent=expr}function addHist(e,r){var d=document.createElement('div');d.innerHTML=e+' = <span>'+r+'</span>';var h=document.getElementById('hist');h.insertBefore(d,h.children[1])}document.addEventListener('keydown',function(e){if(e.key>='0'&&e.key<='9')num(e.key);else if(e.key==='+')op('+');else if(e.key==='-')op('-');else if(e.key==='*')op('*');else if(e.key==='/')op('/');else if(e.key==='Enter'||e.key==='=')calc();else if(e.key==='Escape')clr();else if(e.key==='Backspace')bs()})</script>
+
+
+
+
+
+
+
+
+
+<script src="/bridge.js" data-tool-id="calculator"><\/script>
+</body></html>

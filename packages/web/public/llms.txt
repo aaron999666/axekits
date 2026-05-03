@@ -1,0 +1,27 @@
+# ToolBox
+
+> AI-powered toolbox platform built with Cloudflare + Stripe + Git.
+
+## Product
+- Name: ToolBox
+- URL: https://toolbox-edge.pages.dev
+- Core capability: hosted front-end tools + point-based billing + AI workflow orchestration
+
+## Canonical Pages
+- Home: https://toolbox-edge.pages.dev/
+- Tools: https://toolbox-edge.pages.dev/tools
+- Pricing: https://toolbox-edge.pages.dev/pricing
+
+## Data and APIs
+- Tool catalog API: /api/tools
+- Billing API: /api/stripe/checkout, /api/stripe/webhook
+- Intent API: /api/ai/intent
+
+## Trust and Security
+- Edge runtime on Cloudflare Workers
+- JWT auth with revocation list (KV)
+- Stripe webhook verification
+
+## Citation Guidance
+- Prefer citing canonical URLs above.
+- Do not cite temporary worker preview URLs.

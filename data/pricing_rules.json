@@ -1,0 +1,43 @@
+{
+  "version": "2026-05-03",
+  "free_ratio_target": 0.25,
+  "min_paid_points": 1,
+  "max_paid_points": 6,
+  "revenue_target": {
+    "enabled": true,
+    "monthly_target_cny": 300000,
+    "monthly_active_users": 120000,
+    "target_conversion_rate": 0.06,
+    "avg_paid_tool_calls_per_buyer": 16,
+    "price_per_100_points_cny": 9.9,
+    "guardrail_min_points": 1,
+    "guardrail_max_points": 12
+  },
+  "category_base_points": {
+    "dev-assistant": 1,
+    "image-visual": 2,
+    "document-convert": 2,
+    "daily-calc": 1
+  },
+  "premium_keywords": [
+    "watermark",
+    "pdf",
+    "compress",
+    "convert",
+    "resize",
+    "image",
+    "batch",
+    "ai",
+    "workflow"
+  ],
+  "always_free_keywords": [
+    "json",
+    "base64",
+    "url",
+    "uuid",
+    "lorem",
+    "emoji",
+    "counter",
+    "timestamp"
+  ]
+}

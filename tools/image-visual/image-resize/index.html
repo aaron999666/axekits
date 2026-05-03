@@ -1,0 +1,139 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>图片缩放</title><style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:sans-serif;background:#0f0f23;color:#e0e0e0;padding-top:48px}.c{max-width:900px;margin:0 auto;padding:20px}.drop{border:2px dashed #333;border-radius:12px;padding:40px;text-align:center;cursor:pointer;margin-bottom:20px}.drop:hover{border-color:#e94560}.controls{background:#1a1a2e;border:1px solid #333;border-radius:8px;padding:16px;margin-bottom:16px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;align-items:end}.field label{color:#e94560;font-size:12px;text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:4px}.field input{width:100%;background:#0f0f23;color:#e0e0e0;border:1px solid #333;border-radius:8px;padding:8px;font-size:14px;outline:none}button{background:linear-gradient(135deg,#e94560,#c23152);color:#fff;border:none;padding:10px 24px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:600;width:100%;margin-bottom:16px}.preview{text-align:center}.preview img{max-width:100%;border-radius:8px}.info{color:#4ade80;font-size:13px;text-align:center}canvas{display:none}</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- toolbox:seo-geo:start -->
+<title>图片缩放 | ToolBox</title>
+<meta name="description" content="使用 Canvas API 缩放图片，支持锁定宽高比 关键词: image, resize, scale, canvas, web">
+<meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1">
+<link rel="canonical" href="https://toolsbox.ai/tools/image-resize">
+<link rel="alternate" hreflang="zh-CN" href="https://toolsbox.ai/tools/image-resize?lang=zh-CN">
+<link rel="alternate" hreflang="en" href="https://toolsbox.ai/tools/image-resize?lang=en">
+<link rel="alternate" hreflang="x-default" href="https://toolsbox.ai/tools/image-resize">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolBox">
+<meta property="og:title" content="图片缩放 | ToolBox">
+<meta property="og:description" content="使用 Canvas API 缩放图片，支持锁定宽高比 关键词: image, resize, scale, canvas, web">
+<meta property="og:url" content="https://toolsbox.ai/tools/image-resize">
+<meta property="og:locale" content="zh_CN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="图片缩放 | ToolBox">
+<meta name="twitter:description" content="使用 Canvas API 缩放图片，支持锁定宽高比 关键词: image, resize, scale, canvas, web">
+<meta name="geo.region" content="CN-31">
+<meta name="geo.placename" content="Shanghai">
+<meta name="ICBM" content="31.2304,121.4737">
+<script type="application/ld+json" id="toolbox-jsonld">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Image Resizer","applicationCategory":"image-visual","operatingSystem":"Web","url":"https://toolsbox.ai/tools/image-resize","description":"Resize images with aspect ratio lock using Canvas API","inLanguage":["zh-CN","en"],"offers":{"@type":"Offer","price":"0","priceCurrency":"CNY"},"publisher":{"@type":"Organization","name":"ToolBox"}}<\/script>
+<!-- toolbox:seo-geo:end -->
+
+<style id="toolbox-shell-styles">
+:root{
+  --tb-bg:#070d18;--tb-surface:#0f1b31;--tb-surface-soft:#162744;--tb-text:#ebf2ff;
+  --tb-text-muted:#99abd1;--tb-accent:#ff7a45;--tb-accent-2:#ffb066;--tb-border:#253a63;
+  --tb-radius:14px;--tb-shadow:0 12px 30px rgba(7,13,24,.45);
+}
+html,body{background:radial-gradient(1200px 500px at 50% -20%,#1a2f57 0%,#070d18 58%) fixed !important;color:var(--tb-text) !important;}
+#toolbox-shell{
+  position:fixed;top:0;left:0;right:0;height:56px;
+  background:linear-gradient(120deg,var(--tb-surface) 0%,var(--tb-surface-soft) 100%);
+  color:var(--tb-text);display:flex;align-items:center;padding:0 16px;z-index:99999;
+  font-family:'IBM Plex Sans','Segoe UI',sans-serif;font-size:14px;gap:12px;
+  box-shadow:var(--tb-shadow);border-bottom:1px solid var(--tb-border);backdrop-filter:blur(10px);
+}
+#toolbox-shell button{
+  background:transparent;border:1px solid transparent;color:var(--tb-text);cursor:pointer;font-size:16px;
+  padding:7px 10px;border-radius:10px;transition:all .2s ease;
+}
+#toolbox-shell button:hover{background:rgba(255,255,255,.08);border-color:var(--tb-border);}
+#toolbox-tool-name{font-weight:700;font-size:14px;letter-spacing:.2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:42vw;}
+#toolbox-shell-right{margin-left:auto;display:flex;align-items:center;gap:10px;}
+#toolbox-points{
+  background:linear-gradient(120deg,var(--tb-accent) 0%,var(--tb-accent-2) 100%);
+  padding:5px 12px;border-radius:999px;font-size:12px;font-weight:800;color:#2a180b;
+}
+#toolbox-free-remaining{font-size:11px;color:var(--tb-text-muted);}
+
+/* Unified tool canvas primitives */
+body{padding-top:56px !important;font-family:'IBM Plex Sans','Segoe UI',sans-serif !important;}
+.container,.c{max-width:1120px !important;margin:0 auto !important;padding:20px !important;}
+.actions{bottom:18px !important;}
+button:not(#toolbox-shell button){
+  border:none !important;border-radius:12px !important;padding:10px 16px !important;
+  background:linear-gradient(120deg,var(--tb-accent),var(--tb-accent-2)) !important;color:#1b120a !important;
+  font-weight:700 !important;box-shadow:0 4px 14px rgba(255,122,69,.25) !important;
+}
+button.secondary{
+  background:linear-gradient(120deg,#1a2846,#21355a) !important;color:var(--tb-text) !important;
+  border:1px solid var(--tb-border) !important;box-shadow:none !important;
+}
+input,textarea,select{
+  background:#0f1b31 !important;border:1px solid var(--tb-border) !important;color:var(--tb-text) !important;
+  border-radius:12px !important;
+}
+h1,h2,h3,h4,label{font-family:'IBM Plex Sans','Segoe UI',sans-serif !important;}
+h3,label{color:#ff9a6b !important;}
+</style>
+</head><body>
+
+<!-- toolbox:shell:start -->
+<div id="toolbox-shell">
+  <button onclick="history.back()" title="Back">&#8592;</button>
+  <button onclick="window.location.href='/'" title="Home">&#8962;</button>
+  <span id="toolbox-tool-name">ToolBox Tool</span>
+  <div id="toolbox-shell-right">
+    <span id="toolbox-free-remaining"></span>
+    <span id="toolbox-points">0 pts</span>
+  </div>
+</div>
+<!-- toolbox:shell:end -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="c"><div class="drop" onclick="document.getElementById('file').click()"><div style="font-size:48px">🖼️</div><p style="color:#aaa;margin-top:8px">Click or drag image</p><input type="file" id="file" accept="image/*" style="display:none" onchange="loadFile(this)"></div><div class="controls"><div class="field"><label>Width</label><input type="number" id="w" oninput="resize()"></div><div class="field"><label>Height</label><input type="number" id="h" oninput="resize()"></div><div class="field"><label>Lock Ratio</label><input type="checkbox" id="lock" checked style="accent-color:#e94560;width:auto"></div></div><button onclick="download()">Download Resized</button><div class="preview"><img id="preview"></div><div class="info" id="info"></div><canvas id="canvas"></canvas></div><script>var origW=0,origH=0,ratio=1;function loadFile(input){var file=input.files[0];if(!file)return;var reader=new FileReader();reader.onload=function(e){var img=new Image();img.onload=function(){origW=img.naturalWidth;origH=img.naturalHeight;ratio=origW/origH;document.getElementById('w').value=origW;document.getElementById('h').value=origH;document.getElementById('preview').src=e.target.result;document.getElementById('info').textContent='Original: '+origW+'×'+origH;window._img=img};img.src=e.target.result};reader.readAsDataURL(file)}function resize(){var w=parseInt(document.getElementById('w').value);var h=parseInt(document.getElementById('h').value);if(!w||!h||!window._img)return;if(document.getElementById('lock').checked){if(this===document.getElementById('w')){h=Math.round(w/ratio);document.getElementById('h').value=h}else{w=Math.round(h*ratio);document.getElementById('w').value=w}}var canvas=document.getElementById('canvas');canvas.width=w;canvas.height=h;var ctx=canvas.getContext('2d');ctx.drawImage(window._img,0,0,w,h);document.getElementById('preview').src=canvas.toDataURL('image/png');document.getElementById('info').textContent=origW+'×'+origH+' → '+w+'×'+h;window.toolbox&&window.toolbox.complete({width:w,height:h})}function download(){var canvas=document.getElementById('canvas');var link=document.createElement('a');link.download='resized.png';link.href=canvas.toDataURL('image/png');link.click()}</script>
+
+
+
+
+
+
+
+
+
+<script src="/bridge.js" data-tool-id="image-resize"><\/script>
+</body></html>

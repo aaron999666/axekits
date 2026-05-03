@@ -1,0 +1,20 @@
+{
+  "version": "2026-05-03",
+  "weights": {
+    "heat": 0.35,
+    "growth_proxy": 0.2,
+    "commercial_intent": 0.2,
+    "supply_gap": 0.2,
+    "capability_fit": 0.15,
+    "risk_penalty": 0.3
+  },
+  "limits": {
+    "max_candidates": 80,
+    "launch_queue_top_n": 20
+  },
+  "notes": [
+    "热度来自外部生态和站内行为；供给缺口来自竞品缺口和站内未满足请求",
+    "风险词命中将进入 manual_review，不自动上线",
+    "本文件可由运营每周调整权重，控制上新节奏"
+  ]
+}

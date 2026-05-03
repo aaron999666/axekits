@@ -1,0 +1,140 @@
+name: Release (Gated)
+
+on:
+  workflow_dispatch:
+    inputs:
+      deploy_worker:
+        description: "Deploy Cloudflare Worker"
+        required: true
+        default: true
+        type: boolean
+      deploy_web:
+        description: "Deploy Web (packages/web)"
+        required: true
+        default: true
+        type: boolean
+      deploy_tools:
+        description: "Deploy Tools static site"
+        required: true
+        default: true
+        type: boolean
+
+jobs:
+  quality-gate:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.PAT_TOKEN }}
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Python dependencies
+        run: pip install -r scripts/requirements.txt
+      - name: Install Node dependencies
+        run: npm install
+
+      - name: Auto normalize tool UI
+        run: node packages/tool-shell/inject.js tools
+
+      - name: UI consistency gate
+        run: python scripts/ui_consistency_check.py
+
+      - name: Data validation gate
+        run: python scripts/validate.py
+      - name: Demand discovery gate
+        run: python scripts/demand_discovery.py
+      - name: Auto tool factory gate
+        run: python scripts/auto_tool_factory.py
+      - name: Auto pricing gate
+        run: python scripts/pricing_engine.py
+      - name: Generate web SEO assets
+        run: python scripts/generate_web_seo_assets.py
+      - name: Billing policy gate
+        run: python scripts/billing_policy_check.py
+      - name: SEO/GEO gate
+        run: python scripts/seo_geo_autocheck.py
+      - name: Web build gate (Linux)
+        run: npm -w packages/web run build
+
+      - name: Security gate
+        run: python scripts/security_gate.py
+
+      - name: Health check gate
+        run: python scripts/health_check.py
+
+      - name: Commit normalization updates (if any)
+        run: |
+          git config user.name "toolbox-bot"
+          git config user.email "bot@toolbox.dev"
+          git add tools/ data/
+          if git diff --staged --quiet; then
+            echo "No normalization updates."
+          else
+            git commit -m "chore(release): normalize ui and health metadata"
+            git push
+          fi
+
+  deploy-worker:
+    needs: quality-gate
+    if: ${{ inputs.deploy_worker }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Install dependencies
+        run: npm install
+      - name: Deploy Worker
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
+        run: npm run deploy:worker
+
+  deploy-web:
+    needs: quality-gate
+    if: ${{ inputs.deploy_web }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Install dependencies
+        run: npm install
+      - name: Deploy Web
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
+          NEXT_PUBLIC_API_BASE: ${{ secrets.NEXT_PUBLIC_API_BASE }}
+          NEXT_PUBLIC_TOOLS_DOMAIN: ${{ secrets.NEXT_PUBLIC_TOOLS_DOMAIN }}
+          NEXT_PUBLIC_SITE_URL: ${{ secrets.NEXT_PUBLIC_SITE_URL }}
+        run: npm run deploy:web
+
+  deploy-tools:
+    needs: quality-gate
+    if: ${{ inputs.deploy_tools }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Install dependencies
+        run: npm install
+      - name: Deploy Tools
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
+        run: npm run deploy:tools

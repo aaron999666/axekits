@@ -1,0 +1,139 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>年龄计算</title><style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:sans-serif;background:#0f0f23;color:#e0e0e0;padding-top:48px}.c{max-width:700px;margin:0 auto;padding:20px}.card{background:#1a1a2e;border:1px solid #333;border-radius:8px;padding:20px;margin-bottom:16px}label{color:#e94560;font-size:13px;text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:8px}input[type=date]{width:100%;background:#0f0f23;color:#e0e0e0;border:1px solid #333;border-radius:8px;padding:12px;font-size:16px;outline:none;margin-bottom:16px}input:focus{border-color:#e94560}.result{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}.stat{background:#0f0f23;border-radius:8px;padding:16px;text-align:center}.stat .val{font-size:36px;font-weight:700;color:#4ade80}.stat .lbl{font-size:12px;color:#aaa;margin-top:4px}.detail{margin-top:16px;color:#aaa;font-size:14px;line-height:2}.detail span{color:#4ade80;font-weight:600}button{background:linear-gradient(135deg,#e94560,#c23152);color:#fff;border:none;padding:10px 24px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:600;width:100%}</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- toolbox:seo-geo:start -->
+<title>年龄计算 | ToolBox</title>
+<meta name="description" content="精确计算年龄（年/月/日），附带详细统计 关键词: age, calculator, date, utility">
+<meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1">
+<link rel="canonical" href="https://toolsbox.ai/tools/age-calc">
+<link rel="alternate" hreflang="zh-CN" href="https://toolsbox.ai/tools/age-calc?lang=zh-CN">
+<link rel="alternate" hreflang="en" href="https://toolsbox.ai/tools/age-calc?lang=en">
+<link rel="alternate" hreflang="x-default" href="https://toolsbox.ai/tools/age-calc">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolBox">
+<meta property="og:title" content="年龄计算 | ToolBox">
+<meta property="og:description" content="精确计算年龄（年/月/日），附带详细统计 关键词: age, calculator, date, utility">
+<meta property="og:url" content="https://toolsbox.ai/tools/age-calc">
+<meta property="og:locale" content="zh_CN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="年龄计算 | ToolBox">
+<meta name="twitter:description" content="精确计算年龄（年/月/日），附带详细统计 关键词: age, calculator, date, utility">
+<meta name="geo.region" content="CN-31">
+<meta name="geo.placename" content="Shanghai">
+<meta name="ICBM" content="31.2304,121.4737">
+<script type="application/ld+json" id="toolbox-jsonld">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Age Calculator","applicationCategory":"daily-calc","operatingSystem":"Web","url":"https://toolsbox.ai/tools/age-calc","description":"Calculate exact age in years, months, days with detailed stats","inLanguage":["zh-CN","en"],"offers":{"@type":"Offer","price":"0","priceCurrency":"CNY"},"publisher":{"@type":"Organization","name":"ToolBox"}}<\/script>
+<!-- toolbox:seo-geo:end -->
+
+<style id="toolbox-shell-styles">
+:root{
+  --tb-bg:#070d18;--tb-surface:#0f1b31;--tb-surface-soft:#162744;--tb-text:#ebf2ff;
+  --tb-text-muted:#99abd1;--tb-accent:#ff7a45;--tb-accent-2:#ffb066;--tb-border:#253a63;
+  --tb-radius:14px;--tb-shadow:0 12px 30px rgba(7,13,24,.45);
+}
+html,body{background:radial-gradient(1200px 500px at 50% -20%,#1a2f57 0%,#070d18 58%) fixed !important;color:var(--tb-text) !important;}
+#toolbox-shell{
+  position:fixed;top:0;left:0;right:0;height:56px;
+  background:linear-gradient(120deg,var(--tb-surface) 0%,var(--tb-surface-soft) 100%);
+  color:var(--tb-text);display:flex;align-items:center;padding:0 16px;z-index:99999;
+  font-family:'IBM Plex Sans','Segoe UI',sans-serif;font-size:14px;gap:12px;
+  box-shadow:var(--tb-shadow);border-bottom:1px solid var(--tb-border);backdrop-filter:blur(10px);
+}
+#toolbox-shell button{
+  background:transparent;border:1px solid transparent;color:var(--tb-text);cursor:pointer;font-size:16px;
+  padding:7px 10px;border-radius:10px;transition:all .2s ease;
+}
+#toolbox-shell button:hover{background:rgba(255,255,255,.08);border-color:var(--tb-border);}
+#toolbox-tool-name{font-weight:700;font-size:14px;letter-spacing:.2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:42vw;}
+#toolbox-shell-right{margin-left:auto;display:flex;align-items:center;gap:10px;}
+#toolbox-points{
+  background:linear-gradient(120deg,var(--tb-accent) 0%,var(--tb-accent-2) 100%);
+  padding:5px 12px;border-radius:999px;font-size:12px;font-weight:800;color:#2a180b;
+}
+#toolbox-free-remaining{font-size:11px;color:var(--tb-text-muted);}
+
+/* Unified tool canvas primitives */
+body{padding-top:56px !important;font-family:'IBM Plex Sans','Segoe UI',sans-serif !important;}
+.container,.c{max-width:1120px !important;margin:0 auto !important;padding:20px !important;}
+.actions{bottom:18px !important;}
+button:not(#toolbox-shell button){
+  border:none !important;border-radius:12px !important;padding:10px 16px !important;
+  background:linear-gradient(120deg,var(--tb-accent),var(--tb-accent-2)) !important;color:#1b120a !important;
+  font-weight:700 !important;box-shadow:0 4px 14px rgba(255,122,69,.25) !important;
+}
+button.secondary{
+  background:linear-gradient(120deg,#1a2846,#21355a) !important;color:var(--tb-text) !important;
+  border:1px solid var(--tb-border) !important;box-shadow:none !important;
+}
+input,textarea,select{
+  background:#0f1b31 !important;border:1px solid var(--tb-border) !important;color:var(--tb-text) !important;
+  border-radius:12px !important;
+}
+h1,h2,h3,h4,label{font-family:'IBM Plex Sans','Segoe UI',sans-serif !important;}
+h3,label{color:#ff9a6b !important;}
+</style>
+</head><body>
+
+<!-- toolbox:shell:start -->
+<div id="toolbox-shell">
+  <button onclick="history.back()" title="Back">&#8592;</button>
+  <button onclick="window.location.href='/'" title="Home">&#8962;</button>
+  <span id="toolbox-tool-name">ToolBox Tool</span>
+  <div id="toolbox-shell-right">
+    <span id="toolbox-free-remaining"></span>
+    <span id="toolbox-points">0 pts</span>
+  </div>
+</div>
+<!-- toolbox:shell:end -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="c"><div class="card"><label>Date of Birth</label><input type="date" id="dob" onchange="calc()"><label>Target Date</label><input type="date" id="target" onchange="calc()"><button onclick="calc()">Calculate</button></div><div class="result" id="result" style="display:none"><div class="stat"><div class="val" id="years">0</div><div class="lbl">Years</div></div><div class="stat"><div class="val" id="months">0</div><div class="lbl">Months</div></div><div class="stat"><div class="val" id="days">0</div><div class="lbl">Days</div></div></div><div class="detail" id="detail"></div></div><script>document.getElementById('target').valueAsDate=new Date();function calc(){var dob=document.getElementById('dob').value;var target=document.getElementById('target').value;if(!dob)return;var birth=new Date(dob);var end=target?new Date(target):new Date();if(birth>end){window.toolbox&&window.toolbox.error('Birth date must be before target date');return}document.getElementById('result').style.display='grid';var y=end.getFullYear()-birth.getFullYear();var m=end.getMonth()-birth.getMonth();var d=end.getDate()-birth.getDate();if(d<0){m--;var prev=new Date(end.getFullYear(),end.getMonth(),0);d+=prev.getDate()}if(m<0){y--;m+=12}document.getElementById('years').textContent=y;document.getElementById('months').textContent=m;document.getElementById('days').textContent=d;var totalDays=Math.floor((end-birth)/(1000*60*60*24));var totalWeeks=Math.floor(totalDays/7);var totalHours=totalDays*24;var nextBday=new Date(end.getFullYear(),birth.getMonth(),birth.getDate());if(nextBday<=end)nextBday.setFullYear(nextBday.getFullYear()+1);var daysUntilNext=Math.ceil((nextBday-end)/(1000*60*60*24));document.getElementById('detail').innerHTML='Total: <span>'+totalDays+'</span> days / <span>'+totalWeeks+'</span> weeks / <span>'+totalHours.toLocaleString()+'</span> hours<br>Next birthday in: <span>'+daysUntilNext+'</span> days<br>You were born on: <span>'+birth.toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'})+'</span>';window.toolbox&&window.toolbox.complete({years:y,months:m,days:d,totalDays:totalDays})}</script>
+
+
+
+
+
+
+
+
+
+<script src="/bridge.js" data-tool-id="age-calc"><\/script>
+</body></html>

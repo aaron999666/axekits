@@ -1,0 +1,47 @@
+name: Tool UI Auto-Fix
+
+on:
+  push:
+    paths:
+      - "tools/**/index.html"
+      - "packages/tool-shell/inject.js"
+      - "scripts/ui_consistency_check.py"
+  workflow_dispatch:
+
+jobs:
+  normalize-tool-ui:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.PAT_TOKEN }}
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Auto inject unified shell
+        run: node packages/tool-shell/inject.js tools
+
+      - name: Verify UI consistency
+        run: python scripts/ui_consistency_check.py
+
+      - name: Auto commit normalized UI
+        run: |
+          git config user.name "toolbox-bot"
+          git config user.email "bot@toolbox.dev"
+          git add tools/
+          if git diff --staged --quiet; then
+            echo "No UI normalization changes."
+          else
+            git commit -m "chore(ui): auto-normalize tool UI shell"
+            git push
+          fi

@@ -1,0 +1,37 @@
+[
+  {
+    "id": "image-compress-watermark",
+    "name": "Compress & Watermark",
+    "name_zh": "压缩并加水印",
+    "description": "Compress an image then add a watermark in one workflow",
+    "description_zh": "一步完成图片压缩和添加水印",
+    "steps": [
+      { "tool": "image-compress", "input": "$url", "params": { "quality": 80 } },
+      { "tool": "image-watermark", "input": "$step1.output", "params": { "text": "ToolBox", "position": "br" } }
+    ],
+    "total_points": 3
+  },
+  {
+    "id": "image-resize-convert",
+    "name": "Resize & Convert",
+    "name_zh": "缩放并转换格式",
+    "description": "Resize an image and convert it to WebP format",
+    "description_zh": "缩放图片并转换为 WebP 格式",
+    "steps": [
+      { "tool": "image-resize", "input": "$url", "params": { "width": 800 } },
+      { "tool": "image-convert", "input": "$step1.output", "params": { "format": "webp" } }
+    ],
+    "total_points": 2
+  },
+  {
+    "id": "image-to-pdf-workflow",
+    "name": "Images to PDF",
+    "name_zh": "多图转 PDF",
+    "description": "Convert multiple images to a single PDF document",
+    "description_zh": "将多张图片合并为一个 PDF 文档",
+    "steps": [
+      { "tool": "image-to-pdf", "input": "$url", "params": {} }
+    ],
+    "total_points": 1
+  }
+]

@@ -1,0 +1,139 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>UUID 生成</title><style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:sans-serif;background:#0f0f23;color:#e0e0e0;padding-top:48px}.c{max-width:700px;margin:0 auto;padding:20px}.row{display:flex;align-items:center;gap:12px;margin-bottom:20px}.row label{color:#e94560;font-size:13px;text-transform:uppercase;letter-spacing:1px;min-width:80px}.row input[type=number]{width:80px;background:#1a1a2e;color:#e0e0e0;border:1px solid #333;border-radius:8px;padding:8px;font-size:14px;outline:none}.row input:focus{border-color:#e94560}button{background:linear-gradient(135deg,#e94560,#c23152);color:#fff;border:none;padding:10px 24px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:600}button.s{background:linear-gradient(135deg,#16213e,#1a1a2e);border:1px solid #333}.list{background:#1a1a2e;border:1px solid #333;border-radius:8px;padding:16px;max-height:500px;overflow-y:auto}.item{display:flex;align-items:center;justify-content:space-between;padding:8px 12px;border-bottom:1px solid #333;font-family:monospace;font-size:14px;color:#4ade80}.item:last-child{border-bottom:none}.item button{background:none;border:1px solid #333;color:#aaa;padding:4px 8px;font-size:11px;border-radius:4px}.item button:hover{color:#e94560;border-color:#e94560}</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- toolbox:seo-geo:start -->
+<title>UUID 生成 | ToolBox</title>
+<meta name="description" content="批量生成 UUID v4 标识符 关键词: uuid, generator, id, random, utility">
+<meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1">
+<link rel="canonical" href="https://toolsbox.ai/tools/uuid-gen">
+<link rel="alternate" hreflang="zh-CN" href="https://toolsbox.ai/tools/uuid-gen?lang=zh-CN">
+<link rel="alternate" hreflang="en" href="https://toolsbox.ai/tools/uuid-gen?lang=en">
+<link rel="alternate" hreflang="x-default" href="https://toolsbox.ai/tools/uuid-gen">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolBox">
+<meta property="og:title" content="UUID 生成 | ToolBox">
+<meta property="og:description" content="批量生成 UUID v4 标识符 关键词: uuid, generator, id, random, utility">
+<meta property="og:url" content="https://toolsbox.ai/tools/uuid-gen">
+<meta property="og:locale" content="zh_CN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="UUID 生成 | ToolBox">
+<meta name="twitter:description" content="批量生成 UUID v4 标识符 关键词: uuid, generator, id, random, utility">
+<meta name="geo.region" content="CN-31">
+<meta name="geo.placename" content="Shanghai">
+<meta name="ICBM" content="31.2304,121.4737">
+<script type="application/ld+json" id="toolbox-jsonld">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"UUID Generator","applicationCategory":"dev-assistant","operatingSystem":"Web","url":"https://toolsbox.ai/tools/uuid-gen","description":"Generate UUID v4 identifiers in bulk","inLanguage":["zh-CN","en"],"offers":{"@type":"Offer","price":"0","priceCurrency":"CNY"},"publisher":{"@type":"Organization","name":"ToolBox"}}<\/script>
+<!-- toolbox:seo-geo:end -->
+
+<style id="toolbox-shell-styles">
+:root{
+  --tb-bg:#070d18;--tb-surface:#0f1b31;--tb-surface-soft:#162744;--tb-text:#ebf2ff;
+  --tb-text-muted:#99abd1;--tb-accent:#ff7a45;--tb-accent-2:#ffb066;--tb-border:#253a63;
+  --tb-radius:14px;--tb-shadow:0 12px 30px rgba(7,13,24,.45);
+}
+html,body{background:radial-gradient(1200px 500px at 50% -20%,#1a2f57 0%,#070d18 58%) fixed !important;color:var(--tb-text) !important;}
+#toolbox-shell{
+  position:fixed;top:0;left:0;right:0;height:56px;
+  background:linear-gradient(120deg,var(--tb-surface) 0%,var(--tb-surface-soft) 100%);
+  color:var(--tb-text);display:flex;align-items:center;padding:0 16px;z-index:99999;
+  font-family:'IBM Plex Sans','Segoe UI',sans-serif;font-size:14px;gap:12px;
+  box-shadow:var(--tb-shadow);border-bottom:1px solid var(--tb-border);backdrop-filter:blur(10px);
+}
+#toolbox-shell button{
+  background:transparent;border:1px solid transparent;color:var(--tb-text);cursor:pointer;font-size:16px;
+  padding:7px 10px;border-radius:10px;transition:all .2s ease;
+}
+#toolbox-shell button:hover{background:rgba(255,255,255,.08);border-color:var(--tb-border);}
+#toolbox-tool-name{font-weight:700;font-size:14px;letter-spacing:.2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:42vw;}
+#toolbox-shell-right{margin-left:auto;display:flex;align-items:center;gap:10px;}
+#toolbox-points{
+  background:linear-gradient(120deg,var(--tb-accent) 0%,var(--tb-accent-2) 100%);
+  padding:5px 12px;border-radius:999px;font-size:12px;font-weight:800;color:#2a180b;
+}
+#toolbox-free-remaining{font-size:11px;color:var(--tb-text-muted);}
+
+/* Unified tool canvas primitives */
+body{padding-top:56px !important;font-family:'IBM Plex Sans','Segoe UI',sans-serif !important;}
+.container,.c{max-width:1120px !important;margin:0 auto !important;padding:20px !important;}
+.actions{bottom:18px !important;}
+button:not(#toolbox-shell button){
+  border:none !important;border-radius:12px !important;padding:10px 16px !important;
+  background:linear-gradient(120deg,var(--tb-accent),var(--tb-accent-2)) !important;color:#1b120a !important;
+  font-weight:700 !important;box-shadow:0 4px 14px rgba(255,122,69,.25) !important;
+}
+button.secondary{
+  background:linear-gradient(120deg,#1a2846,#21355a) !important;color:var(--tb-text) !important;
+  border:1px solid var(--tb-border) !important;box-shadow:none !important;
+}
+input,textarea,select{
+  background:#0f1b31 !important;border:1px solid var(--tb-border) !important;color:var(--tb-text) !important;
+  border-radius:12px !important;
+}
+h1,h2,h3,h4,label{font-family:'IBM Plex Sans','Segoe UI',sans-serif !important;}
+h3,label{color:#ff9a6b !important;}
+</style>
+</head><body>
+
+<!-- toolbox:shell:start -->
+<div id="toolbox-shell">
+  <button onclick="history.back()" title="Back">&#8592;</button>
+  <button onclick="window.location.href='/'" title="Home">&#8962;</button>
+  <span id="toolbox-tool-name">ToolBox Tool</span>
+  <div id="toolbox-shell-right">
+    <span id="toolbox-free-remaining"></span>
+    <span id="toolbox-points">0 pts</span>
+  </div>
+</div>
+<!-- toolbox:shell:end -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="c"><div class="row"><label>Count</label><input type="number" id="count" value="5" min="1" max="100"><button onclick="gen()">Generate</button><button class="s" onclick="copyAll()">Copy All</button></div><div class="list" id="list"></div></div><script>function v4(){return'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,function(c){var r=crypto.getRandomValues(new Uint8Array(1))[0]%16;var v=c==='x'?r:(r&0x3|0x8);return v.toString(16)})}function gen(){var n=parseInt(document.getElementById('count').value)||5;n=Math.min(n,100);var list=document.getElementById('list');list.innerHTML='';var uuids=[];for(var i=0;i<n;i++){var id=v4();uuids.push(id);var div=document.createElement('div');div.className='item';div.innerHTML='<span>'+id+'</span><button onclick="navigator.clipboard.writeText(\''+id+'\')">Copy</button>';list.appendChild(div)}window.toolbox&&window.toolbox.complete({count:n,uuids:uuids})}function copyAll(){var items=document.querySelectorAll('.item span');var text=Array.from(items).map(function(s){return s.textContent}).join('\n');navigator.clipboard.writeText(text)}</script>
+
+
+
+
+
+
+
+
+
+<script src="/bridge.js" data-tool-id="uuid-gen"><\/script>
+</body></html>

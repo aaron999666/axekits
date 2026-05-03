@@ -1,0 +1,46 @@
+name: PR Quality Gate
+
+on:
+  pull_request:
+    branches: ["main"]
+  workflow_dispatch:
+
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install Python dependencies
+        run: pip install -r scripts/requirements.txt
+      - name: Install Node dependencies
+        run: npm install
+      - name: Normalize tool UI
+        run: node packages/tool-shell/inject.js tools
+      - name: UI consistency check
+        run: python scripts/ui_consistency_check.py
+      - name: Data validation
+        run: python scripts/validate.py
+      - name: Demand discovery check
+        run: python scripts/demand_discovery.py
+      - name: Auto tool factory check
+        run: python scripts/auto_tool_factory.py
+      - name: Auto pricing engine
+        run: python scripts/pricing_engine.py
+      - name: Generate web SEO assets
+        run: python scripts/generate_web_seo_assets.py
+      - name: Billing policy check
+        run: python scripts/billing_policy_check.py
+      - name: SEO/GEO auto-check
+        run: python scripts/seo_geo_autocheck.py
+      - name: Web build gate (Linux)
+        run: npm -w packages/web run build
+      - name: Security gate
+        run: python scripts/security_gate.py
+      - name: Health check
+        run: python scripts/health_check.py

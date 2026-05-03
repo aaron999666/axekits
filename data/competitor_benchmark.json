@@ -1,0 +1,167 @@
+{
+  "generated_at": "2026-05-03T12:47:26.670107+00:00",
+  "competitor_count": 5,
+  "our_tool_count": 41,
+  "top_our_tags": [
+    [
+      "utility",
+      33
+    ],
+    [
+      "auto-generated",
+      11
+    ],
+    [
+      "demand-driven",
+      11
+    ],
+    [
+      "web",
+      8
+    ],
+    [
+      "text",
+      7
+    ],
+    [
+      "convert",
+      6
+    ],
+    [
+      "image",
+      6
+    ],
+    [
+      "minify",
+      5
+    ],
+    [
+      "code",
+      4
+    ],
+    [
+      "format",
+      3
+    ],
+    [
+      "decode",
+      3
+    ],
+    [
+      "date",
+      3
+    ],
+    [
+      "canvas",
+      3
+    ],
+    [
+      "calculator",
+      3
+    ],
+    [
+      "encode",
+      2
+    ],
+    [
+      "html",
+      2
+    ],
+    [
+      "security",
+      2
+    ],
+    [
+      "generator",
+      2
+    ],
+    [
+      "random",
+      2
+    ],
+    [
+      "time",
+      2
+    ]
+  ],
+  "gaps": [
+    {
+      "name": "TinyWow",
+      "url": "https://tinywow.com",
+      "focus": [
+        "pdf",
+        "image",
+        "ai-tools",
+        "file-convert"
+      ],
+      "missing_topics": [],
+      "thin_topics": [
+        "pdf",
+        "ai-tools",
+        "file-convert"
+      ]
+    },
+    {
+      "name": "iLovePDF",
+      "url": "https://www.ilovepdf.com",
+      "focus": [
+        "pdf",
+        "merge",
+        "compress",
+        "office-convert"
+      ],
+      "missing_topics": [],
+      "thin_topics": [
+        "pdf",
+        "merge",
+        "compress",
+        "office-convert"
+      ]
+    },
+    {
+      "name": "Smallpdf",
+      "url": "https://smallpdf.com",
+      "focus": [
+        "pdf",
+        "workflow",
+        "document-sign"
+      ],
+      "missing_topics": [],
+      "thin_topics": [
+        "pdf",
+        "workflow",
+        "document-sign"
+      ]
+    },
+    {
+      "name": "Canva Tools",
+      "url": "https://www.canva.com/tools",
+      "focus": [
+        "design",
+        "image",
+        "social-assets"
+      ],
+      "missing_topics": [],
+      "thin_topics": [
+        "design",
+        "social-assets"
+      ]
+    },
+    {
+      "name": "CloudConvert",
+      "url": "https://cloudconvert.com",
+      "focus": [
+        "format-convert",
+        "api",
+        "batch-convert"
+      ],
+      "missing_topics": [],
+      "thin_topics": [
+        "format-convert",
+        "api",
+        "batch-convert"
+      ]
+    }
+  ],
+  "recommendations": []
+}

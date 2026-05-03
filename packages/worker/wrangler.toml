@@ -1,0 +1,60 @@
+name = "toolbox-api"
+main = "src/index.ts"
+compatibility_date = "2025-04-01"
+compatibility_flags = ["nodejs_compat"]
+
+[limits]
+cpu_ms = 30000
+
+[triggers]
+crons = ["0 * * * *"]
+
+[[d1_databases]]
+binding = "DB"
+database_name = "toolbox-db"
+database_id = "YOUR_D1_DATABASE_ID"
+
+[[kv_namespaces]]
+binding = "AUTH_KV"
+id = "YOUR_AUTH_KV_ID"
+
+[[kv_namespaces]]
+binding = "CACHE_KV"
+id = "YOUR_CACHE_KV_ID"
+
+[[r2_buckets]]
+binding = "R2"
+bucket_name = "toolbox-files"
+
+[[queues.producers]]
+queue = "billing-queue"
+binding = "BILLING_QUEUE"
+
+[[queues.producers]]
+queue = "cleanup-queue"
+binding = "CLEANUP_QUEUE"
+
+[[analytics_engine_datasets]]
+binding = "ANALYTICS"
+dataset = "toolbox_events"
+
+[vars]
+JWT_ISSUER = "toolbox-edge"
+APP_ORIGIN = "https://toolbox-edge.pages.dev"
+JWT_EXPIRY_SECONDS = "900"
+FREE_DAILY_LIMIT = "5"
+R2_FILE_TTL_SECONDS = "86400"
+MAX_FILE_SIZE_BYTES = "52428800"
+TOOLS_DOMAIN = "t.your-domain.com"
+TOOLS_DATA_URL = "https://raw.githubusercontent.com/YOUR_ORG/toolbox/main/data/tools.json"
+WORKFLOWS_DATA_URL = "https://raw.githubusercontent.com/YOUR_ORG/toolbox/main/data/workflows/index.json"
+STRIPE_PRICE_BASIC = "price_replace_basic"
+STRIPE_PRICE_PRO = "price_replace_pro"
+STRIPE_PRICE_PACK_100 = "price_replace_pack_100"
+AI_PROVIDER_ORDER = "gemini,cloudflare,mimo,deepseek"
+CF_AI_MODEL = "@cf/meta/llama-3.1-8b-instruct"
+GEMINI_MODEL = "gemini-1.5-flash"
+MIMO_MODEL = "mimo-chat"
+DEEPSEEK_MODEL = "deepseek-chat"
+ADMIN_BOOTSTRAP_KEY = "replace_with_long_random_once"
+TURNSTILE_ENFORCE = "true"

@@ -1,0 +1,139 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>URL 编码/解码</title><style>*{margin:0;padding:0;box-sizing:border-box;}body{font-family:sans-serif;background:#0f0f23;color:#e0e0e0;padding-top:48px}.c{max-width:1200px;margin:0 auto;padding:20px;display:grid;grid-template-columns:1fr 1fr;gap:20px;height:calc(100vh - 68px)}textarea{width:100%;height:100%;background:#1a1a2e;color:#e0e0e0;border:1px solid #333;border-radius:8px;padding:16px;font-family:monospace;font-size:14px;resize:none;outline:none}textarea:focus{border-color:#e94560}.a{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);display:flex;gap:10px;z-index:100}button{background:linear-gradient(135deg,#e94560,#c23152);color:#fff;border:none;padding:10px 24px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:600}button.s{background:linear-gradient(135deg,#16213e,#1a1a2e);border:1px solid #333}h3{margin-bottom:8px;color:#e94560;font-size:13px;text-transform:uppercase;letter-spacing:1px}</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- toolbox:seo-geo:start -->
+<title>URL 编码/解码 | ToolBox</title>
+<meta name="description" content="URL 编码和解码，支持组件级编码 关键词: url, encode, decode, utility, text">
+<meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1">
+<link rel="canonical" href="https://toolsbox.ai/tools/url-encode">
+<link rel="alternate" hreflang="zh-CN" href="https://toolsbox.ai/tools/url-encode?lang=zh-CN">
+<link rel="alternate" hreflang="en" href="https://toolsbox.ai/tools/url-encode?lang=en">
+<link rel="alternate" hreflang="x-default" href="https://toolsbox.ai/tools/url-encode">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolBox">
+<meta property="og:title" content="URL 编码/解码 | ToolBox">
+<meta property="og:description" content="URL 编码和解码，支持组件级编码 关键词: url, encode, decode, utility, text">
+<meta property="og:url" content="https://toolsbox.ai/tools/url-encode">
+<meta property="og:locale" content="zh_CN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="URL 编码/解码 | ToolBox">
+<meta name="twitter:description" content="URL 编码和解码，支持组件级编码 关键词: url, encode, decode, utility, text">
+<meta name="geo.region" content="CN-31">
+<meta name="geo.placename" content="Shanghai">
+<meta name="ICBM" content="31.2304,121.4737">
+<script type="application/ld+json" id="toolbox-jsonld">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"URL Encoder/Decoder","applicationCategory":"dev-assistant","operatingSystem":"Web","url":"https://toolsbox.ai/tools/url-encode","description":"Encode and decode URLs and URL components","inLanguage":["zh-CN","en"],"offers":{"@type":"Offer","price":"0","priceCurrency":"CNY"},"publisher":{"@type":"Organization","name":"ToolBox"}}<\/script>
+<!-- toolbox:seo-geo:end -->
+
+<style id="toolbox-shell-styles">
+:root{
+  --tb-bg:#070d18;--tb-surface:#0f1b31;--tb-surface-soft:#162744;--tb-text:#ebf2ff;
+  --tb-text-muted:#99abd1;--tb-accent:#ff7a45;--tb-accent-2:#ffb066;--tb-border:#253a63;
+  --tb-radius:14px;--tb-shadow:0 12px 30px rgba(7,13,24,.45);
+}
+html,body{background:radial-gradient(1200px 500px at 50% -20%,#1a2f57 0%,#070d18 58%) fixed !important;color:var(--tb-text) !important;}
+#toolbox-shell{
+  position:fixed;top:0;left:0;right:0;height:56px;
+  background:linear-gradient(120deg,var(--tb-surface) 0%,var(--tb-surface-soft) 100%);
+  color:var(--tb-text);display:flex;align-items:center;padding:0 16px;z-index:99999;
+  font-family:'IBM Plex Sans','Segoe UI',sans-serif;font-size:14px;gap:12px;
+  box-shadow:var(--tb-shadow);border-bottom:1px solid var(--tb-border);backdrop-filter:blur(10px);
+}
+#toolbox-shell button{
+  background:transparent;border:1px solid transparent;color:var(--tb-text);cursor:pointer;font-size:16px;
+  padding:7px 10px;border-radius:10px;transition:all .2s ease;
+}
+#toolbox-shell button:hover{background:rgba(255,255,255,.08);border-color:var(--tb-border);}
+#toolbox-tool-name{font-weight:700;font-size:14px;letter-spacing:.2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:42vw;}
+#toolbox-shell-right{margin-left:auto;display:flex;align-items:center;gap:10px;}
+#toolbox-points{
+  background:linear-gradient(120deg,var(--tb-accent) 0%,var(--tb-accent-2) 100%);
+  padding:5px 12px;border-radius:999px;font-size:12px;font-weight:800;color:#2a180b;
+}
+#toolbox-free-remaining{font-size:11px;color:var(--tb-text-muted);}
+
+/* Unified tool canvas primitives */
+body{padding-top:56px !important;font-family:'IBM Plex Sans','Segoe UI',sans-serif !important;}
+.container,.c{max-width:1120px !important;margin:0 auto !important;padding:20px !important;}
+.actions{bottom:18px !important;}
+button:not(#toolbox-shell button){
+  border:none !important;border-radius:12px !important;padding:10px 16px !important;
+  background:linear-gradient(120deg,var(--tb-accent),var(--tb-accent-2)) !important;color:#1b120a !important;
+  font-weight:700 !important;box-shadow:0 4px 14px rgba(255,122,69,.25) !important;
+}
+button.secondary{
+  background:linear-gradient(120deg,#1a2846,#21355a) !important;color:var(--tb-text) !important;
+  border:1px solid var(--tb-border) !important;box-shadow:none !important;
+}
+input,textarea,select{
+  background:#0f1b31 !important;border:1px solid var(--tb-border) !important;color:var(--tb-text) !important;
+  border-radius:12px !important;
+}
+h1,h2,h3,h4,label{font-family:'IBM Plex Sans','Segoe UI',sans-serif !important;}
+h3,label{color:#ff9a6b !important;}
+</style>
+</head><body>
+
+<!-- toolbox:shell:start -->
+<div id="toolbox-shell">
+  <button onclick="history.back()" title="Back">&#8592;</button>
+  <button onclick="window.location.href='/'" title="Home">&#8962;</button>
+  <span id="toolbox-tool-name">ToolBox Tool</span>
+  <div id="toolbox-shell-right">
+    <span id="toolbox-free-remaining"></span>
+    <span id="toolbox-points">0 pts</span>
+  </div>
+</div>
+<!-- toolbox:shell:end -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="c"><div><h3>Input</h3><textarea id="i" placeholder="Enter text or encoded URL..."></textarea></div><div><h3>Output</h3><textarea id="o" readonly></textarea></div></div><div class="a"><button onclick="enc()">Encode</button><button class="s" onclick="dec()">Decode</button><button class="s" onclick="encC()">Encode Component</button><button class="s" onclick="navigator.clipboard.writeText(document.getElementById('o').value)">Copy</button></div><script>function enc(){document.getElementById('o').value=encodeURI(document.getElementById('i').value);window.toolbox&&window.toolbox.complete({action:'encode'})}function dec(){try{document.getElementById('o').value=decodeURI(document.getElementById('i').value);window.toolbox&&window.toolbox.complete({action:'decode'})}catch(e){window.toolbox&&window.toolbox.error(e.message)}}function encC(){document.getElementById('o').value=encodeURIComponent(document.getElementById('i').value);window.toolbox&&window.toolbox.complete({action:'encodeComponent'})}</script>
+
+
+
+
+
+
+
+
+
+<script src="/bridge.js" data-tool-id="url-encode"><\/script>
+</body></html>

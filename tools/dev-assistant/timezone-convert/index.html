@@ -1,0 +1,139 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>时区转换</title><style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:sans-serif;background:#0f0f23;color:#e0e0e0;padding-top:48px}.c{max-width:800px;margin:0 auto;padding:20px}.card{background:#1a1a2e;border:1px solid #333;border-radius:8px;padding:20px;margin-bottom:16px}label{color:#e94560;font-size:13px;text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:8px}select,input[type=datetime-local]{width:100%;background:#0f0f23;color:#e0e0e0;border:1px solid #333;border-radius:8px;padding:10px;font-size:14px;outline:none;margin-bottom:12px}select:focus,input:focus{border-color:#e94560}.result{font-size:28px;color:#4ade80;font-family:monospace;text-align:center;padding:16px}.diff{text-align:center;color:#aaa;font-size:13px;margin-top:8px}.row{display:grid;grid-template-columns:1fr 1fr;gap:16px}</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- toolbox:seo-geo:start -->
+<title>时区转换 | ToolBox</title>
+<meta name="description" content="在不同时区之间转换时间 关键词: timezone, convert, time, date, utility">
+<meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1">
+<link rel="canonical" href="https://toolsbox.ai/tools/timezone-convert">
+<link rel="alternate" hreflang="zh-CN" href="https://toolsbox.ai/tools/timezone-convert?lang=zh-CN">
+<link rel="alternate" hreflang="en" href="https://toolsbox.ai/tools/timezone-convert?lang=en">
+<link rel="alternate" hreflang="x-default" href="https://toolsbox.ai/tools/timezone-convert">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolBox">
+<meta property="og:title" content="时区转换 | ToolBox">
+<meta property="og:description" content="在不同时区之间转换时间 关键词: timezone, convert, time, date, utility">
+<meta property="og:url" content="https://toolsbox.ai/tools/timezone-convert">
+<meta property="og:locale" content="zh_CN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="时区转换 | ToolBox">
+<meta name="twitter:description" content="在不同时区之间转换时间 关键词: timezone, convert, time, date, utility">
+<meta name="geo.region" content="CN-31">
+<meta name="geo.placename" content="Shanghai">
+<meta name="ICBM" content="31.2304,121.4737">
+<script type="application/ld+json" id="toolbox-jsonld">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Timezone Converter","applicationCategory":"dev-assistant","operatingSystem":"Web","url":"https://toolsbox.ai/tools/timezone-convert","description":"Convert time between different timezones","inLanguage":["zh-CN","en"],"offers":{"@type":"Offer","price":"0","priceCurrency":"CNY"},"publisher":{"@type":"Organization","name":"ToolBox"}}<\/script>
+<!-- toolbox:seo-geo:end -->
+
+<style id="toolbox-shell-styles">
+:root{
+  --tb-bg:#070d18;--tb-surface:#0f1b31;--tb-surface-soft:#162744;--tb-text:#ebf2ff;
+  --tb-text-muted:#99abd1;--tb-accent:#ff7a45;--tb-accent-2:#ffb066;--tb-border:#253a63;
+  --tb-radius:14px;--tb-shadow:0 12px 30px rgba(7,13,24,.45);
+}
+html,body{background:radial-gradient(1200px 500px at 50% -20%,#1a2f57 0%,#070d18 58%) fixed !important;color:var(--tb-text) !important;}
+#toolbox-shell{
+  position:fixed;top:0;left:0;right:0;height:56px;
+  background:linear-gradient(120deg,var(--tb-surface) 0%,var(--tb-surface-soft) 100%);
+  color:var(--tb-text);display:flex;align-items:center;padding:0 16px;z-index:99999;
+  font-family:'IBM Plex Sans','Segoe UI',sans-serif;font-size:14px;gap:12px;
+  box-shadow:var(--tb-shadow);border-bottom:1px solid var(--tb-border);backdrop-filter:blur(10px);
+}
+#toolbox-shell button{
+  background:transparent;border:1px solid transparent;color:var(--tb-text);cursor:pointer;font-size:16px;
+  padding:7px 10px;border-radius:10px;transition:all .2s ease;
+}
+#toolbox-shell button:hover{background:rgba(255,255,255,.08);border-color:var(--tb-border);}
+#toolbox-tool-name{font-weight:700;font-size:14px;letter-spacing:.2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:42vw;}
+#toolbox-shell-right{margin-left:auto;display:flex;align-items:center;gap:10px;}
+#toolbox-points{
+  background:linear-gradient(120deg,var(--tb-accent) 0%,var(--tb-accent-2) 100%);
+  padding:5px 12px;border-radius:999px;font-size:12px;font-weight:800;color:#2a180b;
+}
+#toolbox-free-remaining{font-size:11px;color:var(--tb-text-muted);}
+
+/* Unified tool canvas primitives */
+body{padding-top:56px !important;font-family:'IBM Plex Sans','Segoe UI',sans-serif !important;}
+.container,.c{max-width:1120px !important;margin:0 auto !important;padding:20px !important;}
+.actions{bottom:18px !important;}
+button:not(#toolbox-shell button){
+  border:none !important;border-radius:12px !important;padding:10px 16px !important;
+  background:linear-gradient(120deg,var(--tb-accent),var(--tb-accent-2)) !important;color:#1b120a !important;
+  font-weight:700 !important;box-shadow:0 4px 14px rgba(255,122,69,.25) !important;
+}
+button.secondary{
+  background:linear-gradient(120deg,#1a2846,#21355a) !important;color:var(--tb-text) !important;
+  border:1px solid var(--tb-border) !important;box-shadow:none !important;
+}
+input,textarea,select{
+  background:#0f1b31 !important;border:1px solid var(--tb-border) !important;color:var(--tb-text) !important;
+  border-radius:12px !important;
+}
+h1,h2,h3,h4,label{font-family:'IBM Plex Sans','Segoe UI',sans-serif !important;}
+h3,label{color:#ff9a6b !important;}
+</style>
+</head><body>
+
+<!-- toolbox:shell:start -->
+<div id="toolbox-shell">
+  <button onclick="history.back()" title="Back">&#8592;</button>
+  <button onclick="window.location.href='/'" title="Home">&#8962;</button>
+  <span id="toolbox-tool-name">ToolBox Tool</span>
+  <div id="toolbox-shell-right">
+    <span id="toolbox-free-remaining"></span>
+    <span id="toolbox-points">0 pts</span>
+  </div>
+</div>
+<!-- toolbox:shell:end -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="c"><div class="card"><label>Date & Time</label><input type="datetime-local" id="dt" oninput="convert()"><div class="row"><div><label>From Timezone</label><select id="from" onchange="convert()"></select></div><div><label>To Timezone</label><select id="to" onchange="convert()"></select></div></div></div><div class="card"><div class="result" id="result">--</div><div class="diff" id="diff"></div></div></div><script>var TZ=["UTC","America/New_York","America/Chicago","America/Denver","America/Los_Angeles","America/Sao_Paulo","Europe/London","Europe/Paris","Europe/Berlin","Europe/Moscow","Asia/Dubai","Asia/Kolkata","Asia/Bangkok","Asia/Shanghai","Asia/Hong_Kong","Asia/Tokyo","Asia/Seoul","Australia/Sydney","Pacific/Auckland","Pacific/Honolulu"];function init(){var f=document.getElementById('from');var t=document.getElementById('to');TZ.forEach(function(z){f.innerHTML+='<option value="'+z+'">'+z.replace(/_/g,' ')+'</option>';t.innerHTML+='<option value="'+z+'">'+z.replace(/_/g,' ')+'</option>'});f.value="UTC";t.value="Asia/Shanghai";var now=new Date();var offset=now.getTimezoneOffset();var local=new Date(now.getTime()-offset*60000);document.getElementById('dt').value=local.toISOString().slice(0,16);convert()}function convert(){var dt=document.getElementById('dt').value;if(!dt)return;var from=document.getElementById('from').value;var to=document.getElementById('to').value;try{var fromStr=dt.replace('T',' ');var fromFmt=new Date(fromStr);var fromParts=new Intl.DateTimeFormat('en-US',{timeZone:from,year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}).formatToParts(fromFmt);var toParts=new Intl.DateTimeFormat('en-US',{timeZone:to,year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}).formatToParts(toFmt(fromFmt,from,to));var toFmt2=new Intl.DateTimeFormat('en-US',{timeZone:to,year:'numeric',month:'long',day:'numeric',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false,timeZoneName:'short'}).format(fromFmt);document.getElementById('result').textContent=toFmt2;var fromOffset=getOffset(fromFmt,from);var toOffset=getOffset(fromFmt,to);var diff=(toOffset-fromOffset)/60;var sign=diff>=0?'+':'';document.getElementById('diff').textContent=from.replace(/_/g,' ')+' → '+to.replace(/_/g,' ')+' = '+sign+diff+' hours';window.toolbox&&window.toolbox.complete({from:from,to:to,diff:diff})}catch(e){document.getElementById('result').textContent='Error';window.toolbox&&window.toolbox.error(e.message)}}function toFmt(date,from,to){return date}function getOffset(date,tz){var utcStr=date.toLocaleString('en-US',{timeZone:'UTC'});var tzStr=date.toLocaleString('en-US',{timeZone:tz});return(new Date(tzStr)-new Date(utcStr))/60000}init()</script>
+
+
+
+
+
+
+
+
+
+<script src="/bridge.js" data-tool-id="timezone-convert"><\/script>
+</body></html>

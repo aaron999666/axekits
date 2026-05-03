@@ -1,0 +1,8 @@
+{
+  "name": "toolbox-tool-shell",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "inject": "node inject.js ../../tools"
+  }
+}

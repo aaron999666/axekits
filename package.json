@@ -1,0 +1,19 @@
+{
+  "name": "toolbox",
+  "private": true,
+  "workspaces": [
+    "packages/worker",
+    "packages/web",
+    "packages/tool-shell"
+  ],
+  "scripts": {
+    "dev:worker": "cd packages/worker && npx wrangler dev",
+    "dev:web": "cd packages/web && npm run dev",
+    "deploy:worker": "cd packages/worker && npx wrangler deploy",
+    "deploy:web": "cd packages/web && npx @opennextjs/cloudflare deploy",
+    "deploy:tools": "cd tools && npx wrangler pages deploy . --project-name=toolbox-tools",
+    "db:init": "cd packages/worker && npx wrangler d1 execute toolbox-db --file=schema.sql --remote",
+    "db:local": "cd packages/worker && npx wrangler d1 execute toolbox-db --file=schema.sql --local",
+    "inject:shell": "cd packages/tool-shell && node inject.js ../../tools"
+  }
+}

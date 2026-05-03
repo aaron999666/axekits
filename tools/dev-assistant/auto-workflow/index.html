@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Workflow - ToolBox</title>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{font-family:'IBM Plex Sans','Segoe UI',sans-serif;background:#0f172a;color:#e2e8f0;padding-top:56px;}
+    .container{max-width:1120px;margin:0 auto;padding:20px;display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+    .panel{background:#111c34;border:1px solid #2b3f69;border-radius:14px;padding:16px;}
+    h3{margin-bottom:10px;color:#ff9a6b;font-size:13px;letter-spacing:.5px;text-transform:uppercase;}
+    textarea{width:100%;min-height:300px;background:#0f1b31;color:#ebf2ff;border:1px solid #2b3f69;border-radius:12px;padding:12px;resize:vertical;}
+    .actions{display:flex;gap:10px;justify-content:center;margin:14px 0 0;}
+    button{border:none;border-radius:12px;padding:10px 16px;cursor:pointer;font-weight:700;background:linear-gradient(120deg,#ff7a45,#ffb066);color:#1b120a;}
+    button.secondary{background:linear-gradient(120deg,#1a2846,#21355a);color:#ebf2ff;border:1px solid #2b3f69;}
+    .tips{font-size:12px;color:#99abd1;margin-top:8px;}
+  </style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- toolbox:seo-geo:start -->
+<title>workflow 助手 | ToolBox</title>
+<meta name="description" content="基于“workflow”需求信号自动生成的工具。 关键词: workflow, auto-generated, demand-driven, utility">
+<meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1">
+<link rel="canonical" href="https://toolsbox.ai/tools/auto-workflow">
+<link rel="alternate" hreflang="zh-CN" href="https://toolsbox.ai/tools/auto-workflow?lang=zh-CN">
+<link rel="alternate" hreflang="en" href="https://toolsbox.ai/tools/auto-workflow?lang=en">
+<link rel="alternate" hreflang="x-default" href="https://toolsbox.ai/tools/auto-workflow">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolBox">
+<meta property="og:title" content="workflow 助手 | ToolBox">
+<meta property="og:description" content="基于“workflow”需求信号自动生成的工具。 关键词: workflow, auto-generated, demand-driven, utility">
+<meta property="og:url" content="https://toolsbox.ai/tools/auto-workflow">
+<meta property="og:locale" content="zh_CN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="workflow 助手 | ToolBox">
+<meta name="twitter:description" content="基于“workflow”需求信号自动生成的工具。 关键词: workflow, auto-generated, demand-driven, utility">
+<meta name="geo.region" content="CN-31">
+<meta name="geo.placename" content="Shanghai">
+<meta name="ICBM" content="31.2304,121.4737">
+<script type="application/ld+json" id="toolbox-jsonld">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Workflow","applicationCategory":"dev-assistant","operatingSystem":"Web","url":"https://toolsbox.ai/tools/auto-workflow","description":"Auto-generated utility for 'workflow' demand signal.","inLanguage":["zh-CN","en"],"offers":{"@type":"Offer","price":"0","priceCurrency":"CNY"},"publisher":{"@type":"Organization","name":"ToolBox"}}<\/script>
+<!-- toolbox:seo-geo:end -->
+
+<style id="toolbox-shell-styles">
+:root{
+  --tb-bg:#070d18;--tb-surface:#0f1b31;--tb-surface-soft:#162744;--tb-text:#ebf2ff;
+  --tb-text-muted:#99abd1;--tb-accent:#ff7a45;--tb-accent-2:#ffb066;--tb-border:#253a63;
+  --tb-radius:14px;--tb-shadow:0 12px 30px rgba(7,13,24,.45);
+}
+html,body{background:radial-gradient(1200px 500px at 50% -20%,#1a2f57 0%,#070d18 58%) fixed !important;color:var(--tb-text) !important;}
+#toolbox-shell{
+  position:fixed;top:0;left:0;right:0;height:56px;
+  background:linear-gradient(120deg,var(--tb-surface) 0%,var(--tb-surface-soft) 100%);
+  color:var(--tb-text);display:flex;align-items:center;padding:0 16px;z-index:99999;
+  font-family:'IBM Plex Sans','Segoe UI',sans-serif;font-size:14px;gap:12px;
+  box-shadow:var(--tb-shadow);border-bottom:1px solid var(--tb-border);backdrop-filter:blur(10px);
+}
+#toolbox-shell button{
+  background:transparent;border:1px solid transparent;color:var(--tb-text);cursor:pointer;font-size:16px;
+  padding:7px 10px;border-radius:10px;transition:all .2s ease;
+}
+#toolbox-shell button:hover{background:rgba(255,255,255,.08);border-color:var(--tb-border);}
+#toolbox-tool-name{font-weight:700;font-size:14px;letter-spacing:.2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:42vw;}
+#toolbox-shell-right{margin-left:auto;display:flex;align-items:center;gap:10px;}
+#toolbox-points{
+  background:linear-gradient(120deg,var(--tb-accent) 0%,var(--tb-accent-2) 100%);
+  padding:5px 12px;border-radius:999px;font-size:12px;font-weight:800;color:#2a180b;
+}
+#toolbox-free-remaining{font-size:11px;color:var(--tb-text-muted);}
+
+/* Unified tool canvas primitives */
+body{padding-top:56px !important;font-family:'IBM Plex Sans','Segoe UI',sans-serif !important;}
+.container,.c{max-width:1120px !important;margin:0 auto !important;padding:20px !important;}
+.actions{bottom:18px !important;}
+button:not(#toolbox-shell button){
+  border:none !important;border-radius:12px !important;padding:10px 16px !important;
+  background:linear-gradient(120deg,var(--tb-accent),var(--tb-accent-2)) !important;color:#1b120a !important;
+  font-weight:700 !important;box-shadow:0 4px 14px rgba(255,122,69,.25) !important;
+}
+button.secondary{
+  background:linear-gradient(120deg,#1a2846,#21355a) !important;color:var(--tb-text) !important;
+  border:1px solid var(--tb-border) !important;box-shadow:none !important;
+}
+input,textarea,select{
+  background:#0f1b31 !important;border:1px solid var(--tb-border) !important;color:var(--tb-text) !important;
+  border-radius:12px !important;
+}
+h1,h2,h3,h4,label{font-family:'IBM Plex Sans','Segoe UI',sans-serif !important;}
+h3,label{color:#ff9a6b !important;}
+</style>
+</head>
+<body>
+
+<!-- toolbox:shell:start -->
+<div id="toolbox-shell">
+  <button onclick="history.back()" title="Back">&#8592;</button>
+  <button onclick="window.location.href='/'" title="Home">&#8962;</button>
+  <span id="toolbox-tool-name">ToolBox Tool</span>
+  <div id="toolbox-shell-right">
+    <span id="toolbox-free-remaining"></span>
+    <span id="toolbox-points">0 pts</span>
+  </div>
+</div>
+<!-- toolbox:shell:end -->
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="container">
+    <div class="panel">
+      <h3>Input</h3>
+      <textarea id="input" placeholder="输入内容，执行 workflow 相关处理..."></textarea>
+      <div class="tips">此工具由自动上新流水线生成，后续可按真实需求迭代为专用版本。</div>
+    </div>
+    <div class="panel">
+      <h3>Output</h3>
+      <textarea id="output" readonly placeholder="结果会显示在这里"></textarea>
+    </div>
+  </div>
+  <div class="actions">
+    <button onclick="runTool()">Run</button>
+    <button class="secondary" onclick="copyOutput()">Copy</button>
+    <button class="secondary" onclick="clearAll()">Clear</button>
+  </div>
+  <script>
+    function runTool(){
+      var input = document.getElementById('input').value || '';
+      var lines = input.split(/\r?\n/).filter(Boolean);
+      var result = [];
+      result.push('Keyword: workflow');
+      result.push('Chars: ' + input.length);
+      result.push('Lines: ' + lines.length);
+      result.push('Words: ' + (input.trim() ? input.trim().split(/\s+/).length : 0));
+      result.push('');
+      result.push('Normalized Output:');
+      result.push(input.trim());
+      document.getElementById('output').value = result.join('\n');
+      window.toolbox && window.toolbox.complete({ action:'run', keyword:'workflow', chars: input.length });
+    }
+    function copyOutput(){
+      navigator.clipboard.writeText(document.getElementById('output').value || '');
+    }
+    function clearAll(){
+      document.getElementById('input').value='';
+      document.getElementById('output').value='';
+    }
+  </script>
+  
+
+
+
+
+
+
+<script src="/bridge.js" data-tool-id="auto-workflow"><\/script>
+</body>
+</html>

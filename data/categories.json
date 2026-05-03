@@ -1,0 +1,8 @@
+{
+  "categories": [
+    { "id": "dev-assistant", "name": "开发助手", "nameEn": "Dev Assistant", "icon": "💻", "description": "Developer tools for encoding, formatting, and testing" },
+    { "id": "image-visual", "name": "图像视觉", "nameEn": "Image & Visual", "icon": "🖼️", "description": "Image processing, compression, and conversion tools" },
+    { "id": "document-convert", "name": "文档转换", "nameEn": "Document Convert", "icon": "📄", "description": "Document format conversion tools" },
+    { "id": "daily-calc", "name": "日常计算", "nameEn": "Daily Calc", "icon": "🧮", "description": "Everyday calculators and converters" }
+  ]
+}

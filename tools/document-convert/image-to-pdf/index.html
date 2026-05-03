@@ -1,0 +1,139 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>图片转 PDF</title><style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:sans-serif;background:#0f0f23;color:#e0e0e0;padding-top:48px}.c{max-width:700px;margin:0 auto;padding:20px}.drop{border:2px dashed #333;border-radius:12px;padding:40px;text-align:center;cursor:pointer;margin-bottom:20px}.drop:hover{border-color:#e94560}.list{background:#1a1a2e;border:1px solid #333;border-radius:8px;padding:12px;margin-bottom:16px;max-height:200px;overflow-y:auto}.item{display:flex;align-items:center;justify-content:space-between;padding:8px;border-bottom:1px solid #333;font-size:13px}.item:last-child{border-bottom:none}.item .name{color:#4ade80}.item button{background:none;border:1px solid #e94560;color:#e94560;padding:2px 8px;border-radius:4px;cursor:pointer;font-size:11px}.controls{background:#1a1a2e;border:1px solid #333;border-radius:8px;padding:16px;margin-bottom:16px}.row{display:flex;gap:12px;align-items:center;margin-bottom:8px}.row label{color:#e94560;font-size:12px;text-transform:uppercase;letter-spacing:1px;min-width:80px}.row select{flex:1;background:#0f0f23;color:#e0e0e0;border:1px solid #333;border-radius:8px;padding:8px;outline:none}button.primary{background:linear-gradient(135deg,#e94560,#c23152);color:#fff;border:none;padding:10px 24px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:600;width:100%}</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- toolbox:seo-geo:start -->
+<title>图片转 PDF | ToolBox</title>
+<meta name="description" content="将多张图片转换为 PDF 文档 关键词: pdf, image, convert, document, web">
+<meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1">
+<link rel="canonical" href="https://toolsbox.ai/tools/image-to-pdf">
+<link rel="alternate" hreflang="zh-CN" href="https://toolsbox.ai/tools/image-to-pdf?lang=zh-CN">
+<link rel="alternate" hreflang="en" href="https://toolsbox.ai/tools/image-to-pdf?lang=en">
+<link rel="alternate" hreflang="x-default" href="https://toolsbox.ai/tools/image-to-pdf">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolBox">
+<meta property="og:title" content="图片转 PDF | ToolBox">
+<meta property="og:description" content="将多张图片转换为 PDF 文档 关键词: pdf, image, convert, document, web">
+<meta property="og:url" content="https://toolsbox.ai/tools/image-to-pdf">
+<meta property="og:locale" content="zh_CN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="图片转 PDF | ToolBox">
+<meta name="twitter:description" content="将多张图片转换为 PDF 文档 关键词: pdf, image, convert, document, web">
+<meta name="geo.region" content="CN-31">
+<meta name="geo.placename" content="Shanghai">
+<meta name="ICBM" content="31.2304,121.4737">
+<script type="application/ld+json" id="toolbox-jsonld">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Image to PDF","applicationCategory":"document-convert","operatingSystem":"Web","url":"https://toolsbox.ai/tools/image-to-pdf","description":"Convert multiple images to a single PDF document","inLanguage":["zh-CN","en"],"offers":{"@type":"Offer","price":"0","priceCurrency":"CNY"},"publisher":{"@type":"Organization","name":"ToolBox"}}<\/script>
+<!-- toolbox:seo-geo:end -->
+
+<style id="toolbox-shell-styles">
+:root{
+  --tb-bg:#070d18;--tb-surface:#0f1b31;--tb-surface-soft:#162744;--tb-text:#ebf2ff;
+  --tb-text-muted:#99abd1;--tb-accent:#ff7a45;--tb-accent-2:#ffb066;--tb-border:#253a63;
+  --tb-radius:14px;--tb-shadow:0 12px 30px rgba(7,13,24,.45);
+}
+html,body{background:radial-gradient(1200px 500px at 50% -20%,#1a2f57 0%,#070d18 58%) fixed !important;color:var(--tb-text) !important;}
+#toolbox-shell{
+  position:fixed;top:0;left:0;right:0;height:56px;
+  background:linear-gradient(120deg,var(--tb-surface) 0%,var(--tb-surface-soft) 100%);
+  color:var(--tb-text);display:flex;align-items:center;padding:0 16px;z-index:99999;
+  font-family:'IBM Plex Sans','Segoe UI',sans-serif;font-size:14px;gap:12px;
+  box-shadow:var(--tb-shadow);border-bottom:1px solid var(--tb-border);backdrop-filter:blur(10px);
+}
+#toolbox-shell button{
+  background:transparent;border:1px solid transparent;color:var(--tb-text);cursor:pointer;font-size:16px;
+  padding:7px 10px;border-radius:10px;transition:all .2s ease;
+}
+#toolbox-shell button:hover{background:rgba(255,255,255,.08);border-color:var(--tb-border);}
+#toolbox-tool-name{font-weight:700;font-size:14px;letter-spacing:.2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:42vw;}
+#toolbox-shell-right{margin-left:auto;display:flex;align-items:center;gap:10px;}
+#toolbox-points{
+  background:linear-gradient(120deg,var(--tb-accent) 0%,var(--tb-accent-2) 100%);
+  padding:5px 12px;border-radius:999px;font-size:12px;font-weight:800;color:#2a180b;
+}
+#toolbox-free-remaining{font-size:11px;color:var(--tb-text-muted);}
+
+/* Unified tool canvas primitives */
+body{padding-top:56px !important;font-family:'IBM Plex Sans','Segoe UI',sans-serif !important;}
+.container,.c{max-width:1120px !important;margin:0 auto !important;padding:20px !important;}
+.actions{bottom:18px !important;}
+button:not(#toolbox-shell button){
+  border:none !important;border-radius:12px !important;padding:10px 16px !important;
+  background:linear-gradient(120deg,var(--tb-accent),var(--tb-accent-2)) !important;color:#1b120a !important;
+  font-weight:700 !important;box-shadow:0 4px 14px rgba(255,122,69,.25) !important;
+}
+button.secondary{
+  background:linear-gradient(120deg,#1a2846,#21355a) !important;color:var(--tb-text) !important;
+  border:1px solid var(--tb-border) !important;box-shadow:none !important;
+}
+input,textarea,select{
+  background:#0f1b31 !important;border:1px solid var(--tb-border) !important;color:var(--tb-text) !important;
+  border-radius:12px !important;
+}
+h1,h2,h3,h4,label{font-family:'IBM Plex Sans','Segoe UI',sans-serif !important;}
+h3,label{color:#ff9a6b !important;}
+</style>
+</head><body>
+
+<!-- toolbox:shell:start -->
+<div id="toolbox-shell">
+  <button onclick="history.back()" title="Back">&#8592;</button>
+  <button onclick="window.location.href='/'" title="Home">&#8962;</button>
+  <span id="toolbox-tool-name">ToolBox Tool</span>
+  <div id="toolbox-shell-right">
+    <span id="toolbox-free-remaining"></span>
+    <span id="toolbox-points">0 pts</span>
+  </div>
+</div>
+<!-- toolbox:shell:end -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="c"><div class="drop" onclick="document.getElementById('file').click()"><div style="font-size:48px">📄</div><p style="color:#aaa;margin-top:8px">Click or drag images (multiple)</p><input type="file" id="file" accept="image/*" multiple style="display:none" onchange="addFiles(this)"></div><div class="list" id="list"><div style="color:#aaa;text-align:center;padding:8px">No images added</div></div><div class="controls"><div class="row"><label>Page Size</label><select id="pageSize"><option value="a4">A4</option><option value="letter">Letter</option></select></div><div class="row"><label>Orientation</label><select id="orient"><option value="portrait">Portrait</option><option value="landscape">Landscape</option></select></div></div><button class="primary" onclick="generate()">Generate PDF</button></div><script>var images=[];function addFiles(input){var files=Array.from(input.files);files.forEach(function(f){var reader=new FileReader();reader.onload=function(e){images.push({name:f.name,data:e.target.result});renderList()};reader.readAsDataURL(f)})}function renderList(){var list=document.getElementById('list');list.innerHTML='';if(images.length===0){list.innerHTML='<div style="color:#aaa;text-align:center;padding:8px">No images added</div>';return}images.forEach(function(img,i){var div=document.createElement('div');div.className='item';div.innerHTML='<span class="name">'+img.name+'</span><button onclick="removeImage('+i+')">Remove</button>';list.appendChild(div)})}function removeImage(i){images.splice(i,1);renderList()}function generate(){if(images.length===0){window.toolbox&&window.toolbox.error('Add at least one image');return}var pageSize=document.getElementById('pageSize').value;var orient=document.getElementById('orient').value;var pw=pageSize==='a4'?595:612;var ph=pageSize==='a4'?842:792;if(orient==='landscape'){var tmp=pw;pw=ph;ph=tmp}var loaded=0;var imgElements=[];images.forEach(function(imgData,i){var img=new Image();img.onload=function(){imgElements[i]=img;loaded++;if(loaded===images.length)buildPDF(imgElements,pw,ph)};img.src=imgData.data})}function buildPDF(imgElements,pw,ph){var objects=[];var offsets=[];var pdf='';function addObj(content){offsets.push(pdf.length);objects.push(objects.length+1);pdf+=content+'\n'}addObj('%PDF-1.4');addObj('1 0 obj\n<< /Type /Catalog /Pages 2 0 R >>');addObj('2 0 obj\n<< /Type /Pages /Kids ['+imgElements.map(function(_,i){return (3+i*2)+' 0 R'}).join(' ')+'] /Count '+imgElements.length+' >>');imgElements.forEach(function(img,i){var iw=img.naturalWidth;var ih=img.naturalHeight;var scale=Math.min(pw/iw,ph/ih);var w=iw*scale;var h=ih*scale;var x=(pw-w)/2;var y=(ph-h)/2;addObj((3+i*2)+' 0 obj\n<< /Type /Page /Parent 2 0 R /MediaBox [0 0 '+pw+' '+ph+'] /Contents '+(4+i*2)+' 0 R /Resources << /XObject << /Img '+(5+i*2)+' 0 R >> >> >>');addObj((4+i*2)+' 0 obj\n<< /Length '+('q '+w.toFixed(2)+' 0 0 '+h.toFixed(2)+' '+x.toFixed(2)+' '+y.toFixed(2)+' cm /Img Do Q').length+' >>\nstream\nq '+w.toFixed(2)+' 0 0 '+h.toFixed(2)+' '+x.toFixed(2)+' '+y.toFixed(2)+' cm /Img Do Q\nendstream');var canvas=document.createElement('canvas');canvas.width=iw;canvas.height=ih;canvas.getContext('2d').drawImage(img,0,0);var jpegData=canvas.toDataURL('image/jpeg',0.85);var jpegBytes=atob(jpegData.split(',')[1]);var len=jpegBytes.length;addObj((5+i*2)+' 0 obj\n<< /Type /XObject /Subtype /Image /Width '+iw+' /Height '+ih+' /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length '+len+' >>\nstream\n'+jpegBytes+'\nendstream')});var xrefOffset=pdf.length;pdf+='xref\n0 '+(objects.length+1)+'\n0000000000 65535 f \n';offsets.forEach(function(off){pdf+=(off+'').padStart(10,'0')+' 00000 n \n'});pdf+='trailer\n<< /Size '+(objects.length+1)+' /Root 1 0 R >>\nstartxref\n'+xrefOffset+'\n%%EOF';var bytes=new Uint8Array(pdf.length);for(var i=0;i<pdf.length;i++)bytes[i]=pdf.charCodeAt(i);var blob=new Blob([bytes],{type:'application/pdf'});var url=URL.createObjectURL(blob);var a=document.createElement('a');a.href=url;a.download='output.pdf';a.click();URL.revokeObjectURL(url);window.toolbox&&window.toolbox.complete({pages:imgElements.length})}</script>
+
+
+
+
+
+
+
+
+
+<script src="/bridge.js" data-tool-id="image-to-pdf"><\/script>
+</body></html>

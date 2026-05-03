@@ -1,0 +1,139 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>文本计数</title><style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:sans-serif;background:#0f0f23;color:#e0e0e0;padding-top:48px}.c{max-width:900px;margin:0 auto;padding:20px}textarea{width:100%;height:300px;background:#1a1a2e;color:#e0e0e0;border:1px solid #333;border-radius:8px;padding:16px;font-family:monospace;font-size:14px;resize:vertical;outline:none;margin-bottom:20px}textarea:focus{border-color:#e94560}.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}.stat{background:#1a1a2e;border:1px solid #333;border-radius:8px;padding:16px;text-align:center}.stat .val{font-size:28px;font-weight:700;color:#e94560}.stat .lbl{font-size:12px;color:#aaa;text-transform:uppercase;letter-spacing:1px;margin-top:4px}</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- toolbox:seo-geo:start -->
+<title>文本计数 | ToolBox</title>
+<meta name="description" content="实时统计字数、字符数、行数、句子数 关键词: counter, words, characters, text, utility">
+<meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1">
+<link rel="canonical" href="https://toolsbox.ai/tools/text-counter">
+<link rel="alternate" hreflang="zh-CN" href="https://toolsbox.ai/tools/text-counter?lang=zh-CN">
+<link rel="alternate" hreflang="en" href="https://toolsbox.ai/tools/text-counter?lang=en">
+<link rel="alternate" hreflang="x-default" href="https://toolsbox.ai/tools/text-counter">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolBox">
+<meta property="og:title" content="文本计数 | ToolBox">
+<meta property="og:description" content="实时统计字数、字符数、行数、句子数 关键词: counter, words, characters, text, utility">
+<meta property="og:url" content="https://toolsbox.ai/tools/text-counter">
+<meta property="og:locale" content="zh_CN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="文本计数 | ToolBox">
+<meta name="twitter:description" content="实时统计字数、字符数、行数、句子数 关键词: counter, words, characters, text, utility">
+<meta name="geo.region" content="CN-31">
+<meta name="geo.placename" content="Shanghai">
+<meta name="ICBM" content="31.2304,121.4737">
+<script type="application/ld+json" id="toolbox-jsonld">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Text Counter","applicationCategory":"dev-assistant","operatingSystem":"Web","url":"https://toolsbox.ai/tools/text-counter","description":"Count words, characters, lines, sentences in real-time","inLanguage":["zh-CN","en"],"offers":{"@type":"Offer","price":"0","priceCurrency":"CNY"},"publisher":{"@type":"Organization","name":"ToolBox"}}<\/script>
+<!-- toolbox:seo-geo:end -->
+
+<style id="toolbox-shell-styles">
+:root{
+  --tb-bg:#070d18;--tb-surface:#0f1b31;--tb-surface-soft:#162744;--tb-text:#ebf2ff;
+  --tb-text-muted:#99abd1;--tb-accent:#ff7a45;--tb-accent-2:#ffb066;--tb-border:#253a63;
+  --tb-radius:14px;--tb-shadow:0 12px 30px rgba(7,13,24,.45);
+}
+html,body{background:radial-gradient(1200px 500px at 50% -20%,#1a2f57 0%,#070d18 58%) fixed !important;color:var(--tb-text) !important;}
+#toolbox-shell{
+  position:fixed;top:0;left:0;right:0;height:56px;
+  background:linear-gradient(120deg,var(--tb-surface) 0%,var(--tb-surface-soft) 100%);
+  color:var(--tb-text);display:flex;align-items:center;padding:0 16px;z-index:99999;
+  font-family:'IBM Plex Sans','Segoe UI',sans-serif;font-size:14px;gap:12px;
+  box-shadow:var(--tb-shadow);border-bottom:1px solid var(--tb-border);backdrop-filter:blur(10px);
+}
+#toolbox-shell button{
+  background:transparent;border:1px solid transparent;color:var(--tb-text);cursor:pointer;font-size:16px;
+  padding:7px 10px;border-radius:10px;transition:all .2s ease;
+}
+#toolbox-shell button:hover{background:rgba(255,255,255,.08);border-color:var(--tb-border);}
+#toolbox-tool-name{font-weight:700;font-size:14px;letter-spacing:.2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:42vw;}
+#toolbox-shell-right{margin-left:auto;display:flex;align-items:center;gap:10px;}
+#toolbox-points{
+  background:linear-gradient(120deg,var(--tb-accent) 0%,var(--tb-accent-2) 100%);
+  padding:5px 12px;border-radius:999px;font-size:12px;font-weight:800;color:#2a180b;
+}
+#toolbox-free-remaining{font-size:11px;color:var(--tb-text-muted);}
+
+/* Unified tool canvas primitives */
+body{padding-top:56px !important;font-family:'IBM Plex Sans','Segoe UI',sans-serif !important;}
+.container,.c{max-width:1120px !important;margin:0 auto !important;padding:20px !important;}
+.actions{bottom:18px !important;}
+button:not(#toolbox-shell button){
+  border:none !important;border-radius:12px !important;padding:10px 16px !important;
+  background:linear-gradient(120deg,var(--tb-accent),var(--tb-accent-2)) !important;color:#1b120a !important;
+  font-weight:700 !important;box-shadow:0 4px 14px rgba(255,122,69,.25) !important;
+}
+button.secondary{
+  background:linear-gradient(120deg,#1a2846,#21355a) !important;color:var(--tb-text) !important;
+  border:1px solid var(--tb-border) !important;box-shadow:none !important;
+}
+input,textarea,select{
+  background:#0f1b31 !important;border:1px solid var(--tb-border) !important;color:var(--tb-text) !important;
+  border-radius:12px !important;
+}
+h1,h2,h3,h4,label{font-family:'IBM Plex Sans','Segoe UI',sans-serif !important;}
+h3,label{color:#ff9a6b !important;}
+</style>
+</head><body>
+
+<!-- toolbox:shell:start -->
+<div id="toolbox-shell">
+  <button onclick="history.back()" title="Back">&#8592;</button>
+  <button onclick="window.location.href='/'" title="Home">&#8962;</button>
+  <span id="toolbox-tool-name">ToolBox Tool</span>
+  <div id="toolbox-shell-right">
+    <span id="toolbox-free-remaining"></span>
+    <span id="toolbox-points">0 pts</span>
+  </div>
+</div>
+<!-- toolbox:shell:end -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="c"><textarea id="i" placeholder="Type or paste text here..." oninput="count()"></textarea><div class="stats"><div class="stat"><div class="val" id="chars">0</div><div class="lbl">Characters</div></div><div class="stat"><div class="val" id="charsNoSpace">0</div><div class="lbl">No Spaces</div></div><div class="stat"><div class="val" id="words">0</div><div class="lbl">Words</div></div><div class="stat"><div class="val" id="lines">0</div><div class="lbl">Lines</div></div><div class="stat"><div class="val" id="sentences">0</div><div class="lbl">Sentences</div></div><div class="stat"><div class="val" id="paragraphs">0</div><div class="lbl">Paragraphs</div></div></div></div><script>function count(){var v=document.getElementById('i').value;document.getElementById('chars').textContent=v.length;document.getElementById('charsNoSpace').textContent=v.replace(/\s/g,'').length;document.getElementById('words').textContent=v.trim()?v.trim().split(/\s+/).length:0;document.getElementById('lines').textContent=v?v.split('\n').length:0;document.getElementById('sentences').textContent=v.trim()?(v.match(/[.!?。！？]+/g)||[]).length:0;document.getElementById('paragraphs').textContent=v.trim()?v.split(/\n\s*\n/).filter(function(p){return p.trim()}).length:0;window.toolbox&&window.toolbox.complete({chars:v.length,words:v.trim()?v.trim().split(/\s+/).length:0})}</script>
+
+
+
+
+
+
+
+
+
+<script src="/bridge.js" data-tool-id="text-counter"><\/script>
+</body></html>

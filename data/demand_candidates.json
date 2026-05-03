@@ -1,0 +1,26 @@
+{
+  "generated_at": "2026-05-03T12:49:50.260205+00:00",
+  "source_summary": {
+    "tools_count": 41,
+    "raw_repo_count": 0,
+    "competitor_recommendations": 0,
+    "internal_sources_detected": {
+      "search_terms": false,
+      "failed_requests": false,
+      "tool_search_log": false
+    }
+  },
+  "weights": {
+    "heat": 0.35,
+    "growth_proxy": 0.2,
+    "commercial_intent": 0.2,
+    "supply_gap": 0.2,
+    "capability_fit": 0.15,
+    "risk_penalty": 0.3
+  },
+  "limits": {
+    "max_candidates": 80,
+    "launch_queue_top_n": 20
+  },
+  "candidates": []
+}

@@ -1,0 +1,10 @@
+{
+  "name": "ToolBox",
+  "short_name": "ToolBox",
+  "description": "AI 驱动的智能工具工作台，基于 Cloudflare + Stripe + Git 的可维护工具平台。",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0b1220",
+  "theme_color": "#ff6a3d",
+  "lang": "zh-CN"
+}

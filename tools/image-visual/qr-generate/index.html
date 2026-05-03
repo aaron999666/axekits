@@ -1,0 +1,139 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>QR 码生成</title><style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:sans-serif;background:#0f0f23;color:#e0e0e0;padding-top:48px}.c{max-width:700px;margin:0 auto;padding:20px}.card{background:#1a1a2e;border:1px solid #333;border-radius:8px;padding:20px;margin-bottom:16px}label{color:#e94560;font-size:13px;text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:8px}textarea{width:100%;height:100px;background:#0f0f23;color:#e0e0e0;border:1px solid #333;border-radius:8px;padding:12px;font-size:14px;resize:vertical;outline:none;margin-bottom:12px}textarea:focus{border-color:#e94560}.row{display:flex;gap:12px;align-items:center;margin-bottom:12px}.row input[type=number]{width:80px;background:#0f0f23;color:#e0e0e0;border:1px solid #333;border-radius:8px;padding:8px;font-size:14px;outline:none}.row input[type=color]{width:50px;height:36px;border:1px solid #333;border-radius:4px;cursor:pointer}.qr-output{text-align:center;padding:20px}.qr-output canvas{border-radius:8px}button{background:linear-gradient(135deg,#e94560,#c23152);color:#fff;border:none;padding:10px 24px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:600;width:100%}</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- toolbox:seo-geo:start -->
+<title>QR 码生成 | ToolBox</title>
+<meta name="description" content="从文本或 URL 生成 QR 码，可自定义颜色 关键词: qr, generate, code, image, utility">
+<meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1">
+<link rel="canonical" href="https://toolsbox.ai/tools/qr-generate">
+<link rel="alternate" hreflang="zh-CN" href="https://toolsbox.ai/tools/qr-generate?lang=zh-CN">
+<link rel="alternate" hreflang="en" href="https://toolsbox.ai/tools/qr-generate?lang=en">
+<link rel="alternate" hreflang="x-default" href="https://toolsbox.ai/tools/qr-generate">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolBox">
+<meta property="og:title" content="QR 码生成 | ToolBox">
+<meta property="og:description" content="从文本或 URL 生成 QR 码，可自定义颜色 关键词: qr, generate, code, image, utility">
+<meta property="og:url" content="https://toolsbox.ai/tools/qr-generate">
+<meta property="og:locale" content="zh_CN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="QR 码生成 | ToolBox">
+<meta name="twitter:description" content="从文本或 URL 生成 QR 码，可自定义颜色 关键词: qr, generate, code, image, utility">
+<meta name="geo.region" content="CN-31">
+<meta name="geo.placename" content="Shanghai">
+<meta name="ICBM" content="31.2304,121.4737">
+<script type="application/ld+json" id="toolbox-jsonld">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"QR Code Generator","applicationCategory":"image-visual","operatingSystem":"Web","url":"https://toolsbox.ai/tools/qr-generate","description":"Generate QR codes from text or URLs with customizable colors","inLanguage":["zh-CN","en"],"offers":{"@type":"Offer","price":"0","priceCurrency":"CNY"},"publisher":{"@type":"Organization","name":"ToolBox"}}<\/script>
+<!-- toolbox:seo-geo:end -->
+
+<style id="toolbox-shell-styles">
+:root{
+  --tb-bg:#070d18;--tb-surface:#0f1b31;--tb-surface-soft:#162744;--tb-text:#ebf2ff;
+  --tb-text-muted:#99abd1;--tb-accent:#ff7a45;--tb-accent-2:#ffb066;--tb-border:#253a63;
+  --tb-radius:14px;--tb-shadow:0 12px 30px rgba(7,13,24,.45);
+}
+html,body{background:radial-gradient(1200px 500px at 50% -20%,#1a2f57 0%,#070d18 58%) fixed !important;color:var(--tb-text) !important;}
+#toolbox-shell{
+  position:fixed;top:0;left:0;right:0;height:56px;
+  background:linear-gradient(120deg,var(--tb-surface) 0%,var(--tb-surface-soft) 100%);
+  color:var(--tb-text);display:flex;align-items:center;padding:0 16px;z-index:99999;
+  font-family:'IBM Plex Sans','Segoe UI',sans-serif;font-size:14px;gap:12px;
+  box-shadow:var(--tb-shadow);border-bottom:1px solid var(--tb-border);backdrop-filter:blur(10px);
+}
+#toolbox-shell button{
+  background:transparent;border:1px solid transparent;color:var(--tb-text);cursor:pointer;font-size:16px;
+  padding:7px 10px;border-radius:10px;transition:all .2s ease;
+}
+#toolbox-shell button:hover{background:rgba(255,255,255,.08);border-color:var(--tb-border);}
+#toolbox-tool-name{font-weight:700;font-size:14px;letter-spacing:.2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:42vw;}
+#toolbox-shell-right{margin-left:auto;display:flex;align-items:center;gap:10px;}
+#toolbox-points{
+  background:linear-gradient(120deg,var(--tb-accent) 0%,var(--tb-accent-2) 100%);
+  padding:5px 12px;border-radius:999px;font-size:12px;font-weight:800;color:#2a180b;
+}
+#toolbox-free-remaining{font-size:11px;color:var(--tb-text-muted);}
+
+/* Unified tool canvas primitives */
+body{padding-top:56px !important;font-family:'IBM Plex Sans','Segoe UI',sans-serif !important;}
+.container,.c{max-width:1120px !important;margin:0 auto !important;padding:20px !important;}
+.actions{bottom:18px !important;}
+button:not(#toolbox-shell button){
+  border:none !important;border-radius:12px !important;padding:10px 16px !important;
+  background:linear-gradient(120deg,var(--tb-accent),var(--tb-accent-2)) !important;color:#1b120a !important;
+  font-weight:700 !important;box-shadow:0 4px 14px rgba(255,122,69,.25) !important;
+}
+button.secondary{
+  background:linear-gradient(120deg,#1a2846,#21355a) !important;color:var(--tb-text) !important;
+  border:1px solid var(--tb-border) !important;box-shadow:none !important;
+}
+input,textarea,select{
+  background:#0f1b31 !important;border:1px solid var(--tb-border) !important;color:var(--tb-text) !important;
+  border-radius:12px !important;
+}
+h1,h2,h3,h4,label{font-family:'IBM Plex Sans','Segoe UI',sans-serif !important;}
+h3,label{color:#ff9a6b !important;}
+</style>
+</head><body>
+
+<!-- toolbox:shell:start -->
+<div id="toolbox-shell">
+  <button onclick="history.back()" title="Back">&#8592;</button>
+  <button onclick="window.location.href='/'" title="Home">&#8962;</button>
+  <span id="toolbox-tool-name">ToolBox Tool</span>
+  <div id="toolbox-shell-right">
+    <span id="toolbox-free-remaining"></span>
+    <span id="toolbox-points">0 pts</span>
+  </div>
+</div>
+<!-- toolbox:shell:end -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="c"><div class="card"><label>Content</label><textarea id="text" placeholder="Enter text or URL..." oninput="generate()">https://example.com</textarea><div class="row"><label>Size</label><input type="number" id="size" value="256" min="64" max="1024"><label>FG</label><input type="color" id="fg" value="#000000"><label>BG</label><input type="color" id="bg" value="#ffffff"></div></div><div class="qr-output"><canvas id="canvas"></canvas></div><button onclick="download()">Download QR Code</button></div><script>function generate(){var text=document.getElementById('text').value;if(!text)return;var size=parseInt(document.getElementById('size').value)||256;var canvas=document.getElementById('canvas');canvas.width=size;canvas.height=size;var ctx=canvas.getContext('2d');var fg=document.getElementById('fg').value;var bg=document.getElementById('bg').value;ctx.fillStyle=bg;ctx.fillRect(0,0,size,size);var modules=generateQRModules(text);var modCount=modules.length;var cellSize=size/modCount;ctx.fillStyle=fg;for(var r=0;r<modCount;r++){for(var c=0;c<modCount;c++){if(modules[r][c]){ctx.fillRect(c*cellSize,r*cellSize,cellSize+0.5,cellSize+0.5)}}}window.toolbox&&window.toolbox.complete({text:text,size:size})}function generateQRModules(text){var size=25;var grid=[];for(var i=0;i<size;i++){grid[i]=[];for(var j=0;j<size;j++){grid[i][j]=false}}drawFinder(grid,0,0);drawFinder(grid,size-7,0);drawFinder(grid,0,size-7);drawTiming(grid,size);var data=encodeData(text);var idx=0;for(var r=0;r<size;r++){for(var c=0;c<size;c++){if(grid[r][c])continue;if(idx<data.length){grid[r][c]=data[idx]==='1';idx++}else{grid[r][c]=idx%2===0}}}return grid}function drawFinder(grid,x,y){for(var r=0;r<7;r++){for(var c=0;c<7;c++){if(r===0||r===6||c===0||c===6||(r>=2&&r<=4&&c>=2&&c<=4)){if(y+r<grid.length&&x+c<grid[0].length)grid[y+r][x+c]=true}else{if(y+r<grid.length&&x+c<grid[0].length)grid[y+r][x+c]=false}}}}function drawTiming(grid,size){for(var i=8;i<size-8;i++){grid[6][i]=i%2===0;grid[i][6]=i%2===0}}function encodeData(text){var bits='';for(var i=0;i<text.length;i++){var code=text.charCodeAt(i);if(code<128){bits+=code.toString(2).padStart(8,'0')}else{bits+='11110000'+((code>>12)&63).toString(2).padStart(6,'0')+((code>>6)&63).toString(2).padStart(6,'0')+(code&63).toString(2).padStart(6,'0')}}bits='0100'+bits.length.toString(2).padStart(8,'0')+bits;while(bits.length<232)bits+='0';bits=bits.substring(0,232);return bits}document.getElementById('size').oninput=generate;document.getElementById('fg').oninput=generate;document.getElementById('bg').oninput=generate;generate();function download(){var canvas=document.getElementById('canvas');var link=document.createElement('a');link.download='qrcode.png';link.href=canvas.toDataURL('image/png');link.click()}</script>
+
+
+
+
+
+
+
+
+
+<script src="/bridge.js" data-tool-id="qr-generate"><\/script>
+</body></html>

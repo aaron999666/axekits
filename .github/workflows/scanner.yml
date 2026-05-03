@@ -1,0 +1,95 @@
+name: Tool Data Automation
+
+on:
+  schedule:
+    - cron: "0 2 * * *"
+    - cron: "0 */6 * * *"
+  workflow_dispatch:
+
+jobs:
+  scan-and-classify:
+    if: github.event_name == 'workflow_dispatch' || github.event.schedule == '0 2 * * *'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.PAT_TOKEN }}
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+      - name: Install dependencies
+        run: pip install -r scripts/requirements.txt
+      - name: Competitor benchmark first
+        run: python scripts/competitor_benchmark.py
+      - name: Scan GitHub repos
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python scripts/scanner.py
+      - name: Demand discovery
+        run: python scripts/demand_discovery.py
+      - name: Auto tool factory
+        run: python scripts/auto_tool_factory.py
+      - name: Classify with AI
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+          CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
+        run: python scripts/classifier.py
+      - name: Auto pricing engine
+        run: python scripts/pricing_engine.py
+      - name: Generate web SEO assets
+        run: python scripts/generate_web_seo_assets.py
+      - name: Security gate
+        run: python scripts/security_gate.py
+      - name: Translate to Chinese
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python scripts/translator.py
+      - name: Health check
+        run: python scripts/health_check.py
+      - name: Validate output
+        run: python scripts/validate.py
+      - name: Inject tool shell
+        run: node packages/tool-shell/inject.js tools
+      - name: UI consistency check
+        run: python scripts/ui_consistency_check.py
+      - name: Commit and push
+        run: |
+          git config user.name "toolbox-bot"
+          git config user.email "bot@toolbox.dev"
+          git add data/ tools/
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "chore: auto-update tools $(date +%Y-%m-%d)"
+            git push
+          fi
+
+  health-check:
+    if: github.event.schedule == '0 */6 * * *'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.PAT_TOKEN }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r scripts/requirements.txt
+      - run: python scripts/health_check.py
+      - run: |
+          git config user.name "toolbox-bot"
+          git config user.email "bot@toolbox.dev"
+          git add data/health_status.json
+          if git diff --staged --quiet; then
+            echo "No health updates"
+          else
+            git commit -m "chore: health check update"
+            git push
+          fi

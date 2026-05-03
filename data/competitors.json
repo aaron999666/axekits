@@ -1,0 +1,27 @@
+[
+  {
+    "name": "TinyWow",
+    "url": "https://tinywow.com",
+    "focus": ["pdf", "image", "ai-tools", "file-convert"]
+  },
+  {
+    "name": "iLovePDF",
+    "url": "https://www.ilovepdf.com",
+    "focus": ["pdf", "merge", "compress", "office-convert"]
+  },
+  {
+    "name": "Smallpdf",
+    "url": "https://smallpdf.com",
+    "focus": ["pdf", "workflow", "document-sign"]
+  },
+  {
+    "name": "Canva Tools",
+    "url": "https://www.canva.com/tools",
+    "focus": ["design", "image", "social-assets"]
+  },
+  {
+    "name": "CloudConvert",
+    "url": "https://cloudconvert.com",
+    "focus": ["format-convert", "api", "batch-convert"]
+  }
+]

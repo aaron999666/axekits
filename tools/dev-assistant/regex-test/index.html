@@ -1,0 +1,139 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>正则测试</title><style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:sans-serif;background:#0f0f23;color:#e0e0e0;padding-top:48px}.c{max-width:900px;margin:0 auto;padding:20px}.row{display:flex;gap:12px;margin-bottom:16px;align-items:center}label{color:#e94560;font-size:13px;text-transform:uppercase;letter-spacing:1px;min-width:80px}input[type=text]{flex:1;background:#1a1a2e;color:#e0e0e0;border:1px solid #333;border-radius:8px;padding:12px;font-family:monospace;font-size:14px;outline:none}input:focus{border-color:#e94560}.flags{display:flex;gap:8px}.flags label{min-width:auto;font-size:12px;cursor:pointer;display:flex;align-items:center;gap:4px}.flags input[type=checkbox]{accent-color:#e94560}textarea{width:100%;height:200px;background:#1a1a2e;color:#e0e0e0;border:1px solid #333;border-radius:8px;padding:16px;font-family:monospace;font-size:14px;resize:vertical;outline:none;margin-bottom:16px}textarea:focus{border-color:#e94560}.results{background:#1a1a2e;border:1px solid #333;border-radius:8px;padding:16px;min-height:100px}.match{background:#16213e;border:1px solid #4ade80;border-radius:4px;padding:8px 12px;margin:4px 0;font-family:monospace;font-size:13px;color:#4ade80}.error{color:#e94560;font-size:13px}.info{color:#aaa;font-size:12px;margin-top:8px}</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- toolbox:seo-geo:start -->
+<title>正则测试 | ToolBox</title>
+<meta name="description" content="实时测试正则表达式，支持分组捕获 关键词: regex, test, pattern, utility, code">
+<meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1">
+<link rel="canonical" href="https://toolsbox.ai/tools/regex-test">
+<link rel="alternate" hreflang="zh-CN" href="https://toolsbox.ai/tools/regex-test?lang=zh-CN">
+<link rel="alternate" hreflang="en" href="https://toolsbox.ai/tools/regex-test?lang=en">
+<link rel="alternate" hreflang="x-default" href="https://toolsbox.ai/tools/regex-test">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ToolBox">
+<meta property="og:title" content="正则测试 | ToolBox">
+<meta property="og:description" content="实时测试正则表达式，支持分组捕获 关键词: regex, test, pattern, utility, code">
+<meta property="og:url" content="https://toolsbox.ai/tools/regex-test">
+<meta property="og:locale" content="zh_CN">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="正则测试 | ToolBox">
+<meta name="twitter:description" content="实时测试正则表达式，支持分组捕获 关键词: regex, test, pattern, utility, code">
+<meta name="geo.region" content="CN-31">
+<meta name="geo.placename" content="Shanghai">
+<meta name="ICBM" content="31.2304,121.4737">
+<script type="application/ld+json" id="toolbox-jsonld">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Regex Tester","applicationCategory":"dev-assistant","operatingSystem":"Web","url":"https://toolsbox.ai/tools/regex-test","description":"Test regular expressions with real-time matching and group capture","inLanguage":["zh-CN","en"],"offers":{"@type":"Offer","price":"0","priceCurrency":"CNY"},"publisher":{"@type":"Organization","name":"ToolBox"}}<\/script>
+<!-- toolbox:seo-geo:end -->
+
+<style id="toolbox-shell-styles">
+:root{
+  --tb-bg:#070d18;--tb-surface:#0f1b31;--tb-surface-soft:#162744;--tb-text:#ebf2ff;
+  --tb-text-muted:#99abd1;--tb-accent:#ff7a45;--tb-accent-2:#ffb066;--tb-border:#253a63;
+  --tb-radius:14px;--tb-shadow:0 12px 30px rgba(7,13,24,.45);
+}
+html,body{background:radial-gradient(1200px 500px at 50% -20%,#1a2f57 0%,#070d18 58%) fixed !important;color:var(--tb-text) !important;}
+#toolbox-shell{
+  position:fixed;top:0;left:0;right:0;height:56px;
+  background:linear-gradient(120deg,var(--tb-surface) 0%,var(--tb-surface-soft) 100%);
+  color:var(--tb-text);display:flex;align-items:center;padding:0 16px;z-index:99999;
+  font-family:'IBM Plex Sans','Segoe UI',sans-serif;font-size:14px;gap:12px;
+  box-shadow:var(--tb-shadow);border-bottom:1px solid var(--tb-border);backdrop-filter:blur(10px);
+}
+#toolbox-shell button{
+  background:transparent;border:1px solid transparent;color:var(--tb-text);cursor:pointer;font-size:16px;
+  padding:7px 10px;border-radius:10px;transition:all .2s ease;
+}
+#toolbox-shell button:hover{background:rgba(255,255,255,.08);border-color:var(--tb-border);}
+#toolbox-tool-name{font-weight:700;font-size:14px;letter-spacing:.2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:42vw;}
+#toolbox-shell-right{margin-left:auto;display:flex;align-items:center;gap:10px;}
+#toolbox-points{
+  background:linear-gradient(120deg,var(--tb-accent) 0%,var(--tb-accent-2) 100%);
+  padding:5px 12px;border-radius:999px;font-size:12px;font-weight:800;color:#2a180b;
+}
+#toolbox-free-remaining{font-size:11px;color:var(--tb-text-muted);}
+
+/* Unified tool canvas primitives */
+body{padding-top:56px !important;font-family:'IBM Plex Sans','Segoe UI',sans-serif !important;}
+.container,.c{max-width:1120px !important;margin:0 auto !important;padding:20px !important;}
+.actions{bottom:18px !important;}
+button:not(#toolbox-shell button){
+  border:none !important;border-radius:12px !important;padding:10px 16px !important;
+  background:linear-gradient(120deg,var(--tb-accent),var(--tb-accent-2)) !important;color:#1b120a !important;
+  font-weight:700 !important;box-shadow:0 4px 14px rgba(255,122,69,.25) !important;
+}
+button.secondary{
+  background:linear-gradient(120deg,#1a2846,#21355a) !important;color:var(--tb-text) !important;
+  border:1px solid var(--tb-border) !important;box-shadow:none !important;
+}
+input,textarea,select{
+  background:#0f1b31 !important;border:1px solid var(--tb-border) !important;color:var(--tb-text) !important;
+  border-radius:12px !important;
+}
+h1,h2,h3,h4,label{font-family:'IBM Plex Sans','Segoe UI',sans-serif !important;}
+h3,label{color:#ff9a6b !important;}
+</style>
+</head><body>
+
+<!-- toolbox:shell:start -->
+<div id="toolbox-shell">
+  <button onclick="history.back()" title="Back">&#8592;</button>
+  <button onclick="window.location.href='/'" title="Home">&#8962;</button>
+  <span id="toolbox-tool-name">ToolBox Tool</span>
+  <div id="toolbox-shell-right">
+    <span id="toolbox-free-remaining"></span>
+    <span id="toolbox-points">0 pts</span>
+  </div>
+</div>
+<!-- toolbox:shell:end -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="c"><div class="row"><label>Pattern</label><input type="text" id="pattern" placeholder="/pattern/ or pattern" oninput="test()"></div><div class="row"><label>Flags</label><div class="flags"><label><input type="checkbox" id="f_g" checked onchange="test()">g</label><label><input type="checkbox" id="f_i" onchange="test()">i</label><label><input type="checkbox" id="f_m" onchange="test()">m</label><label><input type="checkbox" id="f_s" onchange="test()">s</label></div></div><textarea id="input" placeholder="Enter test string here..." oninput="test()"></textarea><div class="results" id="results"><span style="color:#aaa">Matches will appear here...</span></div><div class="info" id="info"></div></div><script>function test(){var p=document.getElementById('pattern').value;var t=document.getElementById('input').value;var container=document.getElementById('results');var info=document.getElementById('info');if(!p||!t){container.innerHTML='<span style="color:#aaa">Matches will appear here...</span>';info.textContent='';return}var flags='';if(document.getElementById('f_g').checked)flags+='g';if(document.getElementById('f_i').checked)flags+='i';if(document.getElementById('f_m').checked)flags+='m';if(document.getElementById('f_s').checked)flags+='s';try{var re=new RegExp(p,flags);var matches=[];var m;if(flags.includes('g')){while((m=re.exec(t))!==null){matches.push({value:m[0],index:m.index,groups:m.slice(1)});if(m[0].length===0)re.lastIndex++}}else{m=re.exec(t);if(m)matches.push({value:m[0],index:m.index,groups:m.slice(1)})}if(matches.length===0){container.innerHTML='<span style="color:#aaa">No matches found</span>';info.textContent='0 matches'}else{container.innerHTML=matches.map(function(m,i){return '<div class="match">Match '+(i+1)+': "'+m.value+'" at index '+m.index+(m.groups.length?' → Groups: '+m.groups.map(function(g){return '"'+g+'"'}).join(', '):'')+'</div>'}).join('');info.textContent=matches.length+' match'+(matches.length>1?'es':'')+' found'}window.toolbox&&window.toolbox.complete({matches:matches.length})}catch(e){container.innerHTML='<div class="error">Error: '+e.message+'</div>';info.textContent='';window.toolbox&&window.toolbox.error(e.message)}}</script>
+
+
+
+
+
+
+
+
+
+<script src="/bridge.js" data-tool-id="regex-test"><\/script>
+</body></html>
