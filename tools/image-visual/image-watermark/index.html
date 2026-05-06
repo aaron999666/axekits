@@ -1646,6 +1646,9 @@
 
 
 
+
+
+
 <!-- toolbox:seo-geo:start -->
 <title>Image Watermark | ToolBox</title>
 <meta name="description" content="在线使用 Image Watermark，快速完成处理。">
@@ -2825,7 +2828,10 @@ h3,label{color:#ff9a6b !important;}
 
 
 
+
+
 <div class="c"><div class="drop" onclick="document.getElementById('file').click()"><div style="font-size:48px">💧</div><p style="color:#aaa;margin-top:8px">Click or drag image</p><input type="file" id="file" accept="image/*" style="display:none" onchange="loadFile(this)"></div><div class="controls"><div class="row"><label>Text</label><input type="text" id="text" value="ToolBox" oninput="apply()"></div><div class="row"><label>Size</label><input type="range" id="size" min="10" max="120" value="36" oninput="document.getElementById('sizeVal').textContent=this.value+'px';apply()"><span id="sizeVal" style="min-width:50px">36px</span></div><div class="row"><label>Color</label><input type="color" id="color" value="#ffffff" oninput="apply()"><label>Opacity</label><input type="range" id="opacity" min="10" max="100" value="50" oninput="document.getElementById('opVal').textContent=this.value+'%';apply()"><span id="opVal" style="min-width:40px">50%</span></div><div class="row"><label>Position</label><select id="pos" onchange="apply()"><option value="br">Bottom Right</option><option value="bl">Bottom Left</option><option value="tr">Top Right</option><option value="tl">Top Left</option><option value="center">Center</option><option value="tile">Tile</option></select></div></div><button onclick="download()">Download</button><div class="preview"><canvas id="canvas"></canvas></div></div><script>function loadFile(input){var file=input.files[0];if(!file)return;var reader=new FileReader();reader.onload=function(e){var img=new Image();img.onload=function(){window._img=img;apply()};img.src=e.target.result};reader.readAsDataURL(file)}function apply(){if(!window._img)return;var img=window._img;var canvas=document.getElementById('canvas');canvas.width=img.naturalWidth;canvas.height=img.naturalHeight;var ctx=canvas.getContext('2d');ctx.drawImage(img,0,0);var text=document.getElementById('text').value;var size=parseInt(document.getElementById('size').value);var color=document.getElementById('color').value;var opacity=parseInt(document.getElementById('opacity').value)/100;var pos=document.getElementById('pos').value;ctx.font='bold '+size+'px sans-serif';ctx.fillStyle=color;ctx.globalAlpha=opacity;var m=20;var tw=ctx.measureText(text).width;var x,y;if(pos==='br'){x=canvas.width-tw-m;y=canvas.height-m}else if(pos==='bl'){x=m;y=canvas.height-m}else if(pos==='tr'){x=canvas.width-tw-m;y=size+m}else if(pos==='tl'){x=m;y=size+m}else if(pos==='center'){x=(canvas.width-tw)/2;y=canvas.height/2}else{for(var ty=size;ty<canvas.height;ty+=size*2){for(var tx=0;tx<canvas.width;tx+=tw+size){ctx.fillText(text,tx,ty)}}return}ctx.fillText(text,x,y);ctx.globalAlpha=1;window.toolbox&&window.toolbox.complete({text:text,position:pos})}function download(){var canvas=document.getElementById('canvas');var link=document.createElement('a');link.download='watermarked.png';link.href=canvas.toDataURL('image/png');link.click()}</script>
+
 
 
 
