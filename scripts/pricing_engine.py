@@ -1,6 +1,7 @@
 import json
 import math
 from collections import defaultdict
+from datetime import datetime, timezone
 
 TOOLS_FILE = "data/tools.json"
 RULES_FILE = "data/pricing_rules.json"
@@ -32,16 +33,23 @@ def score_tool(tool, rules):
     free_hits = sum(1 for kw in rules["always_free_keywords"] if kw in text)
 
     stars = int(tool.get("stars", 0) or 0)
-    star_bonus = 0
-    if stars >= 5000:
-        star_bonus = 2
+    demand_score = 0
+    if stars >= 20000:
+        demand_score = 4
+    elif stars >= 8000:
+        demand_score = 3
+    elif stars >= 3000:
+        demand_score = 2
     elif stars >= 1000:
-        star_bonus = 1
+        demand_score = 1
+
+    self_hosted = bool(tool.get("self_hosted", False))
+    host_bonus = 1 if self_hosted else 0
 
     # complexity score drives paid points
-    complexity = base + premium_hits + star_bonus - free_hits
+    complexity = base + premium_hits + host_bonus + demand_score - free_hits
     complexity = max(0, complexity)
-    return complexity, premium_hits, free_hits
+    return complexity, premium_hits, free_hits, demand_score, host_bonus
 
 def compute_target_free_count(total, ratio):
     return max(1, int(round(total * ratio)))
@@ -110,22 +118,34 @@ def apply_pricing(tools, rules):
         rules["min_paid_points"] = backsolve["min_paid_points"]
         rules["max_paid_points"] = backsolve["max_paid_points"]
 
+    priced_cfg = rules.get("pricing_tiers", {}) or {}
+    free_ratio_floor = safe_float(rules.get("free_ratio_floor", rules.get("free_ratio_target", 0.25)), 0.25)
+    free_ratio_target = safe_float(rules.get("free_ratio_target", 0.25), 0.25)
+    free_ratio_target = max(free_ratio_floor, free_ratio_target)
+    if free_ratio_target > 0.95:
+        free_ratio_target = 0.95
+
+    guardrail_cfg = rules.get("guardrails", {}) or {}
+    max_daily_increase_ratio = safe_float(guardrail_cfg.get("max_daily_increase_ratio", 0.30), 0.30)
+    max_first_paid_points = safe_int(guardrail_cfg.get("max_first_paid_points", 2), 2)
+    min_first_paid_points = safe_int(guardrail_cfg.get("min_first_paid_points", 1), 1)
+
     scored = []
     for t in tools:
-        complexity, premium_hits, free_hits = score_tool(t, rules)
-        scored.append((t, complexity, premium_hits, free_hits))
+        complexity, premium_hits, free_hits, demand_score, host_bonus = score_tool(t, rules)
+        scored.append((t, complexity, premium_hits, free_hits, demand_score, host_bonus))
 
     # Candidate free tools: lowest complexity first
     scored_sorted = sorted(scored, key=lambda x: (x[1], -(x[3]), x[0].get("id", "")))
-    target_free = compute_target_free_count(len(tools), rules["free_ratio_target"])
+    target_free = compute_target_free_count(len(tools), free_ratio_target)
 
     free_set = set()
     # always-free keyword tools are prioritized
-    for t, _, _, free_hits in scored_sorted:
+    for t, _, _, free_hits, _, _ in scored_sorted:
         if free_hits > 0 and len(free_set) < target_free:
             free_set.add(t.get("id"))
 
-    for t, _, _, _ in scored_sorted:
+    for t, _, _, _, _, _ in scored_sorted:
         if len(free_set) >= target_free:
             break
         free_set.add(t.get("id"))
@@ -134,31 +154,65 @@ def apply_pricing(tools, rules):
     max_pts = int(rules["max_paid_points"])
     report_items = []
 
-    for t, complexity, premium_hits, free_hits in scored:
+    for t, complexity, premium_hits, free_hits, demand_score, host_bonus in scored:
         tid = t.get("id")
-        old = t.get("points_cost", 1)
+        old = safe_int(t.get("points_cost", 1), 1)
+        revenue_tier = "free"
+        auto_free_reason = "ratio_floor"
+
         if tid in free_set:
             new_cost = 0
             mode = "free"
+            revenue_tier = "free"
         else:
             # Map complexity to paid points scale
             raw = 1 + math.floor(complexity / 2)
             new_cost = clamp(raw, min_pts, max_pts)
             mode = "paid"
+            if new_cost <= 2:
+                revenue_tier = "standard"
+            elif new_cost <= 6:
+                revenue_tier = "pro"
+            else:
+                revenue_tier = "enterprise"
+            auto_free_reason = ""
+
+            # Guardrail 1: if previously free, first step-up must stay small.
+            if old <= 0:
+                new_cost = clamp(new_cost, min_first_paid_points, max_first_paid_points)
+
+            # Guardrail 2: daily increase capped (default +30%).
+            if old > 0 and new_cost > old:
+                capped = int(math.ceil(old * (1 + max_daily_increase_ratio)))
+                new_cost = min(new_cost, max(capped, old + 1))
+
         t["points_cost"] = int(new_cost)
+        t["pricing_tier"] = revenue_tier
+        t["billing_mode"] = "free" if new_cost == 0 else "points"
         report_items.append({
             "id": tid,
             "category": t.get("category"),
             "old_points": old,
             "new_points": new_cost,
             "mode": mode,
+            "pricing_tier": revenue_tier,
             "complexity": complexity,
             "premium_hits": premium_hits,
             "free_hits": free_hits,
+            "demand_score": demand_score,
+            "host_bonus": host_bonus,
             "stars": int(t.get("stars", 0) or 0),
+            "auto_free_reason": auto_free_reason,
         })
 
-    return tools, report_items, backsolve
+    return tools, report_items, backsolve, {
+        "free_ratio_target": free_ratio_target,
+        "free_ratio_floor": free_ratio_floor,
+        "max_daily_increase_ratio": max_daily_increase_ratio,
+        "max_first_paid_points": max_first_paid_points,
+        "min_first_paid_points": min_first_paid_points,
+        "tiers": priced_cfg,
+    }
 
 def summarize(report_items):
     by_category = defaultdict(lambda: {"free": 0, "paid": 0, "avg_paid_points": 0, "paid_count": 0})
@@ -190,7 +244,7 @@ def summarize(report_items):
 def main():
     tools = load_json(TOOLS_FILE)
     rules = load_json(RULES_FILE)
-    tools, report_items, backsolve = apply_pricing(tools, rules)
+    tools, report_items, backsolve, pricing_runtime = apply_pricing(tools, rules)
     summary = summarize(report_items)
 
     with open(TOOLS_FILE, "w", encoding="utf-8") as f:
@@ -199,7 +253,9 @@ def main():
     with open(REPORT_FILE, "w", encoding="utf-8") as f:
         json.dump({
             "rules_version": rules.get("version"),
+            "generated_at_utc": datetime.now(timezone.utc).isoformat(),
             "revenue_target_backsolve": backsolve,
+            "pricing_runtime": pricing_runtime,
             "summary": {
                 "free_count": summary["free_count"],
                 "paid_count": summary["paid_count"],
