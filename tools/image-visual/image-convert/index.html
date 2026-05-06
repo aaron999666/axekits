@@ -749,6 +749,9 @@
 
 
 
+
+
+
 <!-- toolbox:seo-geo:start -->
 <title>图片格式转换 | ToolBox</title>
 <meta name="description" content="在 PNG、JPEG、WebP 格式间转换图片 关键词: image, convert, png, jpeg, webp">
@@ -1330,7 +1333,10 @@ h3,label{color:#ff9a6b !important;}
 
 
 
+
+
 <div class="c"><div class="drop" onclick="document.getElementById('file').click()"><div style="font-size:48px">🔄</div><p style="color:#aaa;margin-top:8px">Click or drag image</p><input type="file" id="file" accept="image/*" style="display:none" onchange="loadFile(this)"></div><div class="controls"><label>Convert to</label><select id="format"><option value="image/png">PNG</option><option value="image/jpeg">JPEG</option><option value="image/webp">WebP</option></select></div><button onclick="download()">Download Converted</button><div class="preview"><img id="preview"></div><div class="info" id="info"></div><canvas id="canvas"></canvas></div><script>var origType='';function loadFile(input){var file=input.files[0];if(!file)return;origType=file.type;var reader=new FileReader();reader.onload=function(e){var img=new Image();img.onload=function(){var canvas=document.getElementById('canvas');canvas.width=img.naturalWidth;canvas.height=img.naturalHeight;var ctx=canvas.getContext('2d');ctx.drawImage(img,0,0);document.getElementById('preview').src=canvas.toDataURL(document.getElementById('format').value,0.92);document.getElementById('info').textContent='Original: '+origType.split('/')[1].toUpperCase()+' → '+document.getElementById('format').value.split('/')[1].toUpperCase();window._img=img};img.src=e.target.result};reader.readAsDataURL(file)}document.getElementById('format').onchange=function(){if(!window._img)return;var canvas=document.getElementById('canvas');var ctx=canvas.getContext('2d');ctx.drawImage(window._img,0,0);document.getElementById('preview').src=canvas.toDataURL(this.value,0.92);document.getElementById('info').textContent='Original: '+origType.split('/')[1].toUpperCase()+' → '+this.value.split('/')[1].toUpperCase();window.toolbox&&window.toolbox.complete({from:origType,to:this.value})};function download(){var canvas=document.getElementById('canvas');var fmt=document.getElementById('format').value;var ext=fmt==='image/jpeg'?'jpg':fmt==='image/webp'?'webp':'png';var link=document.createElement('a');link.download='converted.'+ext;link.href=canvas.toDataURL(fmt,0.92);link.click()}</script>
+
 
 
 
