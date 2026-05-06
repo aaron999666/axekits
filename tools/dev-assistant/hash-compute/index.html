@@ -760,6 +760,9 @@ button:hover{transform:scale(1.05);}
 
 
 
+
+
+
 <!-- toolbox:seo-geo:start -->
 <title>哈希计算 | ToolBox</title>
 <meta name="description" content="计算 MD5、SHA-1、SHA-256、SHA-384、SHA-512 哈希值 关键词: hash, md5, sha256, crypto, utility">
@@ -1336,6 +1339,8 @@ h3,label{color:#ff9a6b !important;}
 
 
 
+
+
 <div class="container">
   <textarea id="input" placeholder="Enter text to hash..."></textarea>
   <button onclick="computeHashes()">Compute Hashes</button>
@@ -1383,6 +1388,7 @@ function add32(a,b){return(a+b)&0xFFFFFFFF;}
 if(hex(md51('hello'))!='5d41402abc4b2a76b9719d911017c592'){add32=function(x,y){var lsw=(x&0xFFFF)+(y&0xFFFF),msw=(x>>16)+(y>>16)+(lsw>>16);return(msw<<16)|(lsw&0xFFFF);};}
 return hex(md51(string));}
 </script>
+
 
 
 
