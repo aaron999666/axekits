@@ -1763,6 +1763,9 @@
 
 
 
+
+
+
 <!-- toolbox:seo-geo:start -->
 <title>Image Resize | ToolBox</title>
 <meta name="description" content="在线使用 Image Resize，快速完成处理。">
@@ -3020,7 +3023,10 @@ h3,label{color:#ff9a6b !important;}
 
 
 
+
+
 <div class="c"><div class="drop" onclick="document.getElementById('file').click()"><div style="font-size:48px">🖼️</div><p style="color:#aaa;margin-top:8px">Click or drag image</p><input type="file" id="file" accept="image/*" style="display:none" onchange="loadFile(this)"></div><div class="controls"><div class="field"><label>Width</label><input type="number" id="w" oninput="resize()"></div><div class="field"><label>Height</label><input type="number" id="h" oninput="resize()"></div><div class="field"><label>Lock Ratio</label><input type="checkbox" id="lock" checked style="accent-color:#e94560;width:auto"></div></div><button onclick="download()">Download Resized</button><div class="preview"><img id="preview"></div><div class="info" id="info"></div><canvas id="canvas"></canvas></div><script>var origW=0,origH=0,ratio=1;function loadFile(input){var file=input.files[0];if(!file)return;var reader=new FileReader();reader.onload=function(e){var img=new Image();img.onload=function(){origW=img.naturalWidth;origH=img.naturalHeight;ratio=origW/origH;document.getElementById('w').value=origW;document.getElementById('h').value=origH;document.getElementById('preview').src=e.target.result;document.getElementById('info').textContent='Original: '+origW+'×'+origH;window._img=img};img.src=e.target.result};reader.readAsDataURL(file)}function resize(){var w=parseInt(document.getElementById('w').value);var h=parseInt(document.getElementById('h').value);if(!w||!h||!window._img)return;if(document.getElementById('lock').checked){if(this===document.getElementById('w')){h=Math.round(w/ratio);document.getElementById('h').value=h}else{w=Math.round(h*ratio);document.getElementById('w').value=w}}var canvas=document.getElementById('canvas');canvas.width=w;canvas.height=h;var ctx=canvas.getContext('2d');ctx.drawImage(window._img,0,0,w,h);document.getElementById('preview').src=canvas.toDataURL('image/png');document.getElementById('info').textContent=origW+'×'+origH+' → '+w+'×'+h;window.toolbox&&window.toolbox.complete({width:w,height:h})}function download(){var canvas=document.getElementById('canvas');var link=document.createElement('a');link.download='resized.png';link.href=canvas.toDataURL('image/png');link.click()}</script>
+
 
 
 
