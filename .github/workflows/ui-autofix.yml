@@ -8,23 +8,30 @@ on:
       - "scripts/ui_consistency_check.py"
   workflow_dispatch:
 
+concurrency:
+  group: ui-autofix-main
+  cancel-in-progress: false
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
+
 jobs:
   normalize-tool-ui:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: read
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           token: ${{ secrets.PAT_TOKEN }}
 
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
-          node-version: "20"
+          node-version: "24"
 
       - name: Setup Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: "3.12"
 
@@ -34,14 +41,12 @@ jobs:
       - name: Verify UI consistency
         run: python scripts/ui_consistency_check.py
 
-      - name: Auto commit normalized UI
+      - name: Package normalized UI assets
         run: |
-          git config user.name "toolbox-bot"
-          git config user.email "bot@toolbox.dev"
-          git add tools/
-          if git diff --staged --quiet; then
-            echo "No UI normalization changes."
-          else
-            git commit -m "chore(ui): auto-normalize tool UI shell"
-            git push
-          fi
+          tar -czf ui-autofix-assets.tgz tools
+      - name: Upload normalized UI assets
+        uses: actions/upload-artifact@v4
+        with:
+          name: ui-autofix-assets
+          path: ui-autofix-assets.tgz
+          if-no-files-found: error
