@@ -431,6 +431,9 @@
 
 
 
+
+
+
 <!-- toolbox:seo-geo:start -->
 <title>年龄计算 | ToolBox</title>
 <meta name="description" content="精确计算年龄（年/月/日），附带详细统计 关键词: age, calculator, date, utility">
@@ -800,7 +803,10 @@ h3,label{color:#ff9a6b !important;}
 
 
 
+
+
 <div class="c"><div class="card"><label>Date of Birth</label><input type="date" id="dob" onchange="calc()"><label>Target Date</label><input type="date" id="target" onchange="calc()"><button onclick="calc()">Calculate</button></div><div class="result" id="result" style="display:none"><div class="stat"><div class="val" id="years">0</div><div class="lbl">Years</div></div><div class="stat"><div class="val" id="months">0</div><div class="lbl">Months</div></div><div class="stat"><div class="val" id="days">0</div><div class="lbl">Days</div></div></div><div class="detail" id="detail"></div></div><script>document.getElementById('target').valueAsDate=new Date();function calc(){var dob=document.getElementById('dob').value;var target=document.getElementById('target').value;if(!dob)return;var birth=new Date(dob);var end=target?new Date(target):new Date();if(birth>end){window.toolbox&&window.toolbox.error('Birth date must be before target date');return}document.getElementById('result').style.display='grid';var y=end.getFullYear()-birth.getFullYear();var m=end.getMonth()-birth.getMonth();var d=end.getDate()-birth.getDate();if(d<0){m--;var prev=new Date(end.getFullYear(),end.getMonth(),0);d+=prev.getDate()}if(m<0){y--;m+=12}document.getElementById('years').textContent=y;document.getElementById('months').textContent=m;document.getElementById('days').textContent=d;var totalDays=Math.floor((end-birth)/(1000*60*60*24));var totalWeeks=Math.floor(totalDays/7);var totalHours=totalDays*24;var nextBday=new Date(end.getFullYear(),birth.getMonth(),birth.getDate());if(nextBday<=end)nextBday.setFullYear(nextBday.getFullYear()+1);var daysUntilNext=Math.ceil((nextBday-end)/(1000*60*60*24));document.getElementById('detail').innerHTML='Total: <span>'+totalDays+'</span> days / <span>'+totalWeeks+'</span> weeks / <span>'+totalHours.toLocaleString()+'</span> hours<br>Next birthday in: <span>'+daysUntilNext+'</span> days<br>You were born on: <span>'+birth.toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'})+'</span>';window.toolbox&&window.toolbox.complete({years:y,months:m,days:d,totalDays:totalDays})}</script>
+
 
 
 
