@@ -824,6 +824,9 @@
 
 
 
+
+
+
 <!-- toolbox:seo-geo:start -->
 <title>Lorem Ipsum 生成 | ToolBox</title>
 <meta name="description" content="生成 Lorem Ipsum 占位文本 关键词: lorem, ipsum, placeholder, text, utility">
@@ -1455,7 +1458,10 @@ h3,label{color:#ff9a6b !important;}
 
 
 
+
+
 <div class="c"><div class="row"><label>Type</label><select id="type"><option value="paragraphs">Paragraphs</option><option value="sentences">Sentences</option><option value="words">Words</option></select><label>Count</label><input type="number" id="count" value="3" min="1" max="50"><button onclick="gen()">Generate</button><button class="s" onclick="navigator.clipboard.writeText(document.getElementById('o').value)">Copy</button></div><textarea id="o" readonly></textarea></div><script>var W='lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit anim id est laborum'.split(' ');function rw(){return W[Math.floor(Math.random()*W.length)]}function rs(){var len=8+Math.floor(Math.random()*12);var s='';for(var i=0;i<len;i++)s+=(i?'':'')+rw();return s.charAt(0).toUpperCase()+s.slice(1)+'.'}function rp(){var count=4+Math.floor(Math.random()*4);var s='';for(var i=0;i<count;i++)s+=(i?'\n\n':'')+rs();return s}function gen(){var type=document.getElementById('type').value;var count=parseInt(document.getElementById('count').value)||3;var result='';if(type==='paragraphs'){for(var i=0;i<count;i++)result+=(i?'\n\n':'')+rp()}else if(type==='sentences'){for(var i=0;i<count;i++)result+=(i?' ':'')+rs()}else{for(var i=0;i<count;i++)result+=(i?' ':'')+rw()}document.getElementById('o').value=result;window.toolbox&&window.toolbox.complete({type:type,count:count})}</script>
+
 
 
 
