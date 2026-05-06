@@ -6,12 +6,26 @@
   "daily_limits": {
     "scan_runs": 1,
     "ai_calls": 0,
-    "new_launches": 10
+    "new_launches": 8
+  },
+  "free_quota_guard": {
+    "github_actions": {
+      "monthly_minutes_cap": 400,
+      "est_minutes_per_scan_run": 8
+    },
+    "github_api": {
+      "daily_search_requests_cap": 120,
+      "est_search_requests_per_scan_run": 20
+    },
+    "cloudflare": {
+      "daily_worker_ops_cap": 2000,
+      "est_worker_ops_per_scan_run": 150
+    }
   },
   "notes": [
     "monthly_budget_cny=0 表示不开启人民币预算熔断，使用免费额度阈值控制。",
     "每天仅允许一次自动扫描。",
-    "每天最多上线 10 个工具。",
+    "每天最多上线 8 个工具。",
     "ai_calls=0 表示默认禁用自动 AI 步骤；仅当 ENABLE_AUTOMATION_AI=true 时才会运行。"
   ]
 }

@@ -33,14 +33,14 @@ jobs:
       - name: Scan GitHub repos
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          MAX_REPOS_TOTAL: "30"
+          MAX_REPOS_TOTAL: "20"
         run: python scripts/scanner.py
       - name: Demand discovery
         run: python scripts/demand_discovery.py
       - name: Auto tool factory
         env:
-          AUTO_TOOL_MAX_PER_RUN: "30"
-          AUTO_TOOL_DAILY_LIMIT: "10"
+          AUTO_TOOL_MAX_PER_RUN: "20"
+          AUTO_TOOL_DAILY_LIMIT: "8"
         run: python scripts/auto_tool_factory.py
       - name: Classify with AI (opt-in only)
         if: ${{ secrets.ENABLE_AUTOMATION_AI == 'true' }}
