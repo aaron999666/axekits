@@ -42,10 +42,11 @@ jobs:
           AUTO_TOOL_MAX_PER_RUN: "20"
           AUTO_TOOL_DAILY_LIMIT: "8"
         run: python scripts/auto_tool_factory.py
-      - name: Classify with AI (opt-in only)
-        if: ${{ secrets.ENABLE_AUTOMATION_AI == 'true' }}
+      - name: Classify with AI
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+          CF_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
         run: python scripts/classifier.py
       - name: Auto pricing engine
         run: python scripts/pricing_engine.py
@@ -53,8 +54,7 @@ jobs:
         run: python scripts/generate_web_seo_assets.py
       - name: Security gate
         run: python scripts/security_gate.py
-      - name: Translate to Chinese (opt-in only)
-        if: ${{ secrets.ENABLE_AUTOMATION_AI == 'true' }}
+      - name: Translate to Chinese
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: python scripts/translator.py

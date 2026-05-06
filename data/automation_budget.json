@@ -5,7 +5,7 @@
   "estimated_cost_per_scan_run_cny": 0,
   "daily_limits": {
     "scan_runs": 1,
-    "ai_calls": 0,
+    "ai_calls": 80,
     "new_launches": 8
   },
   "free_quota_guard": {
@@ -26,6 +26,6 @@
     "monthly_budget_cny=0 表示不开启人民币预算熔断，使用免费额度阈值控制。",
     "每天仅允许一次自动扫描。",
     "每天最多上线 8 个工具。",
-    "ai_calls=0 表示默认禁用自动 AI 步骤；仅当 ENABLE_AUTOMATION_AI=true 时才会运行。"
+    "自动 AI 仅允许 Gemini 与 Cloudflare Workers AI 两个免费提供方。"
   ]
 }
