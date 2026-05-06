@@ -80,6 +80,9 @@
 
 
 
+
+
+
 <!-- toolbox:seo-geo:start -->
 <title>JWT 解码 | ToolBox</title>
 <meta name="description" content="解码和检查 JWT 令牌，查看头部和载荷 关键词: jwt, token, decode, security, utility">
@@ -215,7 +218,10 @@ h3,label{color:#ff9a6b !important;}
 
 
 
+
+
 <div class="c"><textarea id="i" placeholder="Paste JWT token here (e.g. eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...)"></textarea><button onclick="decode()">Decode</button><div id="results"></div></div><script>function decode(){var v=document.getElementById('i').value.trim();var container=document.getElementById('results');container.innerHTML='';if(!v){container.innerHTML='<div class="error">Please enter a JWT token</div>';return}var parts=v.split('.');if(parts.length!==3){container.innerHTML='<div class="error">Invalid JWT: must have 3 parts separated by dots</div>';window.toolbox&&window.toolbox.error('Invalid JWT format');return}try{var header=JSON.parse(b64decode(parts[0]));var payload=JSON.parse(b64decode(parts[1]));container.innerHTML='<div class="result"><h4>Header</h4><pre>'+JSON.stringify(header,null,2)+'</pre></div>'+'<div class="result"><h4>Payload</h4><pre>'+JSON.stringify(payload,null,2)+'</pre></div>'+'<div class="result"><h4>Signature</h4><pre>'+parts[2]+'</pre></div>';if(payload.exp){var now=Math.floor(Date.now()/1000);var exp=new Date(payload.exp*1000);container.innerHTML+='<div class="result"><h4>Expiration</h4><pre>'+exp.toISOString()+(payload.exp<now?' (EXPIRED)':' (Valid)')+'</pre></div>'}window.toolbox&&window.toolbox.complete({header:header,payload:payload})}catch(e){container.innerHTML='<div class="error">Decode error: '+e.message+'</div>';window.toolbox&&window.toolbox.error(e.message)}}function b64decode(s){s=s.replace(/-/g,'+').replace(/_/g,'/');while(s.length%4)s+='=';return decodeURIComponent(atob(s).split('').map(function(c){return '%'+('00'+c.charCodeAt(0).toString(16)).slice(-2)}).join(''))}</script>
+
 
 
 
