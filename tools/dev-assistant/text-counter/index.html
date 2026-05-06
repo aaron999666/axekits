@@ -1523,6 +1523,9 @@
 
 
 
+
+
+
 <!-- toolbox:seo-geo:start -->
 <title>Text Counter | ToolBox</title>
 <meta name="description" content="在线使用 Text Counter，快速完成处理。">
@@ -2620,7 +2623,10 @@ h3,label{color:#ff9a6b !important;}
 
 
 
+
+
 <div class="c"><textarea id="i" placeholder="Type or paste text here..." oninput="count()"></textarea><div class="stats"><div class="stat"><div class="val" id="chars">0</div><div class="lbl">Characters</div></div><div class="stat"><div class="val" id="charsNoSpace">0</div><div class="lbl">No Spaces</div></div><div class="stat"><div class="val" id="words">0</div><div class="lbl">Words</div></div><div class="stat"><div class="val" id="lines">0</div><div class="lbl">Lines</div></div><div class="stat"><div class="val" id="sentences">0</div><div class="lbl">Sentences</div></div><div class="stat"><div class="val" id="paragraphs">0</div><div class="lbl">Paragraphs</div></div></div></div><script>function count(){var v=document.getElementById('i').value;document.getElementById('chars').textContent=v.length;document.getElementById('charsNoSpace').textContent=v.replace(/\s/g,'').length;document.getElementById('words').textContent=v.trim()?v.trim().split(/\s+/).length:0;document.getElementById('lines').textContent=v?v.split('\n').length:0;document.getElementById('sentences').textContent=v.trim()?(v.match(/[.!?。！？]+/g)||[]).length:0;document.getElementById('paragraphs').textContent=v.trim()?v.split(/\n\s*\n/).filter(function(p){return p.trim()}).length:0;window.toolbox&&window.toolbox.complete({chars:v.length,words:v.trim()?v.trim().split(/\s+/).length:0})}</script>
+
 
 
 
