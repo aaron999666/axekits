@@ -1,11 +1,6 @@
 name: Tool UI Auto-Fix
 
 on:
-  push:
-    paths:
-      - "tools/**/index.html"
-      - "packages/tool-shell/inject.js"
-      - "scripts/ui_consistency_check.py"
   workflow_dispatch:
 
 concurrency:
