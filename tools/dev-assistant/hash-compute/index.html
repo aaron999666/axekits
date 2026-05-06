@@ -1489,6 +1489,9 @@ button:hover{transform:scale(1.05);}
 
 
 
+
+
+
 <!-- toolbox:seo-geo:start -->
 <title>Hash Compute | ToolBox</title>
 <meta name="description" content="在线使用 Hash Compute，快速完成处理。">
@@ -2551,6 +2554,8 @@ h3,label{color:#ff9a6b !important;}
 
 
 
+
+
 <div class="container">
   <textarea id="input" placeholder="Enter text to hash..."></textarea>
   <button onclick="computeHashes()">Compute Hashes</button>
@@ -2598,6 +2603,7 @@ function add32(a,b){return(a+b)&0xFFFFFFFF;}
 if(hex(md51('hello'))!='5d41402abc4b2a76b9719d911017c592'){add32=function(x,y){var lsw=(x&0xFFFF)+(y&0xFFFF),msw=(x>>16)+(y>>16)+(lsw>>16);return(msw<<16)|(lsw&0xFFFF);};}
 return hex(md51(string));}
 </script>
+
 
 
 
