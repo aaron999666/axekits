@@ -113,9 +113,10 @@ function arrayBufferToHex(buffer: ArrayBuffer): string {
 
 export async function createCheckoutSession(userId: string, priceId: string, env: Env): Promise<string> {
   const priceMap: Record<string, { points: string; name: string }> = {
-    [env.STRIPE_PRICE_BASIC]: { points: "500", name: "Basic Pack" },
-    [env.STRIPE_PRICE_PRO]: { points: "2000", name: "Pro Pack" },
-    [env.STRIPE_PRICE_PACK_100]: { points: "100", name: "100 Points" },
+    [env.STRIPE_PRICE_BASIC]: { points: "600", name: "50 CNY Pack" },
+    [env.STRIPE_PRICE_PRO]: { points: "1400", name: "100 CNY Pack" },
+    // Legacy fallback: if old third price is still passed, treat it as Basic.
+    [env.STRIPE_PRICE_PACK_100]: { points: "600", name: "Legacy Basic Alias" },
   };
   const priceInfo = priceMap[priceId];
   if (!priceInfo) throw new Error("Unknown Stripe price id");

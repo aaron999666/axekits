@@ -4,7 +4,7 @@ import { SITE_NAME } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "定价",
-  description: "ToolBox 积分定价：免费层 + Basic + Pro + 按需积分包，面向轻量到高频使用场景。",
+  description: "ToolBox 两档充值：¥50=600积分，¥100=1400积分；免费层每日5次。",
   alternates: {
     canonical: "/pricing",
   },
@@ -33,31 +33,28 @@ export default function PricingPage() {
             <button className="btn btn-outline" style={{ width: "100%" }}>Get Started</button>
           </div>
           <div className="pricing-card featured">
-            <h3>Basic</h3>
-            <div className="price">$4.99<span>/mo</span></div>
+            <h3>Recharge 50</h3>
+            <div className="price">¥50<span>/once</span></div>
             <ul>
-              <li>500 points per month</li>
+              <li>600 points</li>
               <li>All tools unlocked</li>
               <li>AI workflow orchestration</li>
               <li>Priority support</li>
             </ul>
-            <button className="btn" style={{ width: "100%" }}>Subscribe</button>
+            <button className="btn" style={{ width: "100%" }}>Buy 600 Points</button>
           </div>
           <div className="pricing-card">
-            <h3>Pro</h3>
-            <div className="price">$14.99<span>/mo</span></div>
+            <h3>Recharge 100</h3>
+            <div className="price">¥100<span>/once</span></div>
             <ul>
-              <li>2000 points per month</li>
+              <li>1400 points</li>
               <li>Unlimited AI workflows</li>
               <li>API access</li>
               <li>Priority queue</li>
             </ul>
-            <button className="btn btn-outline" style={{ width: "100%" }}>Subscribe</button>
+            <button className="btn btn-outline" style={{ width: "100%" }}>Buy 1400 Points</button>
           </div>
         </div>
-        <p style={{ color: "var(--text-muted)", marginTop: "24px", fontSize: "13px" }}>
-          Also available: $1.99 = 100 points (never expires)
-        </p>
       </section>
       <script
         type="application/ld+json"
@@ -68,9 +65,8 @@ export default function PricingPage() {
             name: `${SITE_NAME} Pricing`,
             itemListElement: [
               { "@type": "Offer", name: "Free", price: "0", priceCurrency: "USD" },
-              { "@type": "Offer", name: "Basic", price: "4.99", priceCurrency: "USD" },
-              { "@type": "Offer", name: "Pro", price: "14.99", priceCurrency: "USD" },
-              { "@type": "Offer", name: "Pack 100", price: "1.99", priceCurrency: "USD" },
+              { "@type": "Offer", name: "Recharge 50", price: "50", priceCurrency: "CNY" },
+              { "@type": "Offer", name: "Recharge 100", price: "100", priceCurrency: "CNY" },
             ],
           }),
         }}
