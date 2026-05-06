@@ -1835,6 +1835,9 @@
 
 
 
+
+
+
 <!-- toolbox:seo-geo:start -->
 <title>Markdown Preview | ToolBox</title>
 <meta name="description" content="在线使用 Markdown Preview，快速完成处理。">
@@ -3140,7 +3143,10 @@ h3,label{color:#ff9a6b !important;}
 
 
 
+
+
 <div class="c"><div><h3>Markdown Input</h3><textarea id="i" placeholder="# Hello World&#10;&#10;Write **markdown** here..." oninput="render()"></textarea></div><div><h3>Preview</h3><div class="preview" id="o"></div></div></div><script>function render(){var v=document.getElementById('i').value;var h=v.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');h=h.replace(/^### (.+)$/gm,'<h3>$1</h3>');h=h.replace(/^## (.+)$/gm,'<h2>$1</h2>');h=h.replace(/^# (.+)$/gm,'<h1>$1</h1>');h=h.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>');h=h.replace(/\*(.+?)\*/g,'<em>$1</em>');h=h.replace(/`([^`]+)`/g,'<code>$1</code>');h=h.replace(/```[\s\S]*?```/g,function(m){return'<pre><code>'+m.slice(3,-3).trim()+'</code></pre>'});h=h.replace(/^> (.+)$/gm,'<blockquote>$1</blockquote>');h=h.replace(/^---$/gm,'<hr>');h=h.replace(/\[([^\]]+)\]\(([^)]+)\)/g,'<a href="$2" target="_blank">$1</a>');h=h.replace(/!\[([^\]]*)\]\(([^)]+)\)/g,'<img src="$2" alt="$1">');h=h.replace(/^\* (.+)$/gm,'<li>$1</li>');h=h.replace(/(<li>.*<\/li>\n?)+/g,'<ul>$&</ul>');h=h.replace(/^\d+\. (.+)$/gm,'<li>$1</li>');h=h.replace(/\n\n/g,'</p><p>');h=h='<p>'+h+'</p>';h=h.replace(/<p>\s*<(h[1-3]|hr|pre|blockquote|ul|ol)/g,'<$1');h=h.replace(/<\/(h[1-3]|pre|blockquote|ul|ol)>\s*<\/p>/g,'</$1>');document.getElementById('o').innerHTML=h;window.toolbox&&window.toolbox.complete({action:'preview'})}</script>
+
 
 
 
