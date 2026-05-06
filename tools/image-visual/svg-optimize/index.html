@@ -1526,6 +1526,9 @@
 
 
 
+
+
+
 <!-- toolbox:seo-geo:start -->
 <title>Svg Optimize | ToolBox</title>
 <meta name="description" content="在线使用 Svg Optimize，快速完成处理。">
@@ -2625,7 +2628,10 @@ h3,label{color:#ff9a6b !important;}
 
 
 
+
+
 <div class="c"><div><h3>Input SVG</h3><textarea id="i" placeholder="Paste SVG code here..."></textarea></div><div><h3>Optimized SVG</h3><textarea id="o" readonly></textarea></div></div><div class="actions"><button onclick="optimize()">Optimize</button><button class="s" onclick="navigator.clipboard.writeText(document.getElementById('o').value)">Copy</button><span class="stats" id="stats"></span></div><script>function optimize(){var v=document.getElementById('i').value;if(!v)return;var r=v;r=r.replace(/<!--[\s\S]*?-->/g,'');r=r.replace(/\s+xmlns:\w+="[^"]*"/g,function(m){if(r.indexOf(m.replace('xmlns:','').split('=')[0]+':')===-1)return'';return m});r=r.replace(/\s+style=""/g,'');r=r.replace(/\s+class=""/g,'');r=r.replace(/\s+id=""/g,'');r=r.replace(/\s+fill="none"\s*/g,function(m,offset){var after=r.substring(offset+m.length,offset+m.length+1);if(after==='<'||after==='/')return m;return' '});r=r.replace(/^\s+/gm,'');r=r.replace(/\n\s*\n/g,'\n');r=r.replace(/\s{2,}/g,' ');r=r.replace(/\s*([<>\/])\s*/g,'$1');r=r.replace(/>\s+</g,'><');r=r.trim();document.getElementById('o').value=r;var saved=((v.length-r.length)/v.length*100).toFixed(1);document.getElementById('stats').textContent=v.length+' → '+r.length+' bytes ('+saved+'% smaller)';window.toolbox&&window.toolbox.complete({original:v.length,optimized:r.length})}</script>
+
 
 
 
