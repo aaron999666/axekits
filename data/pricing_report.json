@@ -1,5 +1,6 @@
 {
-  "rules_version": "2026-05-03",
+  "rules_version": "2026-05-06",
+  "generated_at_utc": "2026-05-06T07:01:26.222747+00:00",
   "revenue_target_backsolve": {
     "enabled": true,
     "monthly_target_cny": 300000.0,
@@ -13,483 +14,47 @@
     "min_paid_points": 10,
     "max_paid_points": 12
   },
-  "summary": {
-    "free_count": 10,
-    "paid_count": 31,
-    "by_category": {
-      "dev-assistant": {
-        "free": 9,
-        "paid": 16,
-        "avg_paid_points": 10.0
+  "pricing_runtime": {
+    "free_ratio_target": 0.25,
+    "free_ratio_floor": 0.2,
+    "max_daily_increase_ratio": 0.3,
+    "max_first_paid_points": 2,
+    "min_first_paid_points": 1,
+    "tiers": {
+      "free": {
+        "points_range": [
+          0,
+          0
+        ],
+        "description": "无外部成本或拉新工具"
       },
-      "image-visual": {
-        "free": 1,
-        "paid": 5,
-        "avg_paid_points": 10.0
+      "standard": {
+        "points_range": [
+          1,
+          2
+        ],
+        "description": "低成本、轻处理工具"
       },
-      "document-convert": {
-        "free": 0,
-        "paid": 7,
-        "avg_paid_points": 10.0
+      "pro": {
+        "points_range": [
+          3,
+          6
+        ],
+        "description": "中高成本、文件或多步骤处理"
       },
-      "daily-calc": {
-        "free": 0,
-        "paid": 3,
-        "avg_paid_points": 10.0
+      "enterprise": {
+        "points_range": [
+          7,
+          12
+        ],
+        "description": "高算力或批量任务工具"
       }
     }
   },
-  "items": [
-    {
-      "id": "json-format",
-      "category": "dev-assistant",
-      "old_points": 0,
-      "new_points": 0,
-      "mode": "free",
-      "complexity": 0,
-      "premium_hits": 0,
-      "free_hits": 1,
-      "stars": 0
-    },
-    {
-      "id": "base64-convert",
-      "category": "dev-assistant",
-      "old_points": 0,
-      "new_points": 0,
-      "mode": "free",
-      "complexity": 1,
-      "premium_hits": 1,
-      "free_hits": 1,
-      "stars": 0
-    },
-    {
-      "id": "hash-compute",
-      "category": "dev-assistant",
-      "old_points": 10,
-      "new_points": 10,
-      "mode": "paid",
-      "complexity": 1,
-      "premium_hits": 0,
-      "free_hits": 0,
-      "stars": 0
-    },
-    {
-      "id": "url-encode",
-      "category": "dev-assistant",
-      "old_points": 0,
-      "new_points": 0,
-      "mode": "free",
-      "complexity": 0,
-      "premium_hits": 0,
-      "free_hits": 1,
-      "stars": 0
-    },
-    {
-      "id": "html-format",
-      "category": "dev-assistant",
-      "old_points": 10,
-      "new_points": 10,
-      "mode": "paid",
-      "complexity": 1,
-      "premium_hits": 0,
-      "free_hits": 0,
-      "stars": 0
-    },
-    {
-      "id": "css-minify",
-      "category": "dev-assistant",
-      "old_points": 10,
-      "new_points": 10,
-      "mode": "paid",
-      "complexity": 1,
-      "premium_hits": 0,
-      "free_hits": 0,
-      "stars": 0
-    },
-    {
-      "id": "js-minify",
-      "category": "dev-assistant",
-      "old_points": 10,
-      "new_points": 10,
-      "mode": "paid",
-      "complexity": 1,
-      "premium_hits": 0,
-      "free_hits": 0,
-      "stars": 0
-    },
-    {
-      "id": "markdown-preview",
-      "category": "dev-assistant",
-      "old_points": 10,
-      "new_points": 10,
-      "mode": "paid",
-      "complexity": 1,
-      "premium_hits": 0,
-      "free_hits": 0,
-      "stars": 0
-    },
-    {
-      "id": "regex-test",
-      "category": "dev-assistant",
-      "old_points": 10,
-      "new_points": 10,
-      "mode": "paid",
-      "complexity": 1,
-      "premium_hits": 0,
-      "free_hits": 0,
-      "stars": 0
-    },
-    {
-      "id": "jwt-decode",
-      "category": "dev-assistant",
-      "old_points": 10,
-      "new_points": 10,
-      "mode": "paid",
-      "complexity": 1,
-      "premium_hits": 0,
-      "free_hits": 0,
-      "stars": 0
-    },
-    {
-      "id": "text-diff",
-      "category": "dev-assistant",
-      "old_points": 10,
-      "new_points": 10,
-      "mode": "paid",
-      "complexity": 1,
-      "premium_hits": 0,
-      "free_hits": 0,
-      "stars": 0
-    },
-    {
-      "id": "text-counter",
-      "category": "dev-assistant",
-      "old_points": 0,
-      "new_points": 0,
-      "mode": "free",
-      "complexity": 0,
-      "premium_hits": 0,
-      "free_hits": 1,
-      "stars": 0
-    },
-    {
-      "id": "password-gen",
-      "category": "dev-assistant",
-      "old_points": 10,
-      "new_points": 10,
-      "mode": "paid",
-      "complexity": 1,
-      "premium_hits": 0,
-      "free_hits": 0,
-      "stars": 0
-    },
-    {
-      "id": "uuid-gen",
-      "category": "dev-assistant",
-      "old_points": 0,
-      "new_points": 0,
-      "mode": "free",
-      "complexity": 0,
-      "premium_hits": 0,
-      "free_hits": 1,
-      "stars": 0
-    },
-    {
-      "id": "lorem-gen",
-      "category": "dev-assistant",
-      "old_points": 0,
-      "new_points": 0,
-      "mode": "free",
-      "complexity": 0,
-      "premium_hits": 0,
-      "free_hits": 1,
-      "stars": 0
-    },
-    {
-      "id": "timestamp-convert",
-      "category": "dev-assistant",
-      "old_points": 0,
-      "new_points": 0,
-      "mode": "free",
-      "complexity": 1,
-      "premium_hits": 1,
-      "free_hits": 1,
-      "stars": 0
-    },
-    {
-      "id": "color-convert",
-      "category": "dev-assistant",
-      "old_points": 10,
-      "new_points": 10,
-      "mode": "paid",
-      "complexity": 2,
-      "premium_hits": 1,
-      "free_hits": 0,
-      "stars": 0
-    },
-    {
-      "id": "emoji-search",
-      "category": "dev-assistant",
-      "old_points": 0,
-      "new_points": 0,
-      "mode": "free",
-      "complexity": 0,
-      "premium_hits": 0,
-      "free_hits": 1,
-      "stars": 0
-    },
-    {
-      "id": "unit-convert",
-      "category": "dev-assistant",
-      "old_points": 10,
-      "new_points": 10,
-      "mode": "paid",
-      "complexity": 2,
-      "premium_hits": 1,
-      "free_hits": 0,
-      "stars": 0
-    },
-    {
-      "id": "timezone-convert",
-      "category": "dev-assistant",
-      "old_points": 10,
-      "new_points": 10,
-      "mode": "paid",
-      "complexity": 2,
-      "premium_hits": 1,
-      "free_hits": 0,
-      "stars": 0
-    },
-    {
-      "id": "image-compress",
-      "category": "image-visual",
-      "old_points": 10,
-      "new_points": 10,
-      "mode": "paid",
-      "complexity": 4,
-      "premium_hits": 2,
-      "free_hits": 0,
-      "stars": 0
-    },
-    {
-      "id": "image-resize",
-      "category": "image-visual",
-      "old_points": 10,
-      "new_points": 10,
-      "mode": "paid",
-      "complexity": 4,
-      "premium_hits": 2,
-      "free_hits": 0,
-      "stars": 0
-    },
-    {
-      "id": "image-convert",
-      "category": "image-visual",
-      "old_points": 10,
-      "new_points": 10,
-      "mode": "paid",
-      "complexity": 4,
-      "premium_hits": 2,
-      "free_hits": 0,
-      "stars": 0
-    },
-    {
-      "id": "image-watermark",
-      "category": "image-visual",
-      "old_points": 10,
-      "new_points": 10,
-      "mode": "paid",
-      "complexity": 4,
-      "premium_hits": 2,
-      "free_hits": 0,
-      "stars": 0
-    },
-    {
-      "id": "svg-optimize",
-      "category": "image-visual",
-      "old_points": 10,
-      "new_points": 10,
-      "mode": "paid",
-      "complexity": 2,
-      "premium_hits": 0,
-      "free_hits": 0,
-      "stars": 0
-    },
-    {
-      "id": "qr-generate",
-      "category": "image-visual",
-      "old_points": 0,
-      "new_points": 0,
-      "mode": "free",
-      "complexity": 2,
-      "premium_hits": 1,
-      "free_hits": 1,
-      "stars": 0
-    },
-    {
-      "id": "image-to-pdf",
-      "category": "document-convert",
-      "old_points": 10,
-      "new_points": 10,
-      "mode": "paid",
-      "complexity": 5,
-      "premium_hits": 3,
-      "free_hits": 0,
-      "stars": 0
-    },
-    {
-      "id": "calculator",
-      "category": "daily-calc",
-      "old_points": 10,
-      "new_points": 10,
-      "mode": "paid",
-      "complexity": 1,
-      "premium_hits": 0,
-      "free_hits": 0,
-      "stars": 0
-    },
-    {
-      "id": "percentage-calc",
-      "category": "daily-calc",
-      "old_points": 10,
-      "new_points": 10,
-      "mode": "paid",
-      "complexity": 1,
-      "premium_hits": 0,
-      "free_hits": 0,
-      "stars": 0
-    },
-    {
-      "id": "age-calc",
-      "category": "daily-calc",
-      "old_points": 10,
-      "new_points": 10,
-      "mode": "paid",
-      "complexity": 2,
-      "premium_hits": 1,
-      "free_hits": 0,
-      "stars": 0
-    },
-    {
-      "id": "auto-format-convert",
-      "category": "document-convert",
-      "old_points": 10,
-      "new_points": 10,
-      "mode": "paid",
-      "complexity": 3,
-      "premium_hits": 1,
-      "free_hits": 0,
-      "stars": 0
-    },
-    {
-      "id": "auto-file-convert",
-      "category": "document-convert",
-      "old_points": 10,
-      "new_points": 10,
-      "mode": "paid",
-      "complexity": 3,
-      "premium_hits": 1,
-      "free_hits": 0,
-      "stars": 0
-    },
-    {
-      "id": "auto-office-convert",
-      "category": "document-convert",
-      "old_points": 10,
-      "new_points": 10,
-      "mode": "paid",
-      "complexity": 3,
-      "premium_hits": 1,
-      "free_hits": 0,
-      "stars": 0
-    },
-    {
-      "id": "auto-ai-tools",
-      "category": "dev-assistant",
-      "old_points": 10,
-      "new_points": 10,
-      "mode": "paid",
-      "complexity": 2,
-      "premium_hits": 1,
-      "free_hits": 0,
-      "stars": 0
-    },
-    {
-      "id": "auto-document-sign",
-      "category": "document-convert",
-      "old_points": 10,
-      "new_points": 10,
-      "mode": "paid",
-      "complexity": 2,
-      "premium_hits": 0,
-      "free_hits": 0,
-      "stars": 0
-    },
-    {
-      "id": "auto-merge",
-      "category": "document-convert",
-      "old_points": 10,
-      "new_points": 10,
-      "mode": "paid",
-      "complexity": 2,
-      "premium_hits": 0,
-      "free_hits": 0,
-      "stars": 0
-    },
-    {
-      "id": "auto-workflow",
-      "category": "dev-assistant",
-      "old_points": 10,
-      "new_points": 10,
-      "mode": "paid",
-      "complexity": 2,
-      "premium_hits": 1,
-      "free_hits": 0,
-      "stars": 0
-    },
-    {
-      "id": "auto-design",
-      "category": "dev-assistant",
-      "old_points": 10,
-      "new_points": 10,
-      "mode": "paid",
-      "complexity": 1,
-      "premium_hits": 0,
-      "free_hits": 0,
-      "stars": 0
-    },
-    {
-      "id": "auto-social-assets",
-      "category": "dev-assistant",
-      "old_points": 10,
-      "new_points": 10,
-      "mode": "paid",
-      "complexity": 1,
-      "premium_hits": 0,
-      "free_hits": 0,
-      "stars": 0
-    },
-    {
-      "id": "auto-api",
-      "category": "dev-assistant",
-      "old_points": 0,
-      "new_points": 0,
-      "mode": "free",
-      "complexity": 1,
-      "premium_hits": 0,
-      "free_hits": 0,
-      "stars": 0
-    },
-    {
-      "id": "auto-batch-convert",
-      "category": "document-convert",
-      "old_points": 10,
-      "new_points": 10,
-      "mode": "paid",
-      "complexity": 4,
-      "premium_hits": 2,
-      "free_hits": 0,
-      "stars": 0
-    }
-  ]
+  "summary": {
+    "free_count": 0,
+    "paid_count": 0,
+    "by_category": {}
+  },
+  "items": []
 }

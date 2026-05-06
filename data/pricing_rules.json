@@ -1,8 +1,32 @@
 {
-  "version": "2026-05-03",
+  "version": "2026-05-06",
   "free_ratio_target": 0.25,
+  "free_ratio_floor": 0.2,
   "min_paid_points": 1,
   "max_paid_points": 6,
+  "guardrails": {
+    "max_daily_increase_ratio": 0.3,
+    "min_first_paid_points": 1,
+    "max_first_paid_points": 2
+  },
+  "pricing_tiers": {
+    "free": {
+      "points_range": [0, 0],
+      "description": "无外部成本或拉新工具"
+    },
+    "standard": {
+      "points_range": [1, 2],
+      "description": "低成本、轻处理工具"
+    },
+    "pro": {
+      "points_range": [3, 6],
+      "description": "中高成本、文件或多步骤处理"
+    },
+    "enterprise": {
+      "points_range": [7, 12],
+      "description": "高算力或批量任务工具"
+    }
+  },
   "revenue_target": {
     "enabled": true,
     "monthly_target_cny": 300000,
@@ -17,7 +41,14 @@
     "dev-assistant": 1,
     "image-visual": 2,
     "document-convert": 2,
-    "daily-calc": 1
+    "daily-calc": 1,
+    "brand-design": 2,
+    "seo-marketing": 2,
+    "hardware-eng": 2,
+    "finance-data": 2,
+    "web3-security": 3,
+    "ai-productivity": 3,
+    "design-assets": 2
   },
   "premium_keywords": [
     "watermark",
