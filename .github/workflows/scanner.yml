@@ -6,12 +6,16 @@ on:
     - cron: "0 */6 * * *"
   workflow_dispatch:
 
+concurrency:
+  group: scanner-main
+  cancel-in-progress: false
+
 jobs:
   scan-and-classify:
     if: github.event_name == 'workflow_dispatch' || github.event.schedule == '0 2 * * *'
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: read
     steps:
       - uses: actions/checkout@v4
         with:
@@ -57,24 +61,21 @@ jobs:
         run: node packages/tool-shell/inject.js tools
       - name: UI consistency check
         run: python scripts/ui_consistency_check.py
-      - name: Commit and push
+      - name: Package generated assets
         run: |
-          git config user.name "toolbox-bot"
-          git config user.email "bot@toolbox.dev"
-          git add data/ tools/
-          if git diff --staged --quiet; then
-            echo "No changes to commit"
-          else
-            git commit -m "chore: auto-update tools $(date +%Y-%m-%d)"
-            git pull --rebase origin main
-            git push
-          fi
+          tar -czf scanner-assets.tgz data tools
+      - name: Upload generated assets
+        uses: actions/upload-artifact@v4
+        with:
+          name: scanner-assets
+          path: scanner-assets.tgz
+          if-no-files-found: error
 
   health-check:
     if: github.event.schedule == '0 */6 * * *'
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: read
     steps:
       - uses: actions/checkout@v4
         with:
@@ -84,14 +85,9 @@ jobs:
           python-version: "3.12"
       - run: pip install -r scripts/requirements.txt
       - run: python scripts/health_check.py
-      - run: |
-          git config user.name "toolbox-bot"
-          git config user.email "bot@toolbox.dev"
-          git add data/health_status.json
-          if git diff --staged --quiet; then
-            echo "No health updates"
-          else
-            git commit -m "chore: health check update"
-            git pull --rebase origin main
-            git push
-          fi
+      - run: tar -czf health-assets.tgz data/health_status.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: health-assets
+          path: health-assets.tgz
+          if-no-files-found: error
