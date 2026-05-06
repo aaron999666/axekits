@@ -1,0 +1,38 @@
+{
+  "version": "2026-05-06",
+  "max_active_tools": 200,
+  "default_caps": {
+    "scan_repos_per_run": 30,
+    "auto_launch_per_run": 30,
+    "daily_new_launch_limit": 10
+  },
+  "catalog_tiers": [
+    {
+      "min_total_tools": 0,
+      "max_total_tools": 120,
+      "scan_repos_per_run": 30,
+      "auto_launch_per_run": 30,
+      "daily_new_launch_limit": 10
+    },
+    {
+      "min_total_tools": 121,
+      "max_total_tools": 200,
+      "scan_repos_per_run": 20,
+      "auto_launch_per_run": 20,
+      "daily_new_launch_limit": 8
+    },
+    {
+      "min_total_tools": 201,
+      "max_total_tools": 999999,
+      "scan_repos_per_run": 10,
+      "auto_launch_per_run": 10,
+      "daily_new_launch_limit": 5
+    }
+  ],
+  "replacement": {
+    "enabled": true,
+    "prefer_auto_generated": true,
+    "max_replacements_per_run": 10,
+    "min_stars_to_keep": 50
+  }
+}

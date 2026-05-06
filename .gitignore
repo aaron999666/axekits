@@ -9,3 +9,4 @@ __pycache__/
 .env.local
 .env.production
 data/automation_usage.json
+data/auto_launch_state.json

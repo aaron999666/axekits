@@ -7,6 +7,7 @@ TOOLS_FILE = "data/tools.json"
 QUEUE_FILE = "data/auto_launch_queue.json"
 OUT_REPORT = "data/auto_launch_report.json"
 TOOLS_ROOT = "tools"
+CATALOG_CONTROL_FILE = "data/catalog_control.json"
 
 MAX_AUTO_PER_RUN = int(os.getenv("AUTO_TOOL_MAX_PER_RUN", "6"))
 DAILY_AUTO_LAUNCH_LIMIT = int(os.getenv("AUTO_TOOL_DAILY_LIMIT", "10"))
@@ -101,6 +102,72 @@ def build_html(tool_id, name, keyword):
 """
 
 
+def is_active_tool(tool):
+    if bool(tool.get("retired")):
+        return False
+    return str(tool.get("health_status", "healthy")) != "down"
+
+
+def resolve_catalog_caps(total_tools):
+    cfg = load_json(CATALOG_CONTROL_FILE, {})
+    default_caps = cfg.get("default_caps", {}) or {}
+    max_auto = int(default_caps.get("auto_launch_per_run", MAX_AUTO_PER_RUN))
+    daily_limit = int(default_caps.get("daily_new_launch_limit", DAILY_AUTO_LAUNCH_LIMIT))
+    max_active_tools = int(cfg.get("max_active_tools", 200))
+
+    for tier in cfg.get("catalog_tiers", []) or []:
+        lo = int(tier.get("min_total_tools", 0))
+        hi = int(tier.get("max_total_tools", 10**9))
+        if lo <= total_tools <= hi:
+            max_auto = int(tier.get("auto_launch_per_run", max_auto))
+            daily_limit = int(tier.get("daily_new_launch_limit", daily_limit))
+            break
+
+    return {
+        "max_auto_per_run": max(1, max_auto),
+        "daily_auto_launch_limit": max(1, daily_limit),
+        "max_active_tools": max(1, max_active_tools),
+        "replacement": cfg.get("replacement", {}) or {},
+    }
+
+
+def pick_retire_candidates(tools, slots, replacement_cfg):
+    if slots <= 0:
+        return []
+    active = [t for t in tools if is_active_tool(t)]
+    candidates = []
+    min_stars_to_keep = int(replacement_cfg.get("min_stars_to_keep", 50))
+    prefer_auto = bool(replacement_cfg.get("prefer_auto_generated", True))
+    for t in active:
+        stars = int(t.get("stars", 0) or 0)
+        tags = [str(x).lower() for x in (t.get("tags") or [])]
+        is_auto = ("auto-generated" in tags) or str(t.get("id", "")).startswith("auto-")
+        if stars >= min_stars_to_keep and not is_auto:
+            continue
+        score = (
+            0 if (prefer_auto and is_auto) else 1,
+            stars,
+            int(t.get("points_cost", 0) or 0),
+            str(t.get("last_checked", "")),
+            str(t.get("id", "")),
+        )
+        candidates.append((score, t))
+    candidates.sort(key=lambda x: x[0])
+    return [t for _, t in candidates[:slots]]
+
+
+def retire_tools(tools, retire_list):
+    retired = []
+    now_iso = datetime.now(timezone.utc).isoformat()
+    for t in retire_list:
+        t["retired"] = True
+        t["retired_at"] = now_iso
+        t["retire_reason"] = "catalog_replacement"
+        t["health_status"] = "down"
+        retired.append(str(t.get("id", "")))
+    return retired
+
+
 def main():
     tools = load_json(TOOLS_FILE, [])
     queue_obj = load_json(QUEUE_FILE, {"queue": []})
@@ -112,15 +179,21 @@ def main():
         state = {"date": today, "launched_today": 0}
     launched_today = int(state.get("launched_today", 0) or 0)
 
+    total_tools = len(tools)
+    caps = resolve_catalog_caps(total_tools)
+    effective_max_auto_per_run = min(MAX_AUTO_PER_RUN, caps["max_auto_per_run"])
+    effective_daily_limit = min(DAILY_AUTO_LAUNCH_LIMIT, caps["daily_auto_launch_limit"])
+    max_active_tools = caps["max_active_tools"]
+
     existing_ids = {str(t.get("id", "")).strip().lower() for t in tools}
     created = []
     skipped = []
     processed = 0
 
     for item in queue:
-        if processed >= MAX_AUTO_PER_RUN:
+        if processed >= effective_max_auto_per_run:
             break
-        if launched_today + len(created) >= DAILY_AUTO_LAUNCH_LIMIT:
+        if launched_today + len(created) >= effective_daily_limit:
             break
         tool_id = str(item.get("tool_id", "")).strip().lower()
         keyword = str(item.get("keyword", "")).strip().lower()
@@ -174,15 +247,28 @@ def main():
         })
         processed += 1
 
+    active_count = sum(1 for t in tools if is_active_tool(t))
+    overflow = max(0, active_count - max_active_tools)
+    retired_ids = []
+    if overflow > 0 and bool(caps["replacement"].get("enabled", True)):
+        max_replacements = int(caps["replacement"].get("max_replacements_per_run", 10))
+        slots = min(overflow, max_replacements)
+        retire_list = pick_retire_candidates(tools, slots, caps["replacement"])
+        retired_ids = retire_tools(tools, retire_list)
+
     save_json(TOOLS_FILE, tools)
     state["launched_today"] = launched_today + len(created)
     save_json(STATE_FILE, state)
     report = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
-        "max_auto_per_run": MAX_AUTO_PER_RUN,
-        "daily_auto_launch_limit": DAILY_AUTO_LAUNCH_LIMIT,
+        "max_auto_per_run": effective_max_auto_per_run,
+        "daily_auto_launch_limit": effective_daily_limit,
+        "max_active_tools": max_active_tools,
+        "active_tools_after_run": sum(1 for t in tools if is_active_tool(t)),
         "launched_today_after_run": state["launched_today"],
         "created_count": len(created),
+        "retired_count": len(retired_ids),
+        "retired_tool_ids": retired_ids,
         "skipped_count": len(skipped),
         "created": created,
         "skipped": skipped[:200],

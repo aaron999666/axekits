@@ -5,6 +5,8 @@ import requests
 
 GITHUB_TOKEN = os.environ["GITHUB_TOKEN"]
 MAX_REPOS_TOTAL = int(os.getenv("MAX_REPOS_TOTAL", "30"))
+TOOLS_FILE = "data/tools.json"
+CATALOG_CONTROL_FILE = "data/catalog_control.json"
 
 CATEGORIES_QUERIES = {
     "dev-assistant": "topic:developer-tools+topic:utility+stars:>100",
@@ -19,6 +21,31 @@ MIN_STARS_BY_CATEGORY = {
     "document-convert": int(os.getenv("MIN_STARS_DOCUMENT_CONVERT", "150")),
     "daily-calc": int(os.getenv("MIN_STARS_DAILY_CALC", "80")),
 }
+
+
+def load_json(path, default):
+    if not os.path.exists(path):
+        return default
+    with open(path, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+
+def get_total_tools_count():
+    tools = load_json(TOOLS_FILE, [])
+    return len(tools)
+
+
+def dynamic_scan_cap(total_tools):
+    cfg = load_json(CATALOG_CONTROL_FILE, {})
+    default_caps = cfg.get("default_caps", {}) or {}
+    cap = int(default_caps.get("scan_repos_per_run", MAX_REPOS_TOTAL))
+    for tier in cfg.get("catalog_tiers", []) or []:
+        lo = int(tier.get("min_total_tools", 0))
+        hi = int(tier.get("max_total_tools", 10**9))
+        if lo <= total_tools <= hi:
+            cap = int(tier.get("scan_repos_per_run", cap))
+            break
+    return max(1, cap)
 
 def search_repos_graphql(query, category, max_repos=20):
     graphql_query = """
@@ -82,8 +109,12 @@ def search_repos_graphql(query, category, max_repos=20):
     return all_repos
 
 def main():
+    total_tools = get_total_tools_count()
+    effective_cap = min(MAX_REPOS_TOTAL, dynamic_scan_cap(total_tools))
+    print(f"Catalog tools={total_tools}, scanner cap={effective_cap}")
+
     all_repos = []
-    per_category = max(1, min(20, MAX_REPOS_TOTAL // max(1, len(CATEGORIES_QUERIES))))
+    per_category = max(1, min(20, effective_cap // max(1, len(CATEGORIES_QUERIES))))
     for i, (category, query) in enumerate(CATEGORIES_QUERIES.items()):
         if i > 0:
             time.sleep(3)
@@ -97,12 +128,12 @@ def main():
         if repo["id"] not in seen:
             seen.add(repo["id"])
             unique_repos.append(repo)
-        if len(unique_repos) >= MAX_REPOS_TOTAL:
+        if len(unique_repos) >= effective_cap:
             break
     os.makedirs("data", exist_ok=True)
     with open("data/raw_repos.json", "w", encoding="utf-8") as f:
         json.dump(unique_repos, f, ensure_ascii=False, indent=2)
-    print(f"Total unique repos: {len(unique_repos)} (cap={MAX_REPOS_TOTAL})")
+    print(f"Total unique repos: {len(unique_repos)} (cap={effective_cap})")
 
 if __name__ == "__main__":
     main()
