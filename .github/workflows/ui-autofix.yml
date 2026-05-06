@@ -12,6 +12,7 @@ env:
 
 jobs:
   normalize-tool-ui:
+    if: ${{ secrets.ENABLE_AUTOMATION == 'true' }}
     runs-on: ubuntu-latest
     permissions:
       contents: read
