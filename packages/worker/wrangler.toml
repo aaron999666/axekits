@@ -12,15 +12,15 @@ crons = ["0 * * * *"]
 [[d1_databases]]
 binding = "DB"
 database_name = "toolbox-db"
-database_id = "YOUR_D1_DATABASE_ID"
+database_id = "d4dcd801-4a3a-4859-b7eb-fdb9098fea1f"
 
 [[kv_namespaces]]
 binding = "AUTH_KV"
-id = "YOUR_AUTH_KV_ID"
+id = "34107f99f27d44f0a442b98b9e91e29e"
 
 [[kv_namespaces]]
 binding = "CACHE_KV"
-id = "YOUR_CACHE_KV_ID"
+id = "a3eda1079bf041cca7f033e36c1f600d"
 
 [[r2_buckets]]
 binding = "R2"
