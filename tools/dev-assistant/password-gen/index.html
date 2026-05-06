@@ -731,6 +731,9 @@
 
 
 
+
+
+
 <!-- toolbox:seo-geo:start -->
 <title>密码生成 | ToolBox</title>
 <meta name="description" content="生成安全密码，支持自定义选项 关键词: password, generator, security, random, utility">
@@ -1300,7 +1303,10 @@ h3,label{color:#ff9a6b !important;}
 
 
 
+
+
 <div class="c"><div class="result"><div class="pw" id="pw">Click Generate</div><div class="strength" id="str"></div></div><div class="controls"><div class="row"><label>Length</label><input type="range" id="len" min="4" max="64" value="16" oninput="document.getElementById('lenVal').textContent=this.value"><span id="lenVal">16</span></div><div class="checks"><label><input type="checkbox" id="upper" checked> Uppercase (A-Z)</label><label><input type="checkbox" id="lower" checked> Lowercase (a-z)</label><label><input type="checkbox" id="nums" checked> Numbers (0-9)</label><label><input type="checkbox" id="syms" checked> Symbols (!@#$)</label></div></div><button onclick="gen()">Generate Password</button></div><script>function gen(){var len=parseInt(document.getElementById('len').value);var chars='';if(document.getElementById('upper').checked)chars+='ABCDEFGHIJKLMNOPQRSTUVWXYZ';if(document.getElementById('lower').checked)chars+='abcdefghijklmnopqrstuvwxyz';if(document.getElementById('nums').checked)chars+='0123456789';if(document.getElementById('syms').checked)chars+='!@#$%^&*()_+-=[]{}|;:,.<>?';if(!chars){window.toolbox&&window.toolbox.error('Select at least one character type');return}var arr=new Uint32Array(len);crypto.getRandomValues(arr);var pw='';for(var i=0;i<len;i++)pw+=chars[arr[i]%chars.length];document.getElementById('pw').textContent=pw;var s=0;if(len>=8)s++;if(len>=16)s++;if(document.getElementById('upper').checked&&document.getElementById('lower').checked)s++;if(document.getElementById('nums').checked)s++;if(document.getElementById('syms').checked)s++;var colors=['#e94560','#e94560','#f59e0b','#f59e0b','#4ade80','#4ade80'];document.getElementById('str').style.background=colors[s]||'#4ade80';navigator.clipboard.writeText(pw);window.toolbox&&window.toolbox.complete({length:len,strength:s})}</script>
+
 
 
 
