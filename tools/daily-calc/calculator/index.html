@@ -1103,6 +1103,9 @@
 
 
 
+
+
+
 <!-- toolbox:seo-geo:start -->
 <title>科学计算器 | ToolBox</title>
 <meta name="description" content="科学计算器，支持历史记录、三角函数和对数 关键词: calculator, math, scientific, utility">
@@ -1920,7 +1923,10 @@ h3,label{color:#ff9a6b !important;}
 
 
 
+
+
 <div class="c"><div class="display"><div class="expr" id="expr"></div><div class="val" id="val">0</div></div><div class="keys"><button class="clr" onclick="clr()">C</button><button class="fn" onclick="fn('Math.sqrt(')">√</button><button class="fn" onclick="fn('Math.pow(',2)">x²</button><button class="op" onclick="op('/')">÷</button><button onclick="num(7)">7</button><button onclick="num(8)">8</button><button onclick="num(9)">9</button><button class="op" onclick="op('*')">×</button><button onclick="num(4)">4</button><button onclick="num(5)">5</button><button onclick="num(6)">6</button><button class="op" onclick="op('-')">−</button><button onclick="num(1)">1</button><button onclick="num(2)">2</button><button onclick="num(3)">3</button><button class="op" onclick="op('+')">+</button><button class="fn" onclick="fn('(')">(</button><button onclick="num(0)">0</button><button class="fn" onclick="fn(')')">)</button><button class="eq" onclick="calc()">=</button><button class="fn" onclick="fn('Math.sin(')">sin</button><button class="fn" onclick="fn('Math.cos(')">cos</button><button class="fn" onclick="fn('Math.tan(')">tan</button><button class="fn" onclick="fn('Math.log(')">ln</button><button class="fn" onclick="fn('Math.PI')">π</button><button class="fn" onclick="fn('Math.E')">e</button><button class="fn" onclick="pct()">%</button><button class="fn" onclick="bs()">⌫</button></div><div class="history" id="hist"><h4>History</h4></div></div><script>var expr='';var display='0';function num(n){if(display==='0'||display==='Error')display='';display+=n;expr+=n;upd()}function op(o){expr+=o;display=o;upd()}function fn(f){if(f==='Math.pow(',2){expr+='**2';display='²';upd();return}expr+=f;display=f.replace('Math.','');upd()}function clr(){expr='';display='0';upd()}function bs(){expr=expr.slice(0,-1);display=expr||'0';upd()}function pct(){expr+='/100';display='%';upd()}function calc(){try{var r=Function('"use strict";return ('+expr+')')();if(typeof r==='number'){r=parseFloat(r.toPrecision(12))}addHist(expr,r);display=String(r);expr=String(r);upd();window.toolbox&&window.toolbox.complete({expression:expr,result:r})}catch(e){display='Error';expr='';upd();window.toolbox&&window.toolbox.error(e.message)}}function upd(){document.getElementById('val').textContent=display;document.getElementById('expr').textContent=expr}function addHist(e,r){var d=document.createElement('div');d.innerHTML=e+' = <span>'+r+'</span>';var h=document.getElementById('hist');h.insertBefore(d,h.children[1])}document.addEventListener('keydown',function(e){if(e.key>='0'&&e.key<='9')num(e.key);else if(e.key==='+')op('+');else if(e.key==='-')op('-');else if(e.key==='*')op('*');else if(e.key==='/')op('/');else if(e.key==='Enter'||e.key==='=')calc();else if(e.key==='Escape')clr();else if(e.key==='Backspace')bs()})</script>
+
 
 
 
