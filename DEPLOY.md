@@ -55,17 +55,15 @@ wrangler secret put CF_ACCOUNT_ID
 wrangler deploy
 ```
 
-## 三、工具站部署
+## 三、单域工具部署（axekits.com）
 
 ```bash
 # 注入 UI 壳到所有工具
 cd packages/tool-shell
 node inject.js ../../tools
 
-# 部署工具到 Cloudflare Pages
-cd ../../tools
-wrangler pages deploy . --project-name=toolbox-tools
-# 绑定自定义域名 t.your-domain.com
+# 工具会在 web build 前自动同步到 packages/web/public/tools-app
+# 无需单独部署 tools 子站
 ```
 
 ## 四、Next.js 壳站部署
@@ -78,7 +76,7 @@ npm install
 
 # 设置环境变量
 # NEXT_PUBLIC_API_BASE=https://your-worker.workers.dev
-# NEXT_PUBLIC_TOOLS_DOMAIN=t.your-domain.com
+# NEXT_PUBLIC_TOOLS_BASE_PATH=/tools-app
 
 # 部署到 Cloudflare Pages
 npx @opennextjs/cloudflare deploy

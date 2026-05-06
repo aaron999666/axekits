@@ -32,7 +32,6 @@ export interface Env {
   DEEPSEEK_MODEL?: string;
   ADMIN_BOOTSTRAP_KEY?: string;
   TURNSTILE_ENFORCE?: string;
-  TOOLS_DOMAIN: string;
   TOOLS_DATA_URL: string;
   WORKFLOWS_DATA_URL: string;
   ANALYTICS?: AnalyticsEngineDataset;

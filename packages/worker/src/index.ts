@@ -119,7 +119,7 @@ export default {
         }
 
         const toolUrl = tool.self_hosted
-          ? `https://${env.TOOLS_DOMAIN}/${tool.category}/${tool.id}/`
+          ? `${env.APP_ORIGIN}/tools-app/${tool.category}/${tool.id}/`
           : tool.demo_url;
 
         // Free tools can be used without login.

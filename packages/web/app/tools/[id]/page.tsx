@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { API_BASE, CATEGORIES, TOOLS_DOMAIN, type Tool } from "@/lib/config";
+import { API_BASE, CATEGORIES, TOOLS_BASE_PATH, type Tool } from "@/lib/config";
 import type { Metadata } from "next";
 import { absoluteUrl } from "@/lib/site";
 
@@ -61,7 +61,7 @@ export default async function ToolDetailPage({ params }: { params: Promise<{ id:
   }
 
   const toolUrl = tool.self_hosted
-    ? `https://${TOOLS_DOMAIN}/${tool.category}/${tool.id}/`
+    ? `${TOOLS_BASE_PATH}/${tool.category}/${tool.id}/`
     : tool.demo_url || "";
 
   return (
