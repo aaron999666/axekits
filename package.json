@@ -11,7 +11,7 @@
     "dev:web": "cd packages/web && npm run dev",
     "deploy:worker": "cd packages/worker && npx wrangler deploy",
     "deploy:web": "cd packages/web && npx @opennextjs/cloudflare deploy",
-    "deploy:tools": "cd tools && npx wrangler pages deploy . --project-name=toolbox-tools",
+    "deploy:tools": "cd tools && sh -c 'npx wrangler pages deploy . --project-name=${CF_PAGES_TOOLS_PROJECT:-toolbox-tools}'",
     "db:init": "cd packages/worker && npx wrangler d1 execute toolbox-db --file=schema.sql --remote",
     "db:local": "cd packages/worker && npx wrangler d1 execute toolbox-db --file=schema.sql --local",
     "inject:shell": "cd packages/tool-shell && node inject.js ../../tools"

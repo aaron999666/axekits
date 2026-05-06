@@ -179,6 +179,7 @@ npx wrangler d1 execute toolbox-db --remote --command "SELECT name FROM sqlite_m
 6. `NEXT_PUBLIC_SITE_URL` = `https://axekits.com`
 7. `CF_API_TOKEN`
 8. `NEXT_PUBLIC_GA_MEASUREMENT_ID`（你要开 Google 监测就填 `G-xxxx`）
+9. `CF_PAGES_TOOLS_PROJECT`（填你在 Cloudflare Pages 里工具站项目名；如果你就叫 `toolbox-tools`，就填 `toolbox-tools`）
 
 ---
 
@@ -228,4 +229,3 @@ npx wrangler d1 execute toolbox-db --remote --command "SELECT name FROM sqlite_m
 6. `https://axekits.com/llms.txt`
 
 如果都能打开，部署完成。
-

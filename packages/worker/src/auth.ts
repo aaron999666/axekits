@@ -104,3 +104,21 @@ export function parseCookieToken(request: Request): string | null {
   const match = cookie.match(/access_token=([^;]+)/);
   return match ? match[1] : null;
 }
+
+export async function refreshJWTBalance(user: JWTPayload, env: Env): Promise<string> {
+  const row = await env.DB.prepare(
+    "SELECT points_balance, tier FROM users WHERE id = ?"
+  )
+    .bind(user.sub)
+    .first<{ points_balance: number; tier: string }>();
+
+  return signJWT(
+    {
+      sub: user.sub,
+      email: user.email,
+      points: row?.points_balance ?? user.points ?? 0,
+      tier: (row?.tier as "free" | "basic" | "pro" | "enterprise") || (user.tier as "free" | "basic" | "pro" | "enterprise"),
+    },
+    env
+  );
+}
