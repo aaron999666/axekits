@@ -467,6 +467,9 @@
 
 
 
+
+
+
 <!-- toolbox:seo-geo:start -->
 <title>百分比计算 | ToolBox</title>
 <meta name="description" content="计算百分比、百分比变化和值的百分比 关键词: percentage, calculator, math, utility">
@@ -860,7 +863,10 @@ h3,label{color:#ff9a6b !important;}
 
 
 
+
+
 <div class="c"><div class="card"><h3>What is X% of Y?</h3><div class="row"><span>What is</span><input type="number" id="a1" value="25" oninput="calc1()"><span>% of</span><input type="number" id="b1" value="200" oninput="calc1()"><span>?</span></div><div class="result" id="r1">50</div></div><div class="card"><h3>X is what % of Y?</h3><div class="row"><input type="number" id="a2" value="50" oninput="calc2()"><span>is what % of</span><input type="number" id="b2" value="200" oninput="calc2()"><span>?</span></div><div class="result" id="r2">25%</div></div><div class="card"><h3>% Change from X to Y</h3><div class="row"><span>From</span><input type="number" id="a3" value="80" oninput="calc3()"><span>to</span><input type="number" id="b3" value="100" oninput="calc3()"></div><div class="result" id="r3">+25%</div></div><div class="card"><h3>X plus Y% = ?</h3><div class="row"><input type="number" id="a4" value="200" oninput="calc4()"><span>+</span><input type="number" id="b4" value="15" oninput="calc4()"><span>% =</span></div><div class="result" id="r4">230</div></div></div><script>function calc1(){var a=parseFloat(document.getElementById('a1').value)||0;var b=parseFloat(document.getElementById('b1').value)||0;document.getElementById('r1').textContent=(a/100*b).toFixed(4).replace(/\.?0+$/,'');window.toolbox&&window.toolbox.complete({type:'percentOf',result:a/100*b})}function calc2(){var a=parseFloat(document.getElementById('a2').value)||0;var b=parseFloat(document.getElementById('b2').value)||0;document.getElementById('r2').textContent=b?(a/b*100).toFixed(2)+'%':'0%';window.toolbox&&window.toolbox.complete({type:'whatPercent',result:b?a/b*100:0})}function calc3(){var a=parseFloat(document.getElementById('a3').value)||0;var b=parseFloat(document.getElementById('b3').value)||0;var change=a?((b-a)/a*100):0;document.getElementById('r3').textContent=(change>=0?'+':'')+change.toFixed(2)+'%';window.toolbox&&window.toolbox.complete({type:'percentChange',result:change})}function calc4(){var a=parseFloat(document.getElementById('a4').value)||0;var b=parseFloat(document.getElementById('b4').value)||0;document.getElementById('r4').textContent=(a*(1+b/100)).toFixed(4).replace(/\.?0+$/,'');window.toolbox&&window.toolbox.complete({type:'plusPercent',result:a*(1+b/100)})}calc1();calc2();calc3();calc4()</script>
+
 
 
 
