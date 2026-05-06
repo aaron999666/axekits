@@ -122,6 +122,9 @@
 
 
 
+
+
+
 <!-- toolbox:seo-geo:start -->
 <title>URL 编码/解码 | ToolBox</title>
 <meta name="description" content="URL 编码和解码，支持组件级编码 关键词: url, encode, decode, utility, text">
@@ -285,7 +288,10 @@ h3,label{color:#ff9a6b !important;}
 
 
 
+
+
 <div class="c"><div><h3>Input</h3><textarea id="i" placeholder="Enter text or encoded URL..."></textarea></div><div><h3>Output</h3><textarea id="o" readonly></textarea></div></div><div class="a"><button onclick="enc()">Encode</button><button class="s" onclick="dec()">Decode</button><button class="s" onclick="encC()">Encode Component</button><button class="s" onclick="navigator.clipboard.writeText(document.getElementById('o').value)">Copy</button></div><script>function enc(){document.getElementById('o').value=encodeURI(document.getElementById('i').value);window.toolbox&&window.toolbox.complete({action:'encode'})}function dec(){try{document.getElementById('o').value=decodeURI(document.getElementById('i').value);window.toolbox&&window.toolbox.complete({action:'decode'})}catch(e){window.toolbox&&window.toolbox.error(e.message)}}function encC(){document.getElementById('o').value=encodeURIComponent(document.getElementById('i').value);window.toolbox&&window.toolbox.complete({action:'encodeComponent'})}</script>
+
 
 
 
