@@ -953,6 +953,9 @@
 
 
 
+
+
+
 <!-- toolbox:seo-geo:start -->
 <title>QR 码生成 | ToolBox</title>
 <meta name="description" content="从文本或 URL 生成 QR 码，可自定义颜色 关键词: qr, generate, code, image, utility">
@@ -1670,7 +1673,10 @@ h3,label{color:#ff9a6b !important;}
 
 
 
+
+
 <div class="c"><div class="card"><label>Content</label><textarea id="text" placeholder="Enter text or URL..." oninput="generate()">https://example.com</textarea><div class="row"><label>Size</label><input type="number" id="size" value="256" min="64" max="1024"><label>FG</label><input type="color" id="fg" value="#000000"><label>BG</label><input type="color" id="bg" value="#ffffff"></div></div><div class="qr-output"><canvas id="canvas"></canvas></div><button onclick="download()">Download QR Code</button></div><script>function generate(){var text=document.getElementById('text').value;if(!text)return;var size=parseInt(document.getElementById('size').value)||256;var canvas=document.getElementById('canvas');canvas.width=size;canvas.height=size;var ctx=canvas.getContext('2d');var fg=document.getElementById('fg').value;var bg=document.getElementById('bg').value;ctx.fillStyle=bg;ctx.fillRect(0,0,size,size);var modules=generateQRModules(text);var modCount=modules.length;var cellSize=size/modCount;ctx.fillStyle=fg;for(var r=0;r<modCount;r++){for(var c=0;c<modCount;c++){if(modules[r][c]){ctx.fillRect(c*cellSize,r*cellSize,cellSize+0.5,cellSize+0.5)}}}window.toolbox&&window.toolbox.complete({text:text,size:size})}function generateQRModules(text){var size=25;var grid=[];for(var i=0;i<size;i++){grid[i]=[];for(var j=0;j<size;j++){grid[i][j]=false}}drawFinder(grid,0,0);drawFinder(grid,size-7,0);drawFinder(grid,0,size-7);drawTiming(grid,size);var data=encodeData(text);var idx=0;for(var r=0;r<size;r++){for(var c=0;c<size;c++){if(grid[r][c])continue;if(idx<data.length){grid[r][c]=data[idx]==='1';idx++}else{grid[r][c]=idx%2===0}}}return grid}function drawFinder(grid,x,y){for(var r=0;r<7;r++){for(var c=0;c<7;c++){if(r===0||r===6||c===0||c===6||(r>=2&&r<=4&&c>=2&&c<=4)){if(y+r<grid.length&&x+c<grid[0].length)grid[y+r][x+c]=true}else{if(y+r<grid.length&&x+c<grid[0].length)grid[y+r][x+c]=false}}}}function drawTiming(grid,size){for(var i=8;i<size-8;i++){grid[6][i]=i%2===0;grid[i][6]=i%2===0}}function encodeData(text){var bits='';for(var i=0;i<text.length;i++){var code=text.charCodeAt(i);if(code<128){bits+=code.toString(2).padStart(8,'0')}else{bits+='11110000'+((code>>12)&63).toString(2).padStart(6,'0')+((code>>6)&63).toString(2).padStart(6,'0')+(code&63).toString(2).padStart(6,'0')}}bits='0100'+bits.length.toString(2).padStart(8,'0')+bits;while(bits.length<232)bits+='0';bits=bits.substring(0,232);return bits}document.getElementById('size').oninput=generate;document.getElementById('fg').oninput=generate;document.getElementById('bg').oninput=generate;generate();function download(){var canvas=document.getElementById('canvas');var link=document.createElement('a');link.download='qrcode.png';link.href=canvas.toDataURL('image/png');link.click()}</script>
+
 
 
 
