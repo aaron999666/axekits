@@ -1,0 +1,16 @@
+{
+  "version": "2026-05-06",
+  "monthly_budget_cny": 1000,
+  "stop_ratio": 0.5,
+  "estimated_cost_per_scan_run_cny": 8,
+  "daily_limits": {
+    "scan_runs": 1,
+    "ai_calls": 200,
+    "new_launches": 10
+  },
+  "notes": [
+    "达到月预算 50% 自动熔断停止。",
+    "每天仅允许一次自动扫描。",
+    "每天最多上线 10 个工具。"
+  ]
+}

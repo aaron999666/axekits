@@ -9,8 +9,8 @@
     "risk_penalty": 0.3
   },
   "limits": {
-    "max_candidates": 80,
-    "launch_queue_top_n": 20
+    "max_candidates": 30,
+    "launch_queue_top_n": 30
   },
   "notes": [
     "热度来自外部生态和站内行为；供给缺口来自竞品缺口和站内未满足请求",

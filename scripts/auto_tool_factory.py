@@ -9,6 +9,8 @@ OUT_REPORT = "data/auto_launch_report.json"
 TOOLS_ROOT = "tools"
 
 MAX_AUTO_PER_RUN = int(os.getenv("AUTO_TOOL_MAX_PER_RUN", "6"))
+DAILY_AUTO_LAUNCH_LIMIT = int(os.getenv("AUTO_TOOL_DAILY_LIMIT", "10"))
+STATE_FILE = "data/auto_launch_state.json"
 
 
 def load_json(path, default):
@@ -104,6 +106,12 @@ def main():
     queue_obj = load_json(QUEUE_FILE, {"queue": []})
     queue = queue_obj.get("queue", [])
 
+    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    state = load_json(STATE_FILE, {"date": today, "launched_today": 0})
+    if state.get("date") != today:
+        state = {"date": today, "launched_today": 0}
+    launched_today = int(state.get("launched_today", 0) or 0)
+
     existing_ids = {str(t.get("id", "")).strip().lower() for t in tools}
     created = []
     skipped = []
@@ -111,6 +119,8 @@ def main():
 
     for item in queue:
         if processed >= MAX_AUTO_PER_RUN:
+            break
+        if launched_today + len(created) >= DAILY_AUTO_LAUNCH_LIMIT:
             break
         tool_id = str(item.get("tool_id", "")).strip().lower()
         keyword = str(item.get("keyword", "")).strip().lower()
@@ -165,9 +175,13 @@ def main():
         processed += 1
 
     save_json(TOOLS_FILE, tools)
+    state["launched_today"] = launched_today + len(created)
+    save_json(STATE_FILE, state)
     report = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
         "max_auto_per_run": MAX_AUTO_PER_RUN,
+        "daily_auto_launch_limit": DAILY_AUTO_LAUNCH_LIMIT,
+        "launched_today_after_run": state["launched_today"],
         "created_count": len(created),
         "skipped_count": len(skipped),
         "created": created,

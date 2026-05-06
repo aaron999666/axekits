@@ -1,6 +1,8 @@
 name: Tool Data Automation
 
 on:
+  schedule:
+    - cron: "30 2 * * *"
   workflow_dispatch:
 
 concurrency:
@@ -24,15 +26,21 @@ jobs:
           cache: "pip"
       - name: Install dependencies
         run: pip install -r scripts/requirements.txt
+      - name: Automation budget guard
+        run: python scripts/automation_guard.py
       - name: Competitor benchmark first
         run: python scripts/competitor_benchmark.py
       - name: Scan GitHub repos
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MAX_REPOS_TOTAL: "30"
         run: python scripts/scanner.py
       - name: Demand discovery
         run: python scripts/demand_discovery.py
       - name: Auto tool factory
+        env:
+          AUTO_TOOL_MAX_PER_RUN: "30"
+          AUTO_TOOL_DAILY_LIMIT: "10"
         run: python scripts/auto_tool_factory.py
       - name: Classify with AI
         env:

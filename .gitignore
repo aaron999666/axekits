@@ -8,3 +8,4 @@ __pycache__/
 .env
 .env.local
 .env.production
+data/automation_usage.json

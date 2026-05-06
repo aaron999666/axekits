@@ -4,6 +4,7 @@ import time
 import requests
 
 GITHUB_TOKEN = os.environ["GITHUB_TOKEN"]
+MAX_REPOS_TOTAL = int(os.getenv("MAX_REPOS_TOTAL", "30"))
 
 CATEGORIES_QUERIES = {
     "dev-assistant": "topic:developer-tools+topic:utility+stars:>100",
@@ -82,11 +83,12 @@ def search_repos_graphql(query, category, max_repos=20):
 
 def main():
     all_repos = []
+    per_category = max(1, min(20, MAX_REPOS_TOTAL // max(1, len(CATEGORIES_QUERIES))))
     for i, (category, query) in enumerate(CATEGORIES_QUERIES.items()):
         if i > 0:
             time.sleep(3)
         print(f"Scanning category: {category}")
-        repos = search_repos_graphql(query, category)
+        repos = search_repos_graphql(query, category, max_repos=per_category)
         all_repos.extend(repos)
         print(f"  Found {len(repos)} repos")
     seen = set()
@@ -95,10 +97,12 @@ def main():
         if repo["id"] not in seen:
             seen.add(repo["id"])
             unique_repos.append(repo)
+        if len(unique_repos) >= MAX_REPOS_TOTAL:
+            break
     os.makedirs("data", exist_ok=True)
     with open("data/raw_repos.json", "w", encoding="utf-8") as f:
         json.dump(unique_repos, f, ensure_ascii=False, indent=2)
-    print(f"Total unique repos: {len(unique_repos)}")
+    print(f"Total unique repos: {len(unique_repos)} (cap={MAX_REPOS_TOTAL})")
 
 if __name__ == "__main__":
     main()
