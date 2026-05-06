@@ -377,6 +377,9 @@
 
 
 
+
+
+
 <!-- toolbox:seo-geo:start -->
 <title>正则测试 | ToolBox</title>
 <meta name="description" content="实时测试正则表达式，支持分组捕获 关键词: regex, test, pattern, utility, code">
@@ -710,7 +713,10 @@ h3,label{color:#ff9a6b !important;}
 
 
 
+
+
 <div class="c"><div class="row"><label>Pattern</label><input type="text" id="pattern" placeholder="/pattern/ or pattern" oninput="test()"></div><div class="row"><label>Flags</label><div class="flags"><label><input type="checkbox" id="f_g" checked onchange="test()">g</label><label><input type="checkbox" id="f_i" onchange="test()">i</label><label><input type="checkbox" id="f_m" onchange="test()">m</label><label><input type="checkbox" id="f_s" onchange="test()">s</label></div></div><textarea id="input" placeholder="Enter test string here..." oninput="test()"></textarea><div class="results" id="results"><span style="color:#aaa">Matches will appear here...</span></div><div class="info" id="info"></div></div><script>function test(){var p=document.getElementById('pattern').value;var t=document.getElementById('input').value;var container=document.getElementById('results');var info=document.getElementById('info');if(!p||!t){container.innerHTML='<span style="color:#aaa">Matches will appear here...</span>';info.textContent='';return}var flags='';if(document.getElementById('f_g').checked)flags+='g';if(document.getElementById('f_i').checked)flags+='i';if(document.getElementById('f_m').checked)flags+='m';if(document.getElementById('f_s').checked)flags+='s';try{var re=new RegExp(p,flags);var matches=[];var m;if(flags.includes('g')){while((m=re.exec(t))!==null){matches.push({value:m[0],index:m.index,groups:m.slice(1)});if(m[0].length===0)re.lastIndex++}}else{m=re.exec(t);if(m)matches.push({value:m[0],index:m.index,groups:m.slice(1)})}if(matches.length===0){container.innerHTML='<span style="color:#aaa">No matches found</span>';info.textContent='0 matches'}else{container.innerHTML=matches.map(function(m,i){return '<div class="match">Match '+(i+1)+': "'+m.value+'" at index '+m.index+(m.groups.length?' → Groups: '+m.groups.map(function(g){return '"'+g+'"'}).join(', '):'')+'</div>'}).join('');info.textContent=matches.length+' match'+(matches.length>1?'es':'')+' found'}window.toolbox&&window.toolbox.complete({matches:matches.length})}catch(e){container.innerHTML='<div class="error">Error: '+e.message+'</div>';info.textContent='';window.toolbox&&window.toolbox.error(e.message)}}</script>
+
 
 
 
