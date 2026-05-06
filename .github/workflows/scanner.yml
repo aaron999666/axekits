@@ -66,6 +66,7 @@ jobs:
             echo "No changes to commit"
           else
             git commit -m "chore: auto-update tools $(date +%Y-%m-%d)"
+            git pull --rebase origin main
             git push
           fi
 
@@ -91,5 +92,6 @@ jobs:
             echo "No health updates"
           else
             git commit -m "chore: health check update"
+            git pull --rebase origin main
             git push
           fi

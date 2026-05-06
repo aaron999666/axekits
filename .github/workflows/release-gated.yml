@@ -82,6 +82,7 @@ jobs:
             echo "No normalization updates."
           else
             git commit -m "chore(release): normalize ui and health metadata"
+            git pull --rebase origin main
             git push
           fi
 
