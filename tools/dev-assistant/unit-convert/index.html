@@ -1661,6 +1661,9 @@
 
 
 
+
+
+
 <!-- toolbox:seo-geo:start -->
 <title>Unit Convert | ToolBox</title>
 <meta name="description" content="在线使用 Unit Convert，快速完成处理。">
@@ -2850,7 +2853,10 @@ h3,label{color:#ff9a6b !important;}
 
 
 
+
+
 <div class="c"><div class="cats" id="cats"></div><div class="card"><label>Value</label><div class="row"><select id="from" onchange="convert()"></select><div class="arrow">→</div><select id="to" onchange="convert()"></select></div><input type="number" id="val" value="1" oninput="convert()" style="margin-bottom:12px"><div class="result" id="result">1</div></div></div><script>var U={length:{name:"Length",units:{m:1,km:1000,cm:0.01,mm:0.001,mi:1609.344,yd:0.9144,ft:0.3048,in:0.0254}},weight:{name:"Weight",units:{kg:1,g:0.001,mg:0.000001,lb:0.453592,oz:0.0283495,ton:1000}},temperature:{name:"Temperature",units:{c:"Celsius",f:"Fahrenheit",k:"Kelvin"},custom:true},area:{name:"Area",units:{m2:1,km2:1e6,cm2:1e-4,ha:1e4,acre:4046.86,ft2:0.0929,in2:6.452e-4}},volume:{name:"Volume",units:{l:1,ml:0.001,m3:1000,gal:3.78541,qt:0.946353,pt:0.473176,cup:0.236588,floz:0.0295735}},speed:{name:"Speed",units:{ms:1,kmh:0.277778,mph:0.44704,kn:0.514444}},data:{name:"Data",units:{b:1,kb:1024,mb:1048576,gb:1073741824,tb:1099511627776}},time:{name:"Time",units:{s:1,min:60,h:3600,d:86400,wk:604800,mo:2592000,yr:31536000}}};var activeCat="length";function init(){var c=document.getElementById('cats');Object.keys(U).forEach(function(k){var b=document.createElement('button');b.textContent=U[k].name;b.className=k==="length"?"active":"";b.onclick=function(){activeCat=k;document.querySelectorAll('.cats button').forEach(function(x){x.className=""});b.className="active";populateUnits()};c.appendChild(b)});populateUnits()}function populateUnits(){var units=U[activeCat].units;var f=document.getElementById('from');var t=document.getElementById('to');f.innerHTML='';t.innerHTML='';Object.keys(units).forEach(function(u){f.innerHTML+='<option value="'+u+'">'+u+'</option>';t.innerHTML+='<option value="'+u+'">'+u+'</option>'});if(Object.keys(units).length>1)t.selectedIndex=1;convert()}function convert(){var val=parseFloat(document.getElementById('val').value)||0;var from=document.getElementById('from').value;var to=document.getElementById('to').value;var result;if(U[activeCat].custom&&activeCat==="temperature"){result=convertTemp(val,from,to)}else{var base=val*U[activeCat].units[from];result=base/U[activeCat].units[to]}document.getElementById('result').textContent=parseFloat(result.toPrecision(10));window.toolbox&&window.toolbox.complete({value:val,from:from,to:to,result:result})}function convertTemp(v,from,to){if(from===to)return v;var c;if(from==="c")c=v;else if(from==="f")c=(v-32)*5/9;else c=v-273.15;if(to==="c")return c;else if(to==="f")return c*9/5+32;else return c+273.15}init()</script>
+
 
 
 
