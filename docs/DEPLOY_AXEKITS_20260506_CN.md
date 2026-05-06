@@ -134,6 +134,7 @@ npx wrangler d1 execute toolbox-db --remote --command "SELECT name FROM sqlite_m
 6. `NEXT_PUBLIC_SITE_URL` = `https://axekits.com`
 7. `CF_API_TOKEN`
 8. `GEMINI_API_KEY`（可选）
+9. `NEXT_PUBLIC_GA_MEASUREMENT_ID`（Google Analytics 4，用于流量监测）
 
 ---
 
@@ -203,6 +204,7 @@ npm run db:init
    - `https://axekits.com/robots.txt`
    - `https://axekits.com/sitemap.xml`
    - `https://axekits.com/llms.txt`
+7. 打开 GA4 实时报告，确认在线访问能实时出现
 
 ---
 
@@ -217,3 +219,36 @@ npm run db:init
 4. `tools not loading`
    - `TOOLS_DATA_URL` / `WORKFLOWS_DATA_URL` 地址不对
 
+---
+
+## 14. Google 流量监测（GA4，小白一步步）
+
+你的 Google 账号（`yhuntsman123@gmail.com`）可以同时监测多个网站。  
+做法是：一个 Google 账号下创建多个 GA4 Property（每个网站一个 Property 最清晰）。
+
+## 14.1 申请 GA4 代码（Measurement ID）
+1. 打开：https://analytics.google.com/
+2. 管理（Admin）-> 创建账号（如果没有）-> 创建 Property
+3. 数据流（Data streams）-> 选择 Web
+4. 网站 URL 填：`https://axekits.com`
+5. 创建后会看到 `Measurement ID`，格式类似：`G-ABC123XYZ9`
+
+## 14.2 放到哪里（本项目）
+你不需要改代码，只要配一个 GitHub Secret：
+1. GitHub 仓库 -> Settings -> Secrets and variables -> Actions
+2. 新建：
+   - Name: `NEXT_PUBLIC_GA_MEASUREMENT_ID`
+   - Value: 你的 `G-xxxxxxxxxx`
+
+## 14.3 代码已经帮你接好
+1. 注入位置：[`packages/web/app/layout.tsx`](/E:/TOOLS/packages/web/app/layout.tsx)
+2. 示例变量：[`packages/web/.env.example`](/E:/TOOLS/packages/web/.env.example)
+
+## 14.4 多站点监测怎么做
+方案A（推荐）：每个网站一个 Property，各自一个 `G-...`，最干净。  
+方案B：多个域名放同一个 Property（同一个 `G-...`），适合主站+子站合并看。
+
+## 14.5 验证是否生效
+1. 部署后访问 `https://axekits.com`
+2. GA4 -> Reports -> Realtime
+3. 看到当前在线用户和页面访问即成功
