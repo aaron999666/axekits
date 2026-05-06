@@ -443,6 +443,9 @@
 
 
 
+
+
+
 <!-- toolbox:seo-geo:start -->
 <title>CSS 压缩 | ToolBox</title>
 <meta name="description" content="压缩和格式化 CSS 代码 关键词: css, minify, format, web, utility">
@@ -820,7 +823,10 @@ h3,label{color:#ff9a6b !important;}
 
 
 
+
+
 <div class="c"><div><h3>Input CSS</h3><textarea id="i" placeholder="Paste CSS here..."></textarea></div><div><h3>Minified Output</h3><textarea id="o" readonly></textarea></div></div><div class="a"><button onclick="min()">Minify</button><button class="s" onclick="fmt()">Format</button><button class="s" onclick="navigator.clipboard.writeText(document.getElementById('o').value)">Copy</button></div><div class="stats" id="stats"></div><script>function min(){var v=document.getElementById('i').value;if(!v)return;var r=v.replace(/\/\*[\s\S]*?\*\//g,'').replace(/\s+/g,' ').replace(/\s*([{}:;,])\s*/g,'$1').replace(/;}/g,'}').trim();document.getElementById('o').value=r;var saved=((v.length-r.length)/v.length*100).toFixed(1);document.getElementById('stats').textContent='Original: '+v.length+' bytes → Minified: '+r.length+' bytes ('+saved+'% smaller)';window.toolbox&&window.toolbox.complete({action:'minify',original:v.length,minified:r.length})}function fmt(){var v=document.getElementById('i').value;if(!v)return;var r=v.replace(/\{/g,' {\n  ').replace(/\}/g,'\n}\n').replace(/;/g,';\n  ').replace(/\n\s*\n/g,'\n').replace(/  \n\}/g,'\n}');document.getElementById('o').value=r;window.toolbox&&window.toolbox.complete({action:'format'})}</script>
+
 
 
 

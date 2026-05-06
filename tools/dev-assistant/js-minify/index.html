@@ -443,6 +443,9 @@
 
 
 
+
+
+
 <!-- toolbox:seo-geo:start -->
 <title>JS 压缩 | ToolBox</title>
 <meta name="description" content="通过移除注释和空白压缩 JavaScript 代码 关键词: javascript, minify, web, utility, code">
@@ -820,7 +823,10 @@ h3,label{color:#ff9a6b !important;}
 
 
 
+
+
 <div class="c"><div><h3>Input JavaScript</h3><textarea id="i" placeholder="Paste JavaScript here..."></textarea></div><div><h3>Minified Output</h3><textarea id="o" readonly></textarea></div></div><div class="a"><button onclick="min()">Minify</button><button class="s" onclick="navigator.clipboard.writeText(document.getElementById('o').value)">Copy</button></div><div class="stats" id="stats"></div><script>function min(){var v=document.getElementById('i').value;if(!v)return;var r=v.replace(/\/\/.*$/gm,'').replace(/\/\*[\s\S]*?\*\//g,'').replace(/\n/g,' ').replace(/\s+/g,' ').replace(/\s*([{}();,=+\-*/<>!&|?:])\s*/g,'$1').trim();document.getElementById('o').value=r;var saved=((v.length-r.length)/v.length*100).toFixed(1);document.getElementById('stats').textContent='Original: '+v.length+' bytes → Minified: '+r.length+' bytes ('+saved+'% smaller)';window.toolbox&&window.toolbox.complete({action:'minify',original:v.length,minified:r.length})}</script>
+
 
 
 
