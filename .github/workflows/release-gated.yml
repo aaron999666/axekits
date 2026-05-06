@@ -161,7 +161,7 @@ jobs:
 
   deploy-tools:
     needs: quality-gate
-    if: ${{ inputs.deploy_tools && secrets.CF_PAGES_TOOLS_PROJECT != '' }}
+    if: ${{ inputs.deploy_tools }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
