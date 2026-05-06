@@ -1607,6 +1607,9 @@
 
 
 
+
+
+
 <!-- toolbox:seo-geo:start -->
 <title>Image Compress | ToolBox</title>
 <meta name="description" content="在线使用 Image Compress，快速完成处理。">
@@ -2760,7 +2763,10 @@ h3,label{color:#ff9a6b !important;}
 
 
 
+
+
 <div class="c"><div class="drop" id="drop" onclick="document.getElementById('file').click()"><div style="font-size:48px">📷</div><p>Click or drag image here</p><input type="file" id="file" accept="image/*" style="display:none" onchange="loadFile(this)"></div><div class="controls"><div class="row"><label>Quality</label><input type="range" id="quality" min="1" max="100" value="80" oninput="document.getElementById('qVal').textContent=this.value+'%'"><span id="qVal">80%</span></div><div class="row"><label>Format</label><select id="format" style="flex:1;background:#0f0f23;color:#e0e0e0;border:1px solid #333;border-radius:8px;padding:8px;outline:none"><option value="image/jpeg">JPEG</option><option value="image/webp">WebP</option><option value="image/png">PNG</option></select></div></div><div class="preview"><div><h4 style="color:#e94560;font-size:12px;margin-bottom:8px">ORIGINAL</h4><img id="orig"></div><div><h4 style="color:#4ade80;font-size:12px;margin-bottom:8px">COMPRESSED</h4><canvas id="canvas"></canvas><img id="comp"></div></div><button onclick="download()">Download Compressed</button><div class="stats" id="stats"></div></div><script>var origSize=0;function loadFile(input){var file=input.files[0];if(!file)return;origSize=file.size;var reader=new FileReader();reader.onload=function(e){var img=document.getElementById('orig');img.src=e.target.result;img.onload=function(){compress()}};reader.readAsDataURL(file)}function compress(){var img=document.getElementById('orig');if(!img.src||img.src===location.href)return;var canvas=document.getElementById('canvas');var q=parseInt(document.getElementById('quality').value)/100;var fmt=document.getElementById('format').value;canvas.width=img.naturalWidth;canvas.height=img.naturalHeight;var ctx=canvas.getContext('2d');ctx.drawImage(img,0,0);var dataUrl=canvas.toDataURL(fmt,q);document.getElementById('comp').src=dataUrl;var compSize=Math.round(dataUrl.length*3/4);var saved=((origSize-compSize)/origSize*100).toFixed(1);document.getElementById('stats').textContent='Original: '+(origSize/1024).toFixed(1)+'KB → Compressed: '+(compSize/1024).toFixed(1)+'KB ('+saved+'% smaller)';window.toolbox&&window.toolbox.complete({originalSize:origSize,compressedSize:compSize,quality:q})}function download(){var canvas=document.getElementById('canvas');var fmt=document.getElementById('format').value;var ext=fmt==='image/jpeg'?'jpg':fmt==='image/webp'?'webp':'png';var link=document.createElement('a');link.download='compressed.'+ext;link.href=canvas.toDataURL(fmt,parseInt(document.getElementById('quality').value)/100);link.click()}var drop=document.getElementById('drop');drop.ondragover=function(e){e.preventDefault();this.classList.add('over')};drop.ondragleave=function(){this.classList.remove('over')};drop.ondrop=function(e){e.preventDefault();this.classList.remove('over');document.getElementById('file').files=e.dataTransfer.files;loadFile(document.getElementById('file'))}</script>
+
 
 
 
