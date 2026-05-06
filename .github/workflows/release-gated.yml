@@ -73,18 +73,8 @@ jobs:
       - name: Health check gate
         run: python scripts/health_check.py
 
-      - name: Commit normalization updates (if any)
-        run: |
-          git config user.name "toolbox-bot"
-          git config user.email "bot@toolbox.dev"
-          git add tools/ data/
-          if git diff --staged --quiet; then
-            echo "No normalization updates."
-          else
-            git commit -m "chore(release): normalize ui and health metadata"
-            git pull --rebase origin main
-            git push
-          fi
+      - name: Skip auto-commit in release pipeline
+        run: echo "Release pipeline does not auto-commit generated tool/data files to avoid rebase conflicts."
 
   deploy-worker:
     needs: quality-gate
