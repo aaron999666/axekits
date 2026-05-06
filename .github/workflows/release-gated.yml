@@ -22,11 +22,15 @@ on:
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
 
+concurrency:
+  group: release-gated-main
+  cancel-in-progress: false
+
 jobs:
   quality-gate:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+      contents: read
     steps:
       - uses: actions/checkout@v5
         with:
@@ -79,6 +83,16 @@ jobs:
       - name: Skip auto-commit in release pipeline
         run: echo "Release pipeline does not auto-commit generated tool/data files to avoid rebase conflicts."
 
+      - name: Package generated assets
+        run: tar -czf generated-assets.tgz tools data
+
+      - name: Upload generated assets
+        uses: actions/upload-artifact@v4
+        with:
+          name: generated-assets
+          path: generated-assets.tgz
+          if-no-files-found: error
+
   deploy-worker:
     needs: quality-gate
     if: ${{ inputs.deploy_worker }}
@@ -88,6 +102,12 @@ jobs:
       - uses: actions/setup-node@v5
         with:
           node-version: "24"
+      - name: Download generated assets
+        uses: actions/download-artifact@v4
+        with:
+          name: generated-assets
+      - name: Restore generated assets
+        run: tar -xzf generated-assets.tgz
       - name: Install dependencies
         run: npm install
       - name: Deploy Worker
@@ -105,6 +125,12 @@ jobs:
       - uses: actions/setup-node@v5
         with:
           node-version: "24"
+      - name: Download generated assets
+        uses: actions/download-artifact@v4
+        with:
+          name: generated-assets
+      - name: Restore generated assets
+        run: tar -xzf generated-assets.tgz
       - name: Install dependencies
         run: npm install
       - name: Build Web
@@ -133,6 +159,12 @@ jobs:
       - uses: actions/setup-node@v5
         with:
           node-version: "24"
+      - name: Download generated assets
+        uses: actions/download-artifact@v4
+        with:
+          name: generated-assets
+      - name: Restore generated assets
+        run: tar -xzf generated-assets.tgz
       - name: Install dependencies
         run: npm install
       - name: Deploy Tools
