@@ -110,6 +110,15 @@ jobs:
         run: tar -xzf generated-assets.tgz
       - name: Install dependencies
         run: npm install
+      - name: Ensure Worker infra exists (queues/r2)
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
+        run: |
+          cd packages/worker
+          npx wrangler queues create billing-queue || true
+          npx wrangler queues create cleanup-queue || true
+          npx wrangler r2 bucket create toolbox-files || true
       - name: Deploy Worker
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
@@ -152,7 +161,7 @@ jobs:
 
   deploy-tools:
     needs: quality-gate
-    if: ${{ inputs.deploy_tools }}
+    if: ${{ inputs.deploy_tools && secrets.CF_PAGES_TOOLS_PROJECT != '' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
