@@ -44,7 +44,8 @@ def main():
     reasons = []
     if int(d.get("scan_runs", 0)) >= int(limits.get("scan_runs", 1)):
         reasons.append("daily scan_runs reached")
-    if int(d.get("ai_calls", 0)) >= int(limits.get("ai_calls", 200)):
+    ai_limit = int(limits.get("ai_calls", 200))
+    if ai_limit > 0 and int(d.get("ai_calls", 0)) >= ai_limit:
         reasons.append("daily ai_calls reached")
     if int(d.get("new_launches", 0)) >= int(limits.get("new_launches", 10)):
         reasons.append("daily new_launches reached")
