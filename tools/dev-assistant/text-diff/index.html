@@ -785,6 +785,9 @@
 
 
 
+
+
+
 <!-- toolbox:seo-geo:start -->
 <title>文本对比 | ToolBox</title>
 <meta name="description" content="比较两段文本并高亮差异 关键词: diff, compare, text, utility, code">
@@ -1390,7 +1393,10 @@ h3,label{color:#ff9a6b !important;}
 
 
 
+
+
 <div style="max-width:1200px;margin:0 auto;padding:20px 20px 0"><button onclick="compare()">Compare</button></div><div class="c"><div><h3>Original</h3><textarea id="a" placeholder="Paste original text..."></textarea></div><div><h3>Modified</h3><textarea id="b" placeholder="Paste modified text..."></textarea></div></div><div style="max-width:1200px;margin:0 auto;padding:0 20px 20px"><h3 style="margin-bottom:8px">Differences</h3><div class="diff" id="diff"></div></div><script>function compare(){var a=document.getElementById('a').value.split('\n');var b=document.getElementById('b').value.split('\n');var d=document.getElementById('diff');d.innerHTML='';var la=a.length,lb=b.length;var max=Math.max(la,lb);var changes=0;for(var i=0;i<max;i++){var al=i<la?a[i]:null;var bl=i<lb?b[i]:null;if(al===bl){d.innerHTML+='<div>'+(i+1)+': '+esc(al||'')+'</div>'}else{changes++;if(al!==null&&bl!==null){d.innerHTML+='<div>'+(i+1)+': <span class="del">'+esc(al)+'</span> → <span class="add">'+esc(bl)+'</span></div>'}else if(al===null){d.innerHTML+='<div>'+(i+1)+': <span class="add">+ '+esc(bl)+'</span></div>'}else{d.innerHTML+='<div>'+(i+1)+': <span class="del">- '+esc(al)+'</span></div>'}}}if(changes===0)d.innerHTML='<div style="color:#4ade80">No differences found!</div>';window.toolbox&&window.toolbox.complete({changes:changes})}function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}</script>
+
 
 
 
