@@ -1484,6 +1484,9 @@
 
 
 
+
+
+
 <!-- toolbox:seo-geo:start -->
 <title>Uuid Gen | ToolBox</title>
 <meta name="description" content="在线使用 Uuid Gen，快速完成处理。">
@@ -2555,7 +2558,10 @@ h3,label{color:#ff9a6b !important;}
 
 
 
+
+
 <div class="c"><div class="row"><label>Count</label><input type="number" id="count" value="5" min="1" max="100"><button onclick="gen()">Generate</button><button class="s" onclick="copyAll()">Copy All</button></div><div class="list" id="list"></div></div><script>function v4(){return'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,function(c){var r=crypto.getRandomValues(new Uint8Array(1))[0]%16;var v=c==='x'?r:(r&0x3|0x8);return v.toString(16)})}function gen(){var n=parseInt(document.getElementById('count').value)||5;n=Math.min(n,100);var list=document.getElementById('list');list.innerHTML='';var uuids=[];for(var i=0;i<n;i++){var id=v4();uuids.push(id);var div=document.createElement('div');div.className='item';div.innerHTML='<span>'+id+'</span><button onclick="navigator.clipboard.writeText(\''+id+'\')">Copy</button>';list.appendChild(div)}window.toolbox&&window.toolbox.complete({count:n,uuids:uuids})}function copyAll(){var items=document.querySelectorAll('.item span');var text=Array.from(items).map(function(s){return s.textContent}).join('\n');navigator.clipboard.writeText(text)}</script>
+
 
 
 
