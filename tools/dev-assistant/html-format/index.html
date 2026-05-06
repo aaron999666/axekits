@@ -707,6 +707,9 @@
 
 
 
+
+
+
 <!-- toolbox:seo-geo:start -->
 <title>HTML 格式化 | ToolBox</title>
 <meta name="description" content="格式化和压缩 HTML 代码 关键词: html, format, minify, web, utility">
@@ -1260,7 +1263,10 @@ h3,label{color:#ff9a6b !important;}
 
 
 
+
+
 <div class="c"><div><h3>Input HTML</h3><textarea id="i" placeholder="Paste HTML here..."></textarea></div><div><h3>Formatted Output</h3><textarea id="o" readonly></textarea></div></div><div class="a"><button onclick="fmt()">Format</button><button class="s" onclick="min()">Minify</button><button class="s" onclick="navigator.clipboard.writeText(document.getElementById('o').value)">Copy</button></div><script>function fmt(){var v=document.getElementById('i').value;if(!v)return;var r='',indent=0,tabs='  ';v=v.replace(/>\s+</g,'><');var tags=v.split(/(<[^>]+>)/g);for(var i=0;i<tags.length;i++){var t=tags[i];if(!t)continue;if(t.match(/^<\/\w/)){indent--;r+=tabs.repeat(Math.max(0,indent))+t+'\n'}else if(t.match(/^<\w[^>]*[^\/]>$/)){r+=tabs.repeat(indent)+t+'\n';indent++}else if(t.match(/^<\w[^>]*\/>/)){r+=tabs.repeat(indent)+t+'\n'}else{r+=tabs.repeat(indent)+t+'\n'}}document.getElementById('o').value=r.trim();window.toolbox&&window.toolbox.complete({action:'format'})}function min(){var v=document.getElementById('i').value;v=v.replace(/\n/g,'').replace(/\s{2,}/g,' ').replace(/>\s+</g,'><');document.getElementById('o').value=v;window.toolbox&&window.toolbox.complete({action:'minify'})}</script>
+
 
 
 
