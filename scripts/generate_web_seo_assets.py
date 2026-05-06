@@ -18,7 +18,7 @@ def ensure_dir(path):
 
 
 def site_url():
-    return os.getenv("NEXT_PUBLIC_SITE_URL", "https://toolbox-edge.pages.dev").rstrip("/")
+    return os.getenv("NEXT_PUBLIC_SITE_URL", "https://axekits.com").rstrip("/")
 
 
 def write(path, content):

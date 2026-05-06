@@ -4,13 +4,13 @@
 
 ## Product
 - Name: ToolBox
-- URL: https://toolbox-edge.pages.dev
+- URL: https://axekits.com
 - Core capability: hosted front-end tools + point-based billing + AI workflow orchestration
 
 ## Canonical Pages
-- Home: https://toolbox-edge.pages.dev/
-- Tools: https://toolbox-edge.pages.dev/tools
-- Pricing: https://toolbox-edge.pages.dev/pricing
+- Home: https://axekits.com/
+- Tools: https://axekits.com/tools
+- Pricing: https://axekits.com/pricing
 
 ## Data and APIs
 - Tool catalog API: /api/tools

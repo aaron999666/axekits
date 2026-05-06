@@ -26,19 +26,22 @@
 
 
 
+
+
+
 <!-- toolbox:seo-geo:start -->
 <title>图片格式转换 | ToolBox</title>
 <meta name="description" content="在 PNG、JPEG、WebP 格式间转换图片 关键词: image, convert, png, jpeg, webp">
 <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1">
-<link rel="canonical" href="https://toolsbox.ai/tools/image-convert">
-<link rel="alternate" hreflang="zh-CN" href="https://toolsbox.ai/tools/image-convert?lang=zh-CN">
-<link rel="alternate" hreflang="en" href="https://toolsbox.ai/tools/image-convert?lang=en">
-<link rel="alternate" hreflang="x-default" href="https://toolsbox.ai/tools/image-convert">
+<link rel="canonical" href="https://axekits.com/tools/image-convert">
+<link rel="alternate" hreflang="zh-CN" href="https://axekits.com/tools/image-convert?lang=zh-CN">
+<link rel="alternate" hreflang="en" href="https://axekits.com/tools/image-convert?lang=en">
+<link rel="alternate" hreflang="x-default" href="https://axekits.com/tools/image-convert">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolBox">
 <meta property="og:title" content="图片格式转换 | ToolBox">
 <meta property="og:description" content="在 PNG、JPEG、WebP 格式间转换图片 关键词: image, convert, png, jpeg, webp">
-<meta property="og:url" content="https://toolsbox.ai/tools/image-convert">
+<meta property="og:url" content="https://axekits.com/tools/image-convert">
 <meta property="og:locale" content="zh_CN">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="图片格式转换 | ToolBox">
@@ -46,7 +49,7 @@
 <meta name="geo.region" content="CN-31">
 <meta name="geo.placename" content="Shanghai">
 <meta name="ICBM" content="31.2304,121.4737">
-<script type="application/ld+json" id="toolbox-jsonld">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Image Format Converter","applicationCategory":"image-visual","operatingSystem":"Web","url":"https://toolsbox.ai/tools/image-convert","description":"Convert images between PNG, JPEG, and WebP formats","inLanguage":["zh-CN","en"],"offers":{"@type":"Offer","price":"0","priceCurrency":"CNY"},"publisher":{"@type":"Organization","name":"ToolBox"}}<\/script>
+<script type="application/ld+json" id="toolbox-jsonld">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Image Format Converter","applicationCategory":"image-visual","operatingSystem":"Web","url":"https://axekits.com/tools/image-convert","description":"Convert images between PNG, JPEG, and WebP formats","inLanguage":["zh-CN","en"],"offers":{"@type":"Offer","price":"0","priceCurrency":"CNY"},"publisher":{"@type":"Organization","name":"ToolBox"}}<\/script>
 <!-- toolbox:seo-geo:end -->
 
 <style id="toolbox-shell-styles">
@@ -125,7 +128,10 @@ h3,label{color:#ff9a6b !important;}
 
 
 
+
+
 <div class="c"><div class="drop" onclick="document.getElementById('file').click()"><div style="font-size:48px">🔄</div><p style="color:#aaa;margin-top:8px">Click or drag image</p><input type="file" id="file" accept="image/*" style="display:none" onchange="loadFile(this)"></div><div class="controls"><label>Convert to</label><select id="format"><option value="image/png">PNG</option><option value="image/jpeg">JPEG</option><option value="image/webp">WebP</option></select></div><button onclick="download()">Download Converted</button><div class="preview"><img id="preview"></div><div class="info" id="info"></div><canvas id="canvas"></canvas></div><script>var origType='';function loadFile(input){var file=input.files[0];if(!file)return;origType=file.type;var reader=new FileReader();reader.onload=function(e){var img=new Image();img.onload=function(){var canvas=document.getElementById('canvas');canvas.width=img.naturalWidth;canvas.height=img.naturalHeight;var ctx=canvas.getContext('2d');ctx.drawImage(img,0,0);document.getElementById('preview').src=canvas.toDataURL(document.getElementById('format').value,0.92);document.getElementById('info').textContent='Original: '+origType.split('/')[1].toUpperCase()+' → '+document.getElementById('format').value.split('/')[1].toUpperCase();window._img=img};img.src=e.target.result};reader.readAsDataURL(file)}document.getElementById('format').onchange=function(){if(!window._img)return;var canvas=document.getElementById('canvas');var ctx=canvas.getContext('2d');ctx.drawImage(window._img,0,0);document.getElementById('preview').src=canvas.toDataURL(this.value,0.92);document.getElementById('info').textContent='Original: '+origType.split('/')[1].toUpperCase()+' → '+this.value.split('/')[1].toUpperCase();window.toolbox&&window.toolbox.complete({from:origType,to:this.value})};function download(){var canvas=document.getElementById('canvas');var fmt=document.getElementById('format').value;var ext=fmt==='image/jpeg'?'jpg':fmt==='image/webp'?'webp':'png';var link=document.createElement('a');link.download='converted.'+ext;link.href=canvas.toDataURL(fmt,0.92);link.click()}</script>
+
 
 
 

@@ -2,7 +2,7 @@ export const API_BASE =
   process.env.NEXT_PUBLIC_API_BASE ||
   process.env.API_BASE ||
   "http://127.0.0.1:8787";
-export const TOOLS_DOMAIN = process.env.NEXT_PUBLIC_TOOLS_DOMAIN || "t.your-domain.com";
+export const TOOLS_DOMAIN = process.env.NEXT_PUBLIC_TOOLS_DOMAIN || "t.axekits.com";
 
 export const CATEGORIES = [
   { id: "dev-assistant", name: "开发助手", nameEn: "Dev Assistant", icon: "💻" },

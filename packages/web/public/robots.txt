@@ -9,5 +9,5 @@ Allow: /
 User-agent: ClaudeBot
 Allow: /
 
-Sitemap: https://toolbox-edge.pages.dev/sitemap.xml
-Host: https://toolbox-edge.pages.dev
+Sitemap: https://axekits.com/sitemap.xml
+Host: https://axekits.com

@@ -26,19 +26,22 @@
 
 
 
+
+
+
 <!-- toolbox:seo-geo:start -->
 <title>时间戳转换 | ToolBox</title>
 <meta name="description" content="Unix 时间戳与可读日期互转 关键词: timestamp, date, convert, time, utility">
 <meta name="robots" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1">
-<link rel="canonical" href="https://toolsbox.ai/tools/timestamp-convert">
-<link rel="alternate" hreflang="zh-CN" href="https://toolsbox.ai/tools/timestamp-convert?lang=zh-CN">
-<link rel="alternate" hreflang="en" href="https://toolsbox.ai/tools/timestamp-convert?lang=en">
-<link rel="alternate" hreflang="x-default" href="https://toolsbox.ai/tools/timestamp-convert">
+<link rel="canonical" href="https://axekits.com/tools/timestamp-convert">
+<link rel="alternate" hreflang="zh-CN" href="https://axekits.com/tools/timestamp-convert?lang=zh-CN">
+<link rel="alternate" hreflang="en" href="https://axekits.com/tools/timestamp-convert?lang=en">
+<link rel="alternate" hreflang="x-default" href="https://axekits.com/tools/timestamp-convert">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ToolBox">
 <meta property="og:title" content="时间戳转换 | ToolBox">
 <meta property="og:description" content="Unix 时间戳与可读日期互转 关键词: timestamp, date, convert, time, utility">
-<meta property="og:url" content="https://toolsbox.ai/tools/timestamp-convert">
+<meta property="og:url" content="https://axekits.com/tools/timestamp-convert">
 <meta property="og:locale" content="zh_CN">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="时间戳转换 | ToolBox">
@@ -46,7 +49,7 @@
 <meta name="geo.region" content="CN-31">
 <meta name="geo.placename" content="Shanghai">
 <meta name="ICBM" content="31.2304,121.4737">
-<script type="application/ld+json" id="toolbox-jsonld">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Timestamp Converter","applicationCategory":"dev-assistant","operatingSystem":"Web","url":"https://toolsbox.ai/tools/timestamp-convert","description":"Convert between Unix timestamps and human-readable dates","inLanguage":["zh-CN","en"],"offers":{"@type":"Offer","price":"0","priceCurrency":"CNY"},"publisher":{"@type":"Organization","name":"ToolBox"}}<\/script>
+<script type="application/ld+json" id="toolbox-jsonld">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Timestamp Converter","applicationCategory":"dev-assistant","operatingSystem":"Web","url":"https://axekits.com/tools/timestamp-convert","description":"Convert between Unix timestamps and human-readable dates","inLanguage":["zh-CN","en"],"offers":{"@type":"Offer","price":"0","priceCurrency":"CNY"},"publisher":{"@type":"Organization","name":"ToolBox"}}<\/script>
 <!-- toolbox:seo-geo:end -->
 
 <style id="toolbox-shell-styles">
@@ -125,7 +128,10 @@ h3,label{color:#ff9a6b !important;}
 
 
 
+
+
 <div class="c"><div class="now" id="now"></div><div class="card"><h3>Timestamp → Date</h3><div class="row"><input type="text" id="ts" placeholder="Enter Unix timestamp (seconds or milliseconds)"><button onclick="ts2date()">Convert</button></div><div class="result" id="tsResult"></div></div><div class="card"><h3>Date → Timestamp</h3><div class="row"><input type="datetime-local" id="dt" style="flex:1;background:#0f0f23;color:#e0e0e0;border:1px solid #333;border-radius:8px;padding:10px;font-size:14px;outline:none"><button onclick="date2ts()">Convert</button></div><div class="result" id="dtResult"></div></div></div><script>function updateNow(){var now=Date.now();document.getElementById('now').textContent='Current: '+Math.floor(now/1000)+' (s) / '+now+' (ms)'}setInterval(updateNow,1000);updateNow();function ts2date(){var v=parseInt(document.getElementById('ts').value);if(isNaN(v)){window.toolbox&&window.toolbox.error('Invalid timestamp');return}if(v<1e12)v=v*1000;var d=new Date(v);var r='UTC: '+d.toUTCString()+'\nLocal: '+d.toLocaleString()+'\nISO: '+d.toISOString()+'\nSeconds: '+Math.floor(v/1000)+'\nMilliseconds: '+v;document.getElementById('tsResult').textContent=r;window.toolbox&&window.toolbox.complete({timestamp:v,date:d.toISOString()})}function date2ts(){var v=document.getElementById('dt').value;if(!v){window.toolbox&&window.toolbox.error('Select a date');return}var d=new Date(v);var s=Math.floor(d.getTime()/1000);var ms=d.getTime();document.getElementById('dtResult').textContent='Seconds: '+s+'\nMilliseconds: '+ms;window.toolbox&&window.toolbox.complete({timestamp:ms,date:d.toISOString()})}document.getElementById('dt').value=new Date().toISOString().slice(0,16)</script>
+
 
 
 

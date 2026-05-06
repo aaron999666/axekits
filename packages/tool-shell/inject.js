@@ -2,7 +2,7 @@ var fs = require("fs");
 var path = require("path");
 
 var TOOLS_JSON = path.resolve(process.cwd(), "data/tools.json");
-var SEO_SITE_URL = process.env.SEO_SITE_URL || "https://toolsbox.ai";
+var SEO_SITE_URL = process.env.SEO_SITE_URL || "https://axekits.com";
 var SEO_DEFAULT_REGION = process.env.SEO_DEFAULT_REGION || "CN-31";
 var SEO_DEFAULT_PLACENAME = process.env.SEO_DEFAULT_PLACENAME || "Shanghai";
 
