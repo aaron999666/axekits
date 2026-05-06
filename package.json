@@ -10,7 +10,7 @@
     "dev:worker": "cd packages/worker && npx wrangler dev",
     "dev:web": "cd packages/web && npm run dev",
     "deploy:worker": "cd packages/worker && npx wrangler deploy",
-    "deploy:web": "cd packages/web && npx opennextjs-cloudflare build && npx opennextjs-cloudflare deploy",
+    "deploy:web": "cd packages/web && npx @opennextjs/cloudflare build && npx @opennextjs/cloudflare deploy",
     "deploy:tools": "sh -c 'if [ -z \"${CF_PAGES_TOOLS_PROJECT:-}\" ]; then echo \"Skip tools deploy: CF_PAGES_TOOLS_PROJECT not set (single-domain mode).\"; exit 0; fi; cd tools && npx wrangler pages deploy . --project-name=${CF_PAGES_TOOLS_PROJECT} --commit-dirty=true'",
     "db:init": "cd packages/worker && npx wrangler d1 execute toolbox-db --file=schema.sql --remote",
     "db:local": "cd packages/worker && npx wrangler d1 execute toolbox-db --file=schema.sql --local",
