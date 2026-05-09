@@ -102,6 +102,21 @@ export default {
         });
       }
 
+      if (url.pathname === "/api/pay/providers" && request.method === "GET") {
+        return withAuth(request, env, corsHeaders, async () => {
+          const enabled = {
+            stripe: (env.ENABLE_STRIPE_PAYMENTS || "true").toLowerCase() === "true",
+            creem: (env.ENABLE_CREEM_PAYMENTS || "false").toLowerCase() === "true",
+            dodo: (env.ENABLE_DODO_PAYMENTS || "false").toLowerCase() === "true",
+          };
+          const order = (env.PAYMENT_PROVIDER_ORDER || "stripe,creem,dodo")
+            .split(",")
+            .map((s) => s.trim())
+            .filter(Boolean);
+          return json({ enabled, order }, 200, corsHeaders);
+        });
+      }
+
       if (url.pathname === "/api/tools" && request.method === "GET") {
         return handleToolsList(env, url, corsHeaders);
       }

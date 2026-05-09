@@ -121,6 +121,67 @@ export async function createCheckoutSession(userId: string, priceId: string, env
   const priceInfo = priceMap[priceId];
   if (!priceInfo) throw new Error("Unknown Stripe price id");
 
+  const providers = resolveProviders(env);
+  for (const provider of providers) {
+    if (provider === "stripe" && isEnabled(env.ENABLE_STRIPE_PAYMENTS, true)) {
+      if (env.STRIPE_SECRET_KEY) {
+        return createStripeCheckout(userId, priceId, priceInfo.points, env);
+      }
+    }
+    if (provider === "creem" && isEnabled(env.ENABLE_CREEM_PAYMENTS, false)) {
+      const url = buildExternalCheckoutUrl("creem", userId, priceInfo.points, priceId, env);
+      if (url) return url;
+    }
+    if (provider === "dodo" && isEnabled(env.ENABLE_DODO_PAYMENTS, false)) {
+      const url = buildExternalCheckoutUrl("dodo", userId, priceInfo.points, priceId, env);
+      if (url) return url;
+    }
+  }
+
+  throw new Error("No enabled payment provider is available.");
+}
+
+function resolveProviders(env: Env): string[] {
+  const raw = (env.PAYMENT_PROVIDER_ORDER || "stripe,creem,dodo").toLowerCase();
+  const list = raw.split(",").map((x) => x.trim()).filter(Boolean);
+  return list.length ? list : ["stripe"];
+}
+
+function isEnabled(raw: string | undefined, defaultValue: boolean): boolean {
+  if (raw === undefined) return defaultValue;
+  return raw.toLowerCase() === "true";
+}
+
+function resolvePackLabel(priceId: string, env: Env): "50" | "100" | null {
+  if (priceId === env.STRIPE_PRICE_BASIC || priceId === env.STRIPE_PRICE_PACK_100) return "50";
+  if (priceId === env.STRIPE_PRICE_PRO) return "100";
+  return null;
+}
+
+function buildExternalCheckoutUrl(
+  provider: "creem" | "dodo",
+  userId: string,
+  points: string,
+  priceId: string,
+  env: Env
+): string | null {
+  const pack = resolvePackLabel(priceId, env);
+  if (!pack) return null;
+  const base =
+    provider === "creem"
+      ? (pack === "50" ? env.CREEM_CHECKOUT_URL_50 : env.CREEM_CHECKOUT_URL_100)
+      : (pack === "50" ? env.DODO_CHECKOUT_URL_50 : env.DODO_CHECKOUT_URL_100);
+  if (!base) return null;
+
+  const url = new URL(base);
+  url.searchParams.set("client_reference_id", userId);
+  url.searchParams.set("user_id", userId);
+  url.searchParams.set("points", points);
+  url.searchParams.set("provider", provider);
+  return url.toString();
+}
+
+async function createStripeCheckout(userId: string, priceId: string, points: string, env: Env): Promise<string> {
   const response = await fetch("https://api.stripe.com/v1/checkout/sessions", {
     method: "POST",
     headers: {
@@ -134,7 +195,7 @@ export async function createCheckoutSession(userId: string, priceId: string, env
       success_url: `${env.APP_ORIGIN}/pricing?success=true`,
       cancel_url: `${env.APP_ORIGIN}/pricing?canceled=true`,
       client_reference_id: userId,
-      "metadata[points]": priceInfo.points,
+      "metadata[points]": points,
       "metadata[user_id]": userId,
     }).toString(),
   });

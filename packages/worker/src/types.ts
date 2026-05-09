@@ -14,6 +14,14 @@ export interface Env {
   STRIPE_PRICE_BASIC: string;
   STRIPE_PRICE_PRO: string;
   STRIPE_PRICE_PACK_100: string;
+  ENABLE_STRIPE_PAYMENTS?: string;
+  ENABLE_CREEM_PAYMENTS?: string;
+  ENABLE_DODO_PAYMENTS?: string;
+  PAYMENT_PROVIDER_ORDER?: string;
+  CREEM_CHECKOUT_URL_50?: string;
+  CREEM_CHECKOUT_URL_100?: string;
+  DODO_CHECKOUT_URL_50?: string;
+  DODO_CHECKOUT_URL_100?: string;
   FREE_DAILY_LIMIT: string;
   R2_FILE_TTL_SECONDS: string;
   MAX_FILE_SIZE_BYTES: string;
